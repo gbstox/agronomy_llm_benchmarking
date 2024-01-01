@@ -41,27 +41,18 @@ def prompt_fbn_norm(session_id, prompt):
 with open('quizlet.txt', 'r') as file:
     lines = file.readlines()
 
-questions = []
-question = {}
-answers = {}
-answer_key = None
-for line in lines:
-    line = line.strip()
-    if line == '':
-        question['answers'] = answers
-        questions.append(question)
-        question = {}
-        answers = {}
-    elif line in ['a.', 'b.', 'c.', 'd.']:
-        answer_key = line[0]
-    elif len(line) == 1:
-        question['answer'] = line
-    elif 'question' not in question:
-        question['question'] = line
-    else:
-        if answer_key:
-            answers[answer_key] = line
-
-for question in questions:
-    print(question)
+benchmark_test = {
+  "multiple_choice": [
+    {"id" : "",
+     "question": "",
+     "answer_options": [
+       {"1." : ""},
+       {"2." : ""},
+       {"3." : ""},
+       {"4." : ""}
+     ],
+     "correct_answer": ""
+    },
+  ]
+}
 
