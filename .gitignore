@@ -1,0 +1,31 @@
+# .gitignore
+
+# Ignore Python build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore all log files
+*.log
+
+# Ignore the virtual environment folder
+venv/
+
+# Ignore the database file
+*.db
+
+# Ignore the .DS_Store file (Mac OS)
+.DS_Store
+
+# Ignore the .env file
+.env
+
+# Ignore the .idea folder (PyCharm)
+.idea/
+
+# Ignore Jupyter Notebook files
+*.ipynb_checkpoints/
+
+# Ignore VS Code settings
+.vscode/
+<FINAL_CODE>
