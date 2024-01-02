@@ -29,3 +29,7 @@ venv/
 # Ignore VS Code settings
 .vscode/
 <FINAL_CODE>
+
+# Other files
+/quizlet.txt
+/private_utils.py
