@@ -10,7 +10,7 @@
                 "d": "8"
             },
             "id": "0a22c0d1-f2db-407f-8ef2-ba104a6d0d93",
-            "model_answer": "b"
+            "model_answer": "'b'"
         },
         {
             "question": "Applying herbicides directly to cotton is harmful to the cotton because it is",
@@ -129,7 +129,7 @@
                 "d": "140"
             },
             "id": "62c0c921-ae53-487c-aa0c-e9e197bcae93",
-            "model_answer": "b"
+            "model_answer": "c"
         },
         {
             "question": "How often should soil tests be taken to aid in maintaining a good forage stand?",
@@ -177,7 +177,7 @@
                 "d": "depends upon the ENM of the lime"
             },
             "id": "29d83332-428f-4c13-943d-4eb71af29ee6",
-            "model_answer": "d"
+            "model_answer": "'d'"
         },
         {
             "question": "If you are going to double crop soybeans after wheat, which soybean maturity should be used for your area?",
@@ -200,7 +200,7 @@
                 "d": "It would never come up."
             },
             "id": "7e74df96-faaa-404f-b7e6-3e1ee4df1e9f",
-            "model_answer": "c"
+            "model_answer": "a"
         },
         {
             "question": "If you want to establish legumes in a grass pasture, what would you not want to do?",
@@ -260,7 +260,7 @@
                 "d": "determinant"
             },
             "id": "3df2ab18-8ed2-4d89-a48b-512591bd0720",
-            "model_answer": "d"
+            "model_answer": "'d'"
         },
         {
             "question": "In the botanical classification of wheat and barley, at which classification do they differ?",
@@ -388,7 +388,7 @@
                 "d": "breeder seed"
             },
             "id": "8dc45553-85c2-4acf-bdc3-2cbd609f946a",
-            "model_answer": "c"
+            "model_answer": "d"
         },
         {
             "question": "The part of a chromosome that determines individual plant characteristics is called a/an",
@@ -495,7 +495,7 @@
                 "d": "both drilling and 30-inch rows"
             },
             "id": "63b366c1-9b79-4add-8059-1e86b897d626",
-            "model_answer": "e"
+            "model_answer": "d"
         },
         {
             "question": "seed used to produce foundation seed.",
@@ -639,7 +639,7 @@
                 "d": "corn and grain sorghum"
             },
             "id": "35f7537a-0897-4f14-9558-e2a035a01a88",
-            "model_answer": "a"
+            "model_answer": "e"
         },
         {
             "question": "What does K stand for in the fertilizer analysis N-K-P?",
@@ -734,7 +734,7 @@
                 "d": "S"
             },
             "id": "2d862848-4a89-4e94-a91f-857f20101fe6",
-            "model_answer": "a"
+            "model_answer": "'a'"
         },
         {
             "question": "What is only found in a monocot seed?",
@@ -794,7 +794,7 @@
                 "d": "Rotational grazing involves grass pastures whereas management intensive grazing involves legume pastures only."
             },
             "id": "5022959a-9dc1-45c9-88c5-d5809a8b88de",
-            "model_answer": "a"
+            "model_answer": "c"
         },
         {
             "question": "e. seed heads emerged",
@@ -806,7 +806,7 @@
                 "d": "boot stage"
             },
             "id": "65638355-7ec0-4ef1-ae81-32e42a8fe9d9",
-            "model_answer": "b"
+            "model_answer": "d"
         },
         {
             "question": "What is the majority of the corn produced in the United States (60%) used for?",
@@ -830,7 +830,7 @@
                 "d": "57 lbs"
             },
             "id": "78de5a3b-d009-4c69-86b8-f9f7dd42c7f3",
-            "model_answer": "c"
+            "model_answer": "'b'"
         },
         {
             "question": "What is the movement of water and organic materials within the plant?",
@@ -914,7 +914,7 @@
                 "d": "It will yield better than wheat planted in the fall."
             },
             "id": "bbcc0922-c59c-4444-9616-9b789e45afd8",
-            "model_answer": "a"
+            "model_answer": "b"
         },
         {
             "question": "Wheat planting should be delayed after the \"fly-free\" (Hessian Fly) date that ranges from _____ at the Iowa line to _____ at the Arkansas line.",
@@ -926,7 +926,7 @@
                 "d": "October 1, September 1"
             },
             "id": "3065061e-77e3-442e-a07d-f996d93515c5",
-            "model_answer": "c"
+            "model_answer": "'a'"
         },
         {
             "question": "Which elements do plants obtain from the air?",
@@ -1021,7 +1021,7 @@
                 "d": "requires more traffic on a field"
             },
             "id": "c13728b3-a8c8-4c5a-9940-0d5bfad7b099",
-            "model_answer": "c"
+            "model_answer": "'d'"
         },
         {
             "question": "Which of the following statements would be a benefit of leaving crop residue on the planting field?",
@@ -1176,6 +1176,6 @@
             "model_answer": "a"
         }
     ],
-    "date": "2024-01-02T00:12:15.112596",
-    "model_name": "gpt-4-1106-preview"
+    "date": "2024-01-02T00:10:12.752875",
+    "model_name": "gpt-4"
 }

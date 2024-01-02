@@ -59,14 +59,13 @@ def run_benchmark(model_name, benchmark_questions_file, retries = 3):
                 temp_answer = private_utils.prompt_fbn_norm(prompt)
             else:
                 temp_answer = prompt_openai(model_name, prompt)
-            print (temp_answer, f" try #{_}")
-            if len(temp_answer) == 1:  # if the answer is a single character
-                model_answer = temp_answer  # update the model answer
+            print (temp_answer.replace("'", "").replace('"', ""), f" try #{_}")
+            if len(temp_answer.replace("'", "").replace('"', "")) == 1:  # if the answer is a single character
+                model_answer = temp_answer.strip()  # update the model answer
                 break  # exit the loop
 
         benchmark_mc_question["model_answer"] = model_answer
         model_answers["multiple_choice"].append(benchmark_mc_question)  # Append the question to model_answers
-
 
     Path('benchmark_results').mkdir(parents=True, exist_ok=True)
     with open(f'benchmark_results/{model_name}_answers.json', 'w') as f:

@@ -10,7 +10,7 @@
                 "d": "8"
             },
             "id": "0a22c0d1-f2db-407f-8ef2-ba104a6d0d93",
-            "model_answer": "b"
+            "model_answer": "c"
         },
         {
             "question": "Applying herbicides directly to cotton is harmful to the cotton because it is",
@@ -34,7 +34,7 @@
                 "d": "43,560"
             },
             "id": "2008022d-29cd-4e83-849d-b83164f4f669",
-            "model_answer": "a"
+            "model_answer": "d"
         },
         {
             "question": "At what growth stage does the embryo develop into new plant?",
@@ -106,7 +106,7 @@
                 "d": "12 to 18"
             },
             "id": "f8667bf8-e35a-441d-9031-3e9af7feb3a5",
-            "model_answer": "b"
+            "model_answer": "c"
         },
         {
             "question": "High water-holding capacity",
@@ -129,7 +129,7 @@
                 "d": "140"
             },
             "id": "62c0c921-ae53-487c-aa0c-e9e197bcae93",
-            "model_answer": "b"
+            "model_answer": "c"
         },
         {
             "question": "How often should soil tests be taken to aid in maintaining a good forage stand?",
@@ -188,7 +188,7 @@
                 "c": "late-maturing varieties"
             },
             "id": "ab019c63-c560-42e2-9ef1-1e321b246eac",
-            "model_answer": "a"
+            "model_answer": "b"
         },
         {
             "question": "If you planted a soybean variety in extreme northern Missouri in May that was suited for extreme southeast Missouri, what would happen?",
@@ -200,7 +200,7 @@
                 "d": "It would never come up."
             },
             "id": "7e74df96-faaa-404f-b7e6-3e1ee4df1e9f",
-            "model_answer": "c"
+            "model_answer": "a"
         },
         {
             "question": "If you want to establish legumes in a grass pasture, what would you not want to do?",
@@ -260,7 +260,7 @@
                 "d": "determinant"
             },
             "id": "3df2ab18-8ed2-4d89-a48b-512591bd0720",
-            "model_answer": "d"
+            "model_answer": "b"
         },
         {
             "question": "In the botanical classification of wheat and barley, at which classification do they differ?",
@@ -284,7 +284,7 @@
                 "d": "pale green"
             },
             "id": "4f785621-df81-4068-b407-bc4215ad6b05",
-            "model_answer": "c"
+            "model_answer": "a"
         },
         {
             "question": "Low water-holding capacity",
@@ -306,7 +306,7 @@
                 "c": "silt soils"
             },
             "id": "b1ac5717-67d4-468d-b9ee-4f0a4279f6e4",
-            "model_answer": "a"
+            "model_answer": "b"
         },
         {
             "question": "Moisture levels higher than ___% lad to dry matter and quality loss due to heating and molding of the hay.",
@@ -318,7 +318,7 @@
                 "d": "32"
             },
             "id": "82966c55-a615-44f9-b2e8-5d845c3177d9",
-            "model_answer": "b"
+            "model_answer": "c"
         },
         {
             "question": "Most dicots have what type of germination and emergence?",
@@ -364,7 +364,7 @@
                 "c": "silt soils"
             },
             "id": "d01f2eaf-e7c4-4e60-bd72-f935ca9c5dd8",
-            "model_answer": "a"
+            "model_answer": "c"
         },
         {
             "question": "Other than providing water to meet crop needs, why are rice fields flooded?",
@@ -435,7 +435,7 @@
                 "c": "equally"
             },
             "id": "d1d76dfc-f0ef-4dee-ad6e-0c6496645941",
-            "model_answer": "a"
+            "model_answer": "b"
         },
         {
             "question": "Protein content from soybean seed will range from",
@@ -447,7 +447,7 @@
                 "d": "50 to 60%"
             },
             "id": "8bc42dca-851f-4aeb-b41a-d374ad2ac003",
-            "model_answer": "b"
+            "model_answer": "a"
         },
         {
             "question": "Requires labeling by law.",
@@ -459,7 +459,7 @@
                 "d": "breeder seed"
             },
             "id": "463ce323-6c88-4c8d-9bc3-1b472203accf",
-            "model_answer": "b"
+            "model_answer": "a"
         },
         {
             "question": "Respiration produces carbon dioxide, water, and",
@@ -495,7 +495,7 @@
                 "d": "both drilling and 30-inch rows"
             },
             "id": "63b366c1-9b79-4add-8059-1e86b897d626",
-            "model_answer": "e"
+            "model_answer": "d"
         },
         {
             "question": "seed used to produce foundation seed.",
@@ -507,7 +507,7 @@
                 "d": "breeder seed"
             },
             "id": "49605ad9-db17-4394-9d8b-c65fc9f5580b",
-            "model_answer": "d"
+            "model_answer": "c"
         },
         {
             "question": "Soybeans begin flowering after night lengths",
@@ -603,7 +603,7 @@
                 "d": "tolerance factor"
             },
             "id": "867af0d0-1781-49d6-8f55-2607616fe835",
-            "model_answer": "b"
+            "model_answer": "c"
         },
         {
             "question": "Using natural predators of harmful insects to control pests is an example of",
@@ -627,7 +627,7 @@
                 "d": "no-till, strip-till, and conventional-till"
             },
             "id": "f2e16121-e372-4253-a9f9-6a289a91d4af",
-            "model_answer": "b"
+            "model_answer": "a"
         },
         {
             "question": "e. all of the choices are correct",
@@ -639,7 +639,7 @@
                 "d": "corn and grain sorghum"
             },
             "id": "35f7537a-0897-4f14-9558-e2a035a01a88",
-            "model_answer": "a"
+            "model_answer": "d"
         },
         {
             "question": "What does K stand for in the fertilizer analysis N-K-P?",
@@ -686,7 +686,7 @@
                 "d": "both healthy roots and symptoms occur across the field"
             },
             "id": "28d38070-963e-4e28-b976-e9924a599efc",
-            "model_answer": "b"
+            "model_answer": "d"
         },
         {
             "question": "What is a hybrid corn?",
@@ -794,7 +794,7 @@
                 "d": "Rotational grazing involves grass pastures whereas management intensive grazing involves legume pastures only."
             },
             "id": "5022959a-9dc1-45c9-88c5-d5809a8b88de",
-            "model_answer": "a"
+            "model_answer": "c"
         },
         {
             "question": "e. seed heads emerged",
@@ -806,7 +806,7 @@
                 "d": "boot stage"
             },
             "id": "65638355-7ec0-4ef1-ae81-32e42a8fe9d9",
-            "model_answer": "b"
+            "model_answer": "e"
         },
         {
             "question": "What is the majority of the corn produced in the United States (60%) used for?",
@@ -830,7 +830,7 @@
                 "d": "57 lbs"
             },
             "id": "78de5a3b-d009-4c69-86b8-f9f7dd42c7f3",
-            "model_answer": "c"
+            "model_answer": "b"
         },
         {
             "question": "What is the movement of water and organic materials within the plant?",
@@ -914,7 +914,7 @@
                 "d": "It will yield better than wheat planted in the fall."
             },
             "id": "bbcc0922-c59c-4444-9616-9b789e45afd8",
-            "model_answer": "a"
+            "model_answer": "c"
         },
         {
             "question": "Wheat planting should be delayed after the \"fly-free\" (Hessian Fly) date that ranges from _____ at the Iowa line to _____ at the Arkansas line.",
@@ -926,7 +926,7 @@
                 "d": "October 1, September 1"
             },
             "id": "3065061e-77e3-442e-a07d-f996d93515c5",
-            "model_answer": "c"
+            "model_answer": "a"
         },
         {
             "question": "Which elements do plants obtain from the air?",
@@ -950,7 +950,7 @@
                 "d": "translocates water"
             },
             "id": "a5051439-7a7d-462d-8c50-33e2402d0cbd",
-            "model_answer": "b"
+            "model_answer": "a"
         },
         {
             "question": "Which nutrient is most important to the development of the root system for wheat and small grains?",
@@ -974,7 +974,7 @@
                 "d": "stems without vascular cambium and with scattered vascular bundles and leaves with parallel veins"
             },
             "id": "a402ed4b-a2d2-470d-9412-0b40dffe3b58",
-            "model_answer": "b"
+            "model_answer": "c"
         },
         {
             "question": "Which of the following is not a characteristic of Pearl Millet?",
@@ -1009,7 +1009,7 @@
                 "d": "Hard wheat is coarser than soft wheat."
             },
             "id": "e1e99654-3bff-45b6-a8ef-54bfdb940eb8",
-            "model_answer": "b"
+            "model_answer": "a"
         },
         {
             "question": "Which of the following is not true for conservation tillage?",
@@ -1069,7 +1069,7 @@
                 "d": "grasses and legumes"
             },
             "id": "5cd6fd5b-c06b-496e-8ccd-d6da65d8c232",
-            "model_answer": "d"
+            "model_answer": "a"
         },
         {
             "question": "which soils have large pore spaces?",
@@ -1176,6 +1176,6 @@
             "model_answer": "a"
         }
     ],
-    "date": "2024-01-02T00:12:15.112596",
-    "model_name": "gpt-4-1106-preview"
+    "date": "2024-01-02T00:11:36.847896",
+    "model_name": "gpt-3.5-turbo"
 }
