@@ -1,0 +1,1181 @@
+{
+    "multiple_choice": [
+        {
+            "question": "Alfalfa has the potencial to yeild up to ____ tons/acre on good soil.",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "2",
+                "b": "4",
+                "c": "6",
+                "d": "8"
+            },
+            "id": "0a22c0d1-f2db-407f-8ef2-ba104a6d0d93",
+            "model_answer": "c"
+        },
+        {
+            "question": "Applying herbicides directly to cotton is harmful to the cotton because it is",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "a slow-growing plant.",
+                "b": "a broadleaf plant.",
+                "c": "shorter than most weeds.",
+                "d": "attracted to the herbicides."
+            },
+            "id": "e5d3fb63-e54e-4b35-a08a-f5afb94c8b0e",
+            "model_answer": "b"
+        },
+        {
+            "question": "The are ____ in a section.",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "160",
+                "b": "320",
+                "c": "640",
+                "d": "43,560"
+            },
+            "id": "2008022d-29cd-4e83-849d-b83164f4f669",
+            "model_answer": "a"
+        },
+        {
+            "question": "At what growth stage does the embryo develop into new plant?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "vegetative",
+                "b": "reproductive",
+                "c": "germination",
+                "d": "ripening"
+            },
+            "id": "614b9490-1f7c-45bb-8434-3bb655428aa6",
+            "model_answer": "c"
+        },
+        {
+            "question": "At what growth stage does the stem extend and leaves multiply?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "vegetative",
+                "b": "reproductive",
+                "c": "germination",
+                "d": "ripening"
+            },
+            "id": "70534b60-d7d9-464e-91b2-5927653b1219",
+            "model_answer": "a"
+        },
+        {
+            "question": "At what growth stage is corn most vulnerable to hot temperatures and dry soils?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "germination",
+                "b": "vegetative growth",
+                "c": "tasseling and pollination",
+                "d": "maturity"
+            },
+            "id": "517b8601-ffc9-419b-92f2-253fff779901",
+            "model_answer": "b"
+        },
+        {
+            "question": "Carbon Dioxide+water Chlorophyll and light energy ____+ oxygen",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "glucose",
+                "b": "pyruvate",
+                "c": "carbon monoxide",
+                "d": "carboxylase"
+            },
+            "id": "23fe59ac-b606-4f98-8062-202ada444940",
+            "model_answer": "a"
+        },
+        {
+            "question": "Forage legumes ________ digestible protein compared to grasses?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "have the same amount of",
+                "b": "do not require much",
+                "c": "are higher in",
+                "d": "are lower in"
+            },
+            "id": "28b2f535-0588-47fe-95be-4b5d2d6fd9ff",
+            "model_answer": "c"
+        },
+        {
+            "question": "For each 1% of organic matter in the soil, ____ pounds of nitrogen per acre may be available for wheat or small grain use.",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "5 to 6",
+                "b": "6 to 8",
+                "c": "8 to 12",
+                "d": "12 to 18"
+            },
+            "id": "f8667bf8-e35a-441d-9031-3e9af7feb3a5",
+            "model_answer": "c"
+        },
+        {
+            "question": "High water-holding capacity",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "sandy soils",
+                "b": "clay soils",
+                "c": "silt soils"
+            },
+            "id": "0be3d94a-966c-415b-bc95-7213e79a8758",
+            "model_answer": "b"
+        },
+        {
+            "question": "How many growing degree days are there if the maximum temperature was 85 and the minimum was 55?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "20",
+                "b": "25",
+                "c": "30",
+                "d": "140"
+            },
+            "id": "62c0c921-ae53-487c-aa0c-e9e197bcae93",
+            "model_answer": "c"
+        },
+        {
+            "question": "How often should soil tests be taken to aid in maintaining a good forage stand?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "every 3 to 4 years",
+                "b": "every 6 to 7 years",
+                "c": "every 10 years",
+                "d": "soil tests are not needed for forage production"
+            },
+            "id": "a31bc6ce-d598-4bea-8526-6f125ae2c331",
+            "model_answer": "a"
+        },
+        {
+            "question": "If a seed tag stated percent germination at 80% and the purity at 80%, what is the pure live-seed ratio?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "64%",
+                "b": "70%",
+                "c": "72%",
+                "d": "75%"
+            },
+            "id": "20d18b0d-1eda-43e2-ae99-e7d8bbec999c",
+            "model_answer": "c"
+        },
+        {
+            "question": "If a seed tag stated percent germination at 80% and the purity at 90%, what is the pure live-seed ratio?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "65%",
+                "b": "70%",
+                "c": "72%",
+                "d": "75%"
+            },
+            "id": "d801ce57-379c-407a-9370-8858df6cb48a",
+            "model_answer": "c"
+        },
+        {
+            "question": "If a soil test calls for 1200 ENM per acre, how many tons of lime should be applied?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "2 tons",
+                "b": "3 tons",
+                "c": "4 tons",
+                "d": "depends upon the ENM of the lime"
+            },
+            "id": "29d83332-428f-4c13-943d-4eb71af29ee6",
+            "model_answer": "d"
+        },
+        {
+            "question": "If you are going to double crop soybeans after wheat, which soybean maturity should be used for your area?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "early-maturing varieties",
+                "b": "mid-season maturity varieties",
+                "c": "late-maturing varieties"
+            },
+            "id": "ab019c63-c560-42e2-9ef1-1e321b246eac",
+            "model_answer": "a"
+        },
+        {
+            "question": "If you planted a soybean variety in extreme northern Missouri in May that was suited for extreme southeast Missouri, what would happen?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "It would mature a few weeks later.",
+                "b": "It would mature a few weeks earlier.",
+                "c": "It would stay green until frost.",
+                "d": "It would never come up."
+            },
+            "id": "7e74df96-faaa-404f-b7e6-3e1ee4df1e9f",
+            "model_answer": "d"
+        },
+        {
+            "question": "If you want to establish legumes in a grass pasture, what would you not want to do?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "Apply large amounts of N fertilizer.",
+                "b": "Overseed legumes in late winter.",
+                "c": "Remove early spring grass growth.",
+                "d": "Control weeds the previous fall prior to the establishment of legumes."
+            },
+            "id": "740c11ec-19e6-4193-aa85-277439447a54",
+            "model_answer": "a"
+        },
+        {
+            "question": "If you were a plant breeder and wanted to go to the origin of soybeans in order to find resistance of rust, where would you go?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "China",
+                "b": "Europe",
+                "c": "South America",
+                "d": "Iowa"
+            },
+            "id": "38450e57-ea1c-4f57-9481-038edf43af3c",
+            "model_answer": "a"
+        },
+        {
+            "question": "If you were interested in producing a lot of mid-summer annual legume forage but your soils were droughty, which legume would you choose?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "alfalfa",
+                "b": "Korean lespedeza",
+                "c": "Alsike clover",
+                "d": "White clover"
+            },
+            "id": "894091b8-c8ab-4c73-9636-76002d148467",
+            "model_answer": "b"
+        },
+        {
+            "question": "In cotton production what are DD-60s?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "GMO cotton that does not produce seed",
+                "b": "a class of insecticides that are specific for cotton",
+                "c": "heat unit measurements used to manage and monitor cotton",
+                "d": "a grading system for cotton lint"
+            },
+            "id": "be26b5f1-b766-403a-9bea-5fb39362e6d4",
+            "model_answer": "c"
+        },
+        {
+            "question": "In southeast Missouri you are more likely to find which growth habitat of soybeans?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "intermediate",
+                "b": "semi-dwarf",
+                "c": "dwarf",
+                "d": "determinant"
+            },
+            "id": "3df2ab18-8ed2-4d89-a48b-512591bd0720",
+            "model_answer": "a"
+        },
+        {
+            "question": "In the botanical classification of wheat and barley, at which classification do they differ?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "Kingdom",
+                "b": "Order",
+                "c": "Genus",
+                "d": "Class"
+            },
+            "id": "7b4b145f-aae2-4968-8dad-3cc46cb15b6c",
+            "model_answer": "c"
+        },
+        {
+            "question": "______ leaf tips indicate phosphorus deficiencies and occur more often in young plants exposed to good growing conditions after cool, wet conditions?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "yellow",
+                "b": "dark green",
+                "c": "purple",
+                "d": "pale green"
+            },
+            "id": "4f785621-df81-4068-b407-bc4215ad6b05",
+            "model_answer": "c"
+        },
+        {
+            "question": "Low water-holding capacity",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "sandy soils",
+                "b": "clay soils",
+                "c": "silt soils"
+            },
+            "id": "e8f7bf8c-6ba8-416c-8f58-1f77bbd96550",
+            "model_answer": "a"
+        },
+        {
+            "question": "Mixture of pore spaces",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "sandy soils",
+                "b": "clay soils",
+                "c": "silt soils"
+            },
+            "id": "b1ac5717-67d4-468d-b9ee-4f0a4279f6e4",
+            "model_answer": "c"
+        },
+        {
+            "question": "Moisture levels higher than ___% lad to dry matter and quality loss due to heating and molding of the hay.",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "12",
+                "b": "22",
+                "c": "26",
+                "d": "32"
+            },
+            "id": "82966c55-a615-44f9-b2e8-5d845c3177d9",
+            "model_answer": "c"
+        },
+        {
+            "question": "Most dicots have what type of germination and emergence?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "hypogeal",
+                "b": "hypocotyls",
+                "c": "epigeal",
+                "d": "epicotyls"
+            },
+            "id": "cb7ba255-5e67-44b0-b984-bdbaacde539b",
+            "model_answer": "c"
+        },
+        {
+            "question": "The most effective method of determining insect levels in a field is",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "spraying.",
+                "b": "observing plants at the perimeter of the field.",
+                "c": "scouting",
+                "d": "plant sampling."
+            },
+            "id": "65d21616-2aee-43cf-be98-ddb8179ad8f1",
+            "model_answer": "c"
+        },
+        {
+            "question": "Nutrients absorbed gradually",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "sandy soils",
+                "b": "clay soils",
+                "c": "silt soils"
+            },
+            "id": "49a59d94-916c-498c-ab0d-c61a481f4a82",
+            "model_answer": "c"
+        },
+        {
+            "question": "Nutrients pass through quickly",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "sandy soils",
+                "b": "clay soils",
+                "c": "silt soils"
+            },
+            "id": "d01f2eaf-e7c4-4e60-bd72-f935ca9c5dd8",
+            "model_answer": "a"
+        },
+        {
+            "question": "Other than providing water to meet crop needs, why are rice fields flooded?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "to control weeds",
+                "b": "to provide water for mosquito reproduction, which are needed for proper pollination",
+                "c": "to set up anaerobic condititions",
+                "d": "to increase the availability of nutrients"
+            },
+            "id": "f0ac6116-f117-4234-a54c-ad0d6aa7d313",
+            "model_answer": "c"
+        },
+        {
+            "question": "The parent line for registered or certified seed.",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "certified seed",
+                "b": "treated seed",
+                "c": "foundation seed",
+                "d": "breeder seed"
+            },
+            "id": "8dc45553-85c2-4acf-bdc3-2cbd609f946a",
+            "model_answer": "c"
+        },
+        {
+            "question": "The part of a chromosome that determines individual plant characteristics is called a/an",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "trait",
+                "b": "pollen",
+                "c": "enzyme",
+                "d": "gene"
+            },
+            "id": "678a9850-941c-4bb3-918d-fc51d1c3513e",
+            "model_answer": "d"
+        },
+        {
+            "question": "Plants contribute to air quality because they",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "provide a source of carbohydrates to humans.",
+                "b": "use light energy to provide food.",
+                "c": "provide oxygen as a byproduct.",
+                "d": "have chlorophyll in the cells."
+            },
+            "id": "88f718d2-14f5-4419-99b8-f08361ad55e8",
+            "model_answer": "c"
+        },
+        {
+            "question": "The plants reaction to light stimulating flower development is related to",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "photosynthesis",
+                "b": "photoperiodism",
+                "c": "phototropism",
+                "d": "osmosis"
+            },
+            "id": "70d58187-ba54-4387-b06d-851afe6cb774",
+            "model_answer": "b"
+        },
+        {
+            "question": "A product w/ a LD50 of 35 mg/kg is ____ toxic than another w/ a LD50 of 80 mg/kg?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "more",
+                "b": "less",
+                "c": "equally"
+            },
+            "id": "d1d76dfc-f0ef-4dee-ad6e-0c6496645941",
+            "model_answer": "a"
+        },
+        {
+            "question": "Protein content from soybean seed will range from",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "8 to 13%",
+                "b": "15 to 25%",
+                "c": "30 to 45%",
+                "d": "50 to 60%"
+            },
+            "id": "8bc42dca-851f-4aeb-b41a-d374ad2ac003",
+            "model_answer": "a"
+        },
+        {
+            "question": "Requires labeling by law.",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "certified seed",
+                "b": "treated seed",
+                "c": "foundation seed",
+                "d": "breeder seed"
+            },
+            "id": "463ce323-6c88-4c8d-9bc3-1b472203accf",
+            "model_answer": "c"
+        },
+        {
+            "question": "Respiration produces carbon dioxide, water, and",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "oxygen.",
+                "b": "energy.",
+                "c": "glucose.",
+                "d": "carbon monoxide."
+            },
+            "id": "28405555-45cb-460c-a3d9-0bc5217c9728",
+            "model_answer": "a"
+        },
+        {
+            "question": "Rice is grown in what part of Missouri?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "southwest",
+                "b": "southeast",
+                "c": "northeast",
+                "d": "northwest"
+            },
+            "id": "b7c82598-2125-4b0e-8a36-a3c498b70fa1",
+            "model_answer": "a"
+        },
+        {
+            "question": "e. both drilling and water-seeding.",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "drilling.",
+                "b": "30-inch rows.",
+                "c": "water-seeding.",
+                "d": "both drilling and 30-inch rows"
+            },
+            "id": "63b366c1-9b79-4add-8059-1e86b897d626",
+            "model_answer": "c"
+        },
+        {
+            "question": "seed used to produce foundation seed.",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "certified seed",
+                "b": "treated seed",
+                "c": "foundation seed",
+                "d": "breeder seed"
+            },
+            "id": "49605ad9-db17-4394-9d8b-c65fc9f5580b",
+            "model_answer": "a"
+        },
+        {
+            "question": "Soybeans begin flowering after night lengths",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "reach 13 hours",
+                "b": "become longer",
+                "c": "equal darkness",
+                "d": "become shorter"
+            },
+            "id": "1b921969-20ba-4b78-a638-f97c4fb04213",
+            "model_answer": "a"
+        },
+        {
+            "question": "Sunflower heads move toward the sun. This is an example of",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "photosynthesis",
+                "b": "photoperiodism",
+                "c": "phototropism",
+                "d": "osmosis"
+            },
+            "id": "c9245fb6-ae86-4f93-a967-dc9970f55a62",
+            "model_answer": "c"
+        },
+        {
+            "question": "There are ____ sections in a township?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "24",
+                "b": "36",
+                "c": "48",
+                "d": "64"
+            },
+            "id": "847affc6-3e65-4fb9-9ae3-5e1abd1e7c56",
+            "model_answer": "a"
+        },
+        {
+            "question": "There is a lot of talk in the news about \"Glyphosate Resistant Horseweed.\" What caused this to happen?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "Using genetic glyphosate",
+                "b": "Using glyphosate every year on the same field",
+                "c": "Rotating herbicides",
+                "d": "Not rotating crops"
+            },
+            "id": "5b3d32a0-3eb2-4600-8ca1-f72a74645e32",
+            "model_answer": "b"
+        },
+        {
+            "question": "This is the source of food for the new seedling until new leaves develop.",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "cotyledon",
+                "b": "hypocotyls",
+                "c": "epicotyls",
+                "d": "embryo"
+            },
+            "id": "6d2d8652-4e93-442e-a193-f0da9dcf99e9",
+            "model_answer": "a"
+        },
+        {
+            "question": "This micronutrient is deficient in very acid soil, sandy soils and is important for nitrogen fixation in soybeans.",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "copper",
+                "b": "zinc",
+                "c": "molybdenum",
+                "d": "manganese"
+            },
+            "id": "ea888812-72dd-469a-a25a-87300d03991b",
+            "model_answer": "c"
+        },
+        {
+            "question": "Under what conditions would you increase soybean seeding rate?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "if lodging has been a problem",
+                "b": "if using high-quality seed with higher than 85% germination",
+                "c": "If planting very early or very late",
+                "d": "if planting under ideal conditions in 30-inch rows"
+            },
+            "id": "48f06c68-794e-4b7c-894c-8e96f846be09",
+            "model_answer": "b"
+        },
+        {
+            "question": "The Universal Soil Loss Equation, A=RKLSCP, is used to calculate those factors that contribute to soil erosion. What does P stand for in the equation?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "soil erodibility factor",
+                "b": "conservation practice factor",
+                "c": "rainfall factor",
+                "d": "tolerance factor"
+            },
+            "id": "867af0d0-1781-49d6-8f55-2607616fe835",
+            "model_answer": "b"
+        },
+        {
+            "question": "Using natural predators of harmful insects to control pests is an example of",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "fence-row to fence-row farming.",
+                "b": "growth regulators.",
+                "c": "intensive pest management.",
+                "d": "integrated pest management."
+            },
+            "id": "b32a0046-5026-484c-888b-0fad0ec91766",
+            "model_answer": "d"
+        },
+        {
+            "question": "What are the three types of conservation tillage?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "conventional-till, no-till, and ridge-till",
+                "b": "no-till, mulch-till, and ridge-till",
+                "c": "mulch-till, moldboard plowing, and drilling",
+                "d": "no-till, strip-till, and conventional-till"
+            },
+            "id": "f2e16121-e372-4253-a9f9-6a289a91d4af",
+            "model_answer": "a"
+        },
+        {
+            "question": "e. all of the choices are correct",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "corn",
+                "b": "soybeans",
+                "c": "grain sorghum",
+                "d": "corn and grain sorghum"
+            },
+            "id": "35f7537a-0897-4f14-9558-e2a035a01a88",
+            "model_answer": "d"
+        },
+        {
+            "question": "What does K stand for in the fertilizer analysis N-K-P?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "Krypton",
+                "b": "calcium",
+                "c": "potassium",
+                "d": "chromium"
+            },
+            "id": "b661d3c0-6966-4308-868b-db97b98cd3b5",
+            "model_answer": "c"
+        },
+        {
+            "question": "What effect will delays in planting dates have on corn yields?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "yields will increase about 2 bushels per acre.",
+                "b": "yields will increase about 10 bushels per acre.",
+                "c": "There is no increase or decrease in yield.",
+                "d": "Yields will be decreased more as the planting date becomes later."
+            },
+            "id": "cdde43d8-8caf-4e52-8af3-c39c28698ed8",
+            "model_answer": "d"
+        },
+        {
+            "question": "What is a biennial?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "plants that bloom two times per year",
+                "b": "plants that complete their life cycle in two growing years",
+                "c": "plants that only reproduce asexually"
+            },
+            "id": "762afe25-111c-4f0f-8a47-a6e8d850bf10",
+            "model_answer": "b"
+        },
+        {
+            "question": "e. both symptoms occur across the field and stunted roots",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "healthy roots",
+                "b": "symptoms occur across the entire field",
+                "c": "stunted roots",
+                "d": "both healthy roots and symptoms occur across the field"
+            },
+            "id": "28d38070-963e-4e28-b976-e9924a599efc",
+            "model_answer": "b"
+        },
+        {
+            "question": "What is a hybrid corn?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "a GMO",
+                "b": "the cross between two inbred lines",
+                "c": "the cross between two heterozygous lines",
+                "d": "the cross between corn and grain sorghum"
+            },
+            "id": "309fe052-b291-4443-b7ed-b83d1e594843",
+            "model_answer": "b"
+        },
+        {
+            "question": "What is a legume?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "a type of corn",
+                "b": "the area of a plant where the leaf meets the stem",
+                "c": "a family of plants whose seeds are formed in fruits called pods",
+                "d": "plants that complete their life cycle over two growing years"
+            },
+            "id": "78da94c7-d84e-461c-8d0f-d968decc8a6c",
+            "model_answer": "c"
+        },
+        {
+            "question": "What is meant by \"integrated pest management\"?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "using only chemicals to control pests",
+                "b": "using a combination of chemicals, biological, and physical controls to manage pests",
+                "c": "using only organic methods of controlling pests",
+                "d": "not using any means other than biological to control pests"
+            },
+            "id": "4a10f67e-9bcd-4fae-a28e-23641330eea5",
+            "model_answer": "b"
+        },
+        {
+            "question": "What is not a secondary nutrient?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "N",
+                "b": "Ca",
+                "c": "Mg",
+                "d": "S"
+            },
+            "id": "2d862848-4a89-4e94-a91f-857f20101fe6",
+            "model_answer": "d"
+        },
+        {
+            "question": "What is only found in a monocot seed?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "epicotyls",
+                "b": "radical",
+                "c": "endosperm",
+                "d": "hilum"
+            },
+            "id": "cb81ee69-b8c6-4571-9d2e-42bcd66929ee",
+            "model_answer": "d"
+        },
+        {
+            "question": "What is pollination?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "transfer of pollen from the anther to the stigma",
+                "b": "union of male and female cells to form the embryonic cell",
+                "c": "use of vegetative plant parts to produce another plant",
+                "d": "none of the choices are correct"
+            },
+            "id": "d63474b7-0008-469f-a963-cae04c3e125d",
+            "model_answer": "a"
+        },
+        {
+            "question": "What is the broadest level of classification of plants and animals?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "Division",
+                "b": "Class",
+                "c": "Kingdom",
+                "d": "Species"
+            },
+            "id": "3818593f-f637-40fe-87a7-9d1356737111",
+            "model_answer": "c"
+        },
+        {
+            "question": "What is the Cation Exchange Capacity of a soil?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "positive-charged ions",
+                "b": "negative-charged ions",
+                "c": "ability of a soil to hold and exchange nutrients",
+                "d": "removal of bases by water percolation"
+            },
+            "id": "7a9a9675-4239-4114-bb36-aa2650073207",
+            "model_answer": "c"
+        },
+        {
+            "question": "What is the difference between rotational grazing and management intensive grazing?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "There is no difference.",
+                "b": "Rotational grazing is for sheep whereas management intensive is for cattle.",
+                "c": "Rotational grazing involves two to seven pastures whereas management intensive involves eight or more pastures.",
+                "d": "Rotational grazing involves grass pastures whereas management intensive grazing involves legume pastures only."
+            },
+            "id": "5022959a-9dc1-45c9-88c5-d5809a8b88de",
+            "model_answer": "c"
+        },
+        {
+            "question": "e. seed heads emerged",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "1/4 to 1/2 bloom",
+                "b": "blooms emerged",
+                "c": "bud to 1/10th bloom",
+                "d": "boot stage"
+            },
+            "id": "65638355-7ec0-4ef1-ae81-32e42a8fe9d9",
+            "model_answer": "d"
+        },
+        {
+            "question": "What is the majority of the corn produced in the United States (60%) used for?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "animal feed",
+                "b": "corn flakes",
+                "c": "ethanol",
+                "d": "plastics"
+            },
+            "id": "c0d95cbb-297a-458b-a49d-555cb7af3c3e",
+            "model_answer": "a"
+        },
+        {
+            "question": "What is the minimum test weight per bushel for US number 1 corn?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "54 lbs",
+                "b": "55 lbs",
+                "c": "56 lbs",
+                "d": "57 lbs"
+            },
+            "id": "78de5a3b-d009-4c69-86b8-f9f7dd42c7f3",
+            "model_answer": "b"
+        },
+        {
+            "question": "What is the movement of water and organic materials within the plant?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "Translocation",
+                "b": "Transpiration",
+                "c": "Photosynthesis",
+                "d": "Respiration"
+            },
+            "id": "49d95ae8-ea6f-46dc-8db5-9d7e5513ae1d",
+            "model_answer": "a"
+        },
+        {
+            "question": "What plant factors affect the quality of forages?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "plant species",
+                "b": "plant maturity",
+                "c": "plant part",
+                "d": "all choices are correct"
+            },
+            "id": "100103ef-0021-4d01-830c-69bff8cb1086",
+            "model_answer": "d"
+        },
+        {
+            "question": "What plant part connects the stem to the leaf?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "leaf blades",
+                "b": "node",
+                "c": "internode",
+                "d": "leaf sheath"
+            },
+            "id": "bb7cb734-b331-4e08-89c7-e7a378c1a189",
+            "model_answer": "b"
+        },
+        {
+            "question": "What three conditions must be present for a disease to develop?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "soil nutrient deficiency, environmental conditions, and susceptible host",
+                "b": "susceptible host, favorable environmental conditions, and virulent pathogen",
+                "c": "virulent pathogen, cold climate, and soil nutrient deficiency",
+                "d": "hot and dry conditions, virulent pathogen, and soil nutrient deficiency"
+            },
+            "id": "85c23305-44fe-4d17-a7f4-ce222250f28b",
+            "model_answer": "b"
+        },
+        {
+            "question": "What tissue transports watter and dissolved minerals upwards from the roots?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "phloem",
+                "b": "cortex",
+                "c": "xylem",
+                "d": "epidermis"
+            },
+            "id": "4a028e69-e855-4eef-bd2c-323bfc8ff83d",
+            "model_answer": "c"
+        },
+        {
+            "question": "What type of tillage would be used to break up compacted layers of soil?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "mulch tillage",
+                "b": "subsoiling",
+                "c": "no-till",
+                "d": "ridge-till"
+            },
+            "id": "2a55a170-93d7-440f-8987-daecf3c67328",
+            "model_answer": "b"
+        },
+        {
+            "question": "What would happen if you planted winter wheat in April?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "It would grow and develop but mature later.",
+                "b": "It would grow vegetatively but never reproduce.",
+                "c": "It would never come up.",
+                "d": "It will yield better than wheat planted in the fall."
+            },
+            "id": "bbcc0922-c59c-4444-9616-9b789e45afd8",
+            "model_answer": "c"
+        },
+        {
+            "question": "Wheat planting should be delayed after the \"fly-free\" (Hessian Fly) date that ranges from _____ at the Iowa line to _____ at the Arkansas line.",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "October 8, September 14",
+                "b": "September 10, October 10",
+                "c": "September 28, October 17",
+                "d": "October 1, September 1"
+            },
+            "id": "3065061e-77e3-442e-a07d-f996d93515c5",
+            "model_answer": "c"
+        },
+        {
+            "question": "Which elements do plants obtain from the air?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "C,H, and O",
+                "b": "N,O, and K",
+                "c": "K,P, and Ca",
+                "d": "C,Mg, and K"
+            },
+            "id": "b2794877-1c4d-47ec-b8bf-8bda3a2127a6",
+            "model_answer": "a"
+        },
+        {
+            "question": "Which is NOT a role of potassium in corn plants?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "fight diseases",
+                "b": "central element in chlorophyll",
+                "c": "strong stalks",
+                "d": "translocates water"
+            },
+            "id": "a5051439-7a7d-462d-8c50-33e2402d0cbd",
+            "model_answer": "d"
+        },
+        {
+            "question": "Which nutrient is most important to the development of the root system for wheat and small grains?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "nitrogen",
+                "b": "potassium",
+                "c": "molybdenum",
+                "d": "phosphorus"
+            },
+            "id": "83051034-4ce4-4b53-b878-0591ce77a25e",
+            "model_answer": "b"
+        },
+        {
+            "question": "e. two cotyledons and leaves with parallel veins",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "stems without vascular cambium and with scattered vascular bundles",
+                "b": "two cotyledons",
+                "c": "leaves with parallel veins",
+                "d": "stems without vascular cambium and with scattered vascular bundles and leaves with parallel veins"
+            },
+            "id": "a402ed4b-a2d2-470d-9412-0b40dffe3b58",
+            "model_answer": "b"
+        },
+        {
+            "question": "Which of the following is not a characteristic of Pearl Millet?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "grows best on a well-drained soil",
+                "b": "can tolerate acid soils",
+                "c": "is drought tolerant",
+                "d": "produces most of its forage in the spring"
+            },
+            "id": "75ab17c6-f7ec-4584-b33c-01fc68cd87bd",
+            "model_answer": "c"
+        },
+        {
+            "question": "Which of the following is not is not an advantage of using minimum tillage when planting wheat?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "less soil erosion",
+                "b": "increased loss of soil moisture",
+                "c": "less fuel and equipment costs"
+            },
+            "id": "11ca8456-3cd2-4982-a097-728525be30f7",
+            "model_answer": "b"
+        },
+        {
+            "question": "Which of the following is not true?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "soft wheat granules are harder to control and will clog flour sifters",
+                "b": "Most bread is made from soft wheat",
+                "c": "Soft wheat is used mainly for cookies, cakes, and doughnuts.",
+                "d": "Hard wheat is coarser than soft wheat."
+            },
+            "id": "e1e99654-3bff-45b6-a8ef-54bfdb940eb8",
+            "model_answer": "a"
+        },
+        {
+            "question": "Which of the following is not true for conservation tillage?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "reduces soil erosion",
+                "b": "improves soil structure and organic matter content",
+                "c": "increases the need for herbicides",
+                "d": "requires more traffic on a field"
+            },
+            "id": "c13728b3-a8c8-4c5a-9940-0d5bfad7b099",
+            "model_answer": "c"
+        },
+        {
+            "question": "Which of the following statements would be a benefit of leaving crop residue on the planting field?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "allows the soil to crust",
+                "b": "increases water runoff velocities",
+                "c": "soil moisture retention",
+                "d": "increases chance of crop insects and diseases"
+            },
+            "id": "fe8004f9-c3c9-40a1-bc47-0fc5c99dc931",
+            "model_answer": "c"
+        },
+        {
+            "question": "Which of these grasses is not a warm-season grass?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "Smooth Brome",
+                "b": "Switch grass",
+                "c": "Big bluestem",
+                "d": "Bermudagrass"
+            },
+            "id": "22c939e8-7a56-48e2-b282-936d604aee33",
+            "model_answer": "d"
+        },
+        {
+            "question": "Which plant species is not usually cultivated for agricultural production?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "forbs",
+                "b": "grasses",
+                "c": "legumes",
+                "d": "grasses and legumes"
+            },
+            "id": "d351ea7d-2697-4863-873f-9b7dc70bef87",
+            "model_answer": "a"
+        },
+        {
+            "question": "Which plant types are the dominant species in a well-maintained pasture, greenland, or range?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "woody plants, grasses, and legumes",
+                "b": "forbs and grasses",
+                "c": "all plant species",
+                "d": "grasses and legumes"
+            },
+            "id": "5cd6fd5b-c06b-496e-8ccd-d6da65d8c232",
+            "model_answer": "d"
+        },
+        {
+            "question": "which soils have large pore spaces?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "clay soils",
+                "b": "silt soils",
+                "c": "sandy soils"
+            },
+            "id": "0e01a0fa-2dc5-4c27-9db2-1bd5fcc248ea",
+            "model_answer": "c"
+        },
+        {
+            "question": "which soils have nutrients that are held tightly?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "clay soils",
+                "b": "silt soils",
+                "c": "sandy soils"
+            },
+            "id": "65c1e720-60da-48c6-82dc-ff5813b17a1b",
+            "model_answer": "a"
+        },
+        {
+            "question": "which soils have the best water-holding capacity?",
+            "correct_answer": "b",
+            "answer_options": {
+                "a": "clay soils",
+                "b": "silt soils",
+                "c": "sandy soils"
+            },
+            "id": "8ede102d-2381-4202-ae4d-fbf96819471c",
+            "model_answer": "a"
+        },
+        {
+            "question": "which type of soil has small pore spaces?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "clay soils",
+                "b": "silt soils",
+                "c": "sandy soils"
+            },
+            "id": "22d1b643-a66b-4354-8378-34ddcdfd93bd",
+            "model_answer": "a"
+        },
+        {
+            "question": "Which type of wheat is predominately grown in Missouri?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "hard red spring",
+                "b": "hard red winter",
+                "c": "soft red winter",
+                "d": "soft red summer"
+            },
+            "id": "ae0728c3-bc6b-4d98-8724-43cf6d0e1296",
+            "model_answer": "b"
+        },
+        {
+            "question": "Why are oats primarily planted in the north central states?",
+            "correct_answer": "c",
+            "answer_options": {
+                "a": "insect pressure",
+                "b": "state regulations",
+                "c": "oats are primarily adequate moisture and relatively cool weather",
+                "d": "oats are perennial"
+            },
+            "id": "894add6d-659d-4ab8-9bd4-552c6d3c37cb",
+            "model_answer": "c"
+        },
+        {
+            "question": "Why are weeds considered pests?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "They are also plants.",
+                "b": "They can produce their own food through photosynthesis.",
+                "c": "They are immune to many crop diseases.",
+                "d": "They steal needed nutrients from crops."
+            },
+            "id": "fc262acf-ea5c-4ef5-9176-8f9f9c1b396c",
+            "model_answer": "d"
+        },
+        {
+            "question": "Why is cotton not produced in the northern climates?",
+            "correct_answer": "d",
+            "answer_options": {
+                "a": "laws regulating cotton production to south of the Mason-Dixon line",
+                "b": "boll weevils are more prevalent in the northern climates",
+                "c": "diseases that infect cotton overwinter in corn stubble",
+                "d": "cotton requires a long frost-free period"
+            },
+            "id": "df1ea3c2-0d61-4e3e-84ac-ebf4bb025a46",
+            "model_answer": "d"
+        },
+        {
+            "question": "With everything else being equal, which soil conditions cause the deepest soil compaction?",
+            "correct_answer": "a",
+            "answer_options": {
+                "a": "wet soil",
+                "b": "dry soil",
+                "c": "moist soil",
+                "d": "soil moisture has no effect on compaction"
+            },
+            "id": "52e2680a-157f-40ff-959a-84bf40525551",
+            "model_answer": "a"
+        }
+    ],
+    "date": "2024-01-02T23:39:30.060583",
+    "model_name": "teknium/OpenHermes-2p5-Mistral-7B"
+}

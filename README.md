@@ -1,10 +1,15 @@
 # Leaderboard
-Model Name | Score | Date |
------------|-------|------|
-gpt-4-1106-preview     | 83.84%  | 2023-01-01 |
-gpt-4     | 78.79%  | 2023-01-01 |
-fbn-norm     | 74.75%  | 2023-01-01 |
-gpt-3.5-turbo     | 73.74%  | 2023-01-01 |
+| Model Name | Score | Date Tested |
+|------------|-------|-------------|
+| gpt-4-1106-preview | 83.84% | 2024-01-02 |
+| gpt-4 | 78.79% | 2024-01-02 |
+| Mixtral-8x7B-Instruct-v0.1 | 75.76% | 2024-01-02 |
+| fbn-norm | 74.75% | 2024-01-02 |
+| Nous-Hermes-2-Yi-34B | 74.75% | 2024-01-03 |
+| gpt-3.5-turbo | 73.74% | 2024-01-02 |
+| OpenHermes-2p5-Mistral-7B | 65.66% | 2024-01-02 |
+| MythoMax-L2-13b | 50.51% | 2024-01-03 |
+
 
 
 # What is this?
