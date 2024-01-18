@@ -33,4 +33,6 @@ venv/
 # Other files
 /quizlet.txt
 /private_utils.py
+/benchmark_results_tests
+
 

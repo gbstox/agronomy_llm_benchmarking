@@ -1,14 +1,18 @@
 # Leaderboard
+
 | Model Name | Score | Date Tested |
 |------------|-------|-------------|
-| gpt-4-1106-preview | 83.84% | 2024-01-02 |
-| gpt-4 | 78.79% | 2024-01-02 |
-| Mixtral-8x7B-Instruct-v0.1 | 75.76% | 2024-01-02 |
-| fbn-norm | 74.75% | 2024-01-02 |
-| Nous-Hermes-2-Yi-34B | 74.75% | 2024-01-03 |
-| gpt-3.5-turbo | 73.74% | 2024-01-02 |
-| OpenHermes-2p5-Mistral-7B | 65.66% | 2024-01-02 |
-| MythoMax-L2-13b | 50.51% | 2024-01-03 |
+| gpt-4 | 85.71% | 2024-01-15 |
+| agronomYi-hermes-34b | 79.05% | 2024-01-15 |
+| mistral-medium | 77.14% | 2024-01-15 |
+| nous-hermes-yi-34b | 76.19% | 2024-01-15 |
+| mixtral-8x7b-instruct | 72.38% | 2024-01-15 |
+| claude-2 | 72.38% | 2024-01-15 |
+| yi-34b-chat | 71.43% | 2024-01-15 |
+| norm | 69.52% | 2024-01-17 |
+| openhermes-2.5-mistral-7b | 69.52% | 2024-01-15 |
+| gpt-3.5-turbo | 67.62% | 2024-01-15 |
+| mistral-7b-instruct | 61.9% | 2024-01-15 |
 
 
 
@@ -22,3 +26,13 @@ When building new models for agriculture, it's important to know if your model i
 1. Make it harder! These are fairly basic questions. We should add short and long answer questions (to be evaluated against example correct answers)
 2. Add questions for international regions
 3. Add more models to the leaderboard
+
+
+# Updates
+## 2024-01-17
+1. Updated benchmark questions to remove incorrectly formed questions (for eaxample, the most missed question across all models was "e. both symptoms occur across the field and stunted roots", which is clearly not a properly formed question). 
+
+2. Included chat prompt templates for models that require chat templates. 
+
+3. Reran benchmark against all models after fixes in place and updated leaderboard.
+
