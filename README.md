@@ -4,7 +4,7 @@
 |------------|-------|-------------|------|
 | gpt-4 | 85.71% | 2024-01-15 | Proprietary |
 | centeotl | 80.95% | 2024-02-21 | Proprietary |
-| agronomYi-hermes-34b | 79.05% | 2024-01-15 | Open Source |
+| [agronomYi-hermes-34b](https://huggingface.co/gbstox/agronomYi-hermes-34B) | 79.05% | 2024-01-15 | Open Source |
 | mistral-medium | 77.14% | 2024-01-15 | Open Source |
 | nous-hermes-yi-34b | 76.19% | 2024-01-15 | Open Source |
 | mixtral-8x7b-instruct | 72.38% | 2024-01-15 | Open Source |
