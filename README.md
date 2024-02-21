@@ -3,7 +3,7 @@
 | Model Name | Score | Date Tested | License Type |
 |------------|-------|-------------|------|
 | gpt-4 | 85.71% | 2024-01-15 | Proprietary |
-| Centeotl | 80.95% | 2024-02-21 | Proprietary |
+| centeotl | 80.95% | 2024-02-21 | Proprietary |
 | agronomYi-hermes-34b | 79.05% | 2024-01-15 | Open Source |
 | mistral-medium | 77.14% | 2024-01-15 | Open Source |
 | nous-hermes-yi-34b | 76.19% | 2024-01-15 | Open Source |
