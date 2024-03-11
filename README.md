@@ -2,6 +2,7 @@
 
 | Model Name | Score | Date Tested | License Type |
 |------------|-------|-------------|------|
+| claude-3-opus | 86.67% | 2024-03-11 | Proprietary |
 | gpt-4 | 85.71% | 2024-01-15 | Proprietary |
 | centeotl | 80.95% | 2024-02-21 | Proprietary |
 | [agronomYi-hermes-34b](https://huggingface.co/gbstox/agronomYi-hermes-34B) | 79.05% | 2024-01-15 | Open Source |
