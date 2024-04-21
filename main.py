@@ -28,7 +28,7 @@ def format_multiple_choice_prompt(model_id, prompts):
     if prompt_template["assistant_prompt_template"] and formatted_assistant_prompt:
         formatted_assistant_prompt = prompt_template["assistant_prompt_template"][0] + formatted_assistant_prompt + prompt_template["assistant_prompt_template"][1]
     
-    formatted_prompts = {"ystem_prompt": formatted_system_prompt, "user_prompt": formatted_user_prompt, "assistant_prompt": formatted_assistant_prompt}
+    formatted_prompts = {"system_prompt": formatted_system_prompt, "user_prompt": formatted_user_prompt, "assistant_prompt": formatted_assistant_prompt}
     
     return formatted_prompts
     
@@ -219,13 +219,13 @@ def compare_benchmark_scores():
 
 
 benchmark_questions_file = "./agronomy_benchmark_questions.json"
-benchmark_results_dir = './benchmark_results'
+benchmark_results_dir = './benchmark_results_tests/benchmark_results_8'
 
 
 system_prompt = """
         You are a helpful and brilliant agronomist. For the following multiple choice Question, answer  with the key of the correct answer_options value. 
         Your response must be ONLY the answer_options key of the correct answer_options value and no other text. respond with ONLY a single letter key from answer_options.
-        No explaination, notes, confidence score or any other text.
+
 """
 
 user_prompt = ""
@@ -235,19 +235,22 @@ assistant_prompt = "Correct answer_options key:"
 prompts = {"system_prompt": system_prompt, "user_prompt": user_prompt, "assistant_prompt": assistant_prompt}
 
 model_ids = [
-    "openai/gpt-4", 
-    "openai/gpt-3.5-turbo", 
-    "openai/gpt-4-1106-preview", 
-    "anthropic/claude-2",
-    "fbn/norm", 
-    "mistralai/mixtral-8x7b-instruct",
-    "mistralai/mistral-medium",
-    "mistralai/mistral-7b-instruct",
-    "01-ai/yi-34b-chat",
-    "teknium/openhermes-2.5-mistral-7b",
-    "nousresearch/nous-hermes-yi-34b",
-    "gbstox/agronomistral",
-    "gbstox/agronomYi-34b"
+    #"openai/gpt-4", 
+    #"openai/gpt-3.5-turbo", 
+    #"openai/gpt-4-1106-preview", 
+    #"anthropic/claude-2",
+    #"anthropic/claude-3-opus"
+    #"fbn/norm", 
+    "meta-llama/llama-3-8b-instruct:nitro",
+    #"mistralai/mixtral-8x7b-instruct",
+    #"mistralai/mistral-medium",
+    #"mistralai/mistral-7b-instruct",
+    #"01-ai/yi-34b-chat",
+    #"teknium/openhermes-2.5-mistral-7b",
+    #"nousresearch/nous-hermes-yi-34b",
+    #"nousresearch/nous-hermes-2-mixtral-8x7b-dpo"
+    #"gbstox/agronomistral",
+    #"gbstox/agronomYi-34b"
 ]
 
 
