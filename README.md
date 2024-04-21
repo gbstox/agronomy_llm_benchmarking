@@ -1,18 +1,21 @@
 # Leaderboard
 
-| Model Name | Score | Date Tested |
-|------------|-------|-------------|
-| gpt-4 | 85.71% | 2024-01-15 |
-| agronomYi-hermes-34b | 79.05% | 2024-01-15 |
-| mistral-medium | 77.14% | 2024-01-15 |
-| nous-hermes-yi-34b | 76.19% | 2024-01-15 |
-| mixtral-8x7b-instruct | 72.38% | 2024-01-15 |
-| claude-2 | 72.38% | 2024-01-15 |
-| yi-34b-chat | 71.43% | 2024-01-15 |
-| norm | 69.52% | 2024-01-17 |
-| openhermes-2.5-mistral-7b | 69.52% | 2024-01-15 |
-| gpt-3.5-turbo | 67.62% | 2024-01-15 |
-| mistral-7b-instruct | 61.9% | 2024-01-15 |
+| Model Name | Score | Date Tested | License Type |
+|------------|-------|-------------|------|
+| claude-3-opus | 86.67% | 2024-03-11 | Proprietary |
+| gpt-4 | 85.71% | 2024-01-15 | Proprietary |
+| llama-3-70b-instruct | 84.76% | 2024-04-19 | Open Source |
+| centeotl | 80.95% | 2024-02-21 | Proprietary |
+| [agronomYi-hermes-34b](https://huggingface.co/gbstox/agronomYi-hermes-34B) | 79.05% | 2024-01-15 | Open Source |
+| mistral-medium | 77.14% | 2024-01-15 | Open Source |
+| nous-hermes-yi-34b | 76.19% | 2024-01-15 | Open Source |
+| mixtral-8x7b-instruct | 72.38% | 2024-01-15 | Open Source |
+| claude-2 | 72.38% | 2024-01-15 | Proprietary |
+| yi-34b-chat | 71.43% | 2024-01-15 | Open Source |
+| norm | 69.52% | 2024-01-17 | Proprietary |
+| openhermes-2.5-mistral-7b | 69.52% | 2024-01-15 | Open Source |
+| gpt-3.5-turbo | 67.62% | 2024-01-15 | Proprietary |
+| mistral-7b-instruct | 61.9% | 2024-01-15 | Open Source |
 
 
 

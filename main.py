@@ -219,7 +219,7 @@ def compare_benchmark_scores():
 
 
 benchmark_questions_file = "./agronomy_benchmark_questions.json"
-benchmark_results_dir = './benchmark_results_tests/benchmark_results_8'
+benchmark_results_dir = './benchmark_results/'
 
 
 system_prompt = """
@@ -241,7 +241,7 @@ model_ids = [
     #"anthropic/claude-2",
     #"anthropic/claude-3-opus"
     #"fbn/norm", 
-    "meta-llama/llama-3-8b-instruct:nitro",
+    #"meta-llama/llama-3-8b-instruct:nitro",
     #"mistralai/mixtral-8x7b-instruct",
     #"mistralai/mistral-medium",
     #"mistralai/mistral-7b-instruct",
