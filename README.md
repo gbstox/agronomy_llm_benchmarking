@@ -2,6 +2,7 @@
 
 | Model Name | Score | Date Tested | License Type |
 |------------|-------|-------------|------|
+| gpt-4o | 92.38% | 2024-05-13 | Proprietary |
 | claude-3-opus | 86.67% | 2024-03-11 | Proprietary |
 | gpt-4 | 85.71% | 2024-01-15 | Proprietary |
 | llama-3-70b-instruct | 84.76% | 2024-04-19 | Open Source |
