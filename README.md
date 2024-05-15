@@ -3,6 +3,7 @@
 | Model Name | Score | Date Tested | License Type |
 |------------|-------|-------------|------|
 | gpt-4o | 92.38% | 2024-05-13 | Proprietary |
+| llama-3-sonar-large-32k-chat | 88.57% | 2024-05-15 | Proprietary |
 | claude-3-opus | 86.67% | 2024-03-11 | Proprietary |
 | gpt-4 | 85.71% | 2024-01-15 | Proprietary |
 | gemini-pro-1.5 | 84.76% | 2024-05-15 | Proprietary |
