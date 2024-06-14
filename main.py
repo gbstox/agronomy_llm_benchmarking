@@ -5,6 +5,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import openai
 import re
+import glob
 import matplotlib.pyplot as plt
 
 
@@ -268,12 +269,14 @@ def graph_all_models_by_overall_score(model_overall_scores, output_dir):
     plt.close()
 
 def compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, graphs_overall_scores_dir):
-    benchmark_results_files = os.listdir(benchmark_results_dir)
+    benchmark_results_files = glob.glob(f'{benchmark_results_dir}/*.json')
     scores = []
     for model_answers_file in benchmark_results_files:
-        model_scores = score_multile_choice_answers_by_category(os.path.join(benchmark_results_dir, model_answers_file))
+        # Extract the filename from the path
+        filename = os.path.basename(model_answers_file)
+        model_scores = score_multile_choice_answers_by_category(os.path.join(benchmark_results_dir, filename))
         # Extract the date and model_name from the model answers file
-        with open(os.path.join(benchmark_results_dir, model_answers_file), 'r') as f:
+        with open(os.path.join(benchmark_results_dir, filename), 'r') as f:
             data = json.load(f)
             date_tested = data["date"]
             model_name = data["model_name"].split("/")[-1]
@@ -310,8 +313,6 @@ def compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, grap
 
     graph_all_models_by_overall_score(model_overall_scores, graphs_overall_scores_dir)
 
-
-
 system_prompt = """
         You are a helpful and brilliant agronomist. For the following multiple choice Question, answer  with the key of the correct answer_options value. 
         Your response must be ONLY the answer_options key of the correct answer_options value and no other text. respond with ONLY a single letter key from answer_options.
@@ -325,35 +326,36 @@ assistant_prompt = "Correct answer_options key:"
 prompts = {"system_prompt": system_prompt, "user_prompt": user_prompt, "assistant_prompt": assistant_prompt}
 
 model_ids = [
-    "openai/gpt-4",
-    "openai/gpt-4o", 
-    "openai/gpt-3.5-turbo", 
-    "google/gemini-pro-1.5", 
-    "google/gemini-flash-1.5",
+    #"openai/gpt-4",
+    #"openai/gpt-4o", 
+    #"openai/gpt-3.5-turbo", 
+    #"google/gemini-pro-1.5", 
+    #"google/gemini-flash-1.5",
     #"perplexity/llama-3-sonar-large-32k-chat",
     #"anthropic/claude-2",
-    "anthropic/claude-3-haiku",
-    "anthropic/claude-3-opus",
-    "fbn/norm", 
-    "meta-llama/llama-3-8b-instruct:nitro",
+    #"anthropic/claude-3-haiku",
+    #"anthropic/claude-3-opus",
+    #"fbn/norm", 
+    #"meta-llama/llama-3-8b-instruct:nitro",
+    #"meta-llama/llama-3-70b-instruct",
     #"mistralai/mixtral-8x7b-instruct",
     #"mistralai/mistral-medium",
     #"mistralai/mistral-7b-instruct",
-    "01-ai/yi-34b-chat",
-    "qwen/qwen-2-72b-instruct",
+    #"01-ai/yi-34b-chat",
+    #"qwen/qwen-2-72b-instruct",
     #"teknium/openhermes-2.5-mistral-7b",
     #"nousresearch/nous-hermes-yi-34b",
     #"nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
-    "nousresearch/hermes-2-pro-llama-3-8b",
-    "microsoft/phi-3-medium-128k-instruct",
-    "microsoft/phi-3-mini-128k-instruct",
+    #"nousresearch/hermes-2-pro-llama-3-8b",
+    #"microsoft/phi-3-medium-128k-instruct",
+    #"microsoft/phi-3-mini-128k-instruct",
     #"pratik/llama3-8b-dhenu-0.1"
     #"gbstox/agronomistral",
     #"gbstox/agronomYi-34b"
 ]
 
 
-benchmark_questions_file = "./combined_benchmark.json"
+benchmark_questions_file = "./benchmark_questions/combined_benchmark.json"
 benchmark_results_dir = './benchmark_results_tests/benchmark_results_0'
 
 graphs_by_category_dir = f'{benchmark_results_dir}/individual_graphs'
@@ -364,6 +366,6 @@ for model_id in model_ids:
     print (model_id)
     print()
 
-    #run_benchmark(model_id, benchmark_questions_file, prompts, benchmark_results_dir)
+    run_benchmark(model_id, benchmark_questions_file, prompts, benchmark_results_dir)
 
 compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, graphs_overall_scores_dir)
