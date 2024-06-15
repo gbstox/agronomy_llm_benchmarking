@@ -11,7 +11,7 @@
                     "d": "H"
                 },
                 "id": "1",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following plant nutrients is a cation in soils?",
@@ -47,7 +47,7 @@
                     "d": "K"
                 },
                 "id": "4",
-                "model_answer": "d"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following is a beneficial element that is important in animal nutrition?",
@@ -59,7 +59,7 @@
                     "d": "Se"
                 },
                 "id": "5",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following plant nutrient forms is most immobile in soil?",
@@ -83,7 +83,7 @@
                     "d": "N\u2082"
                 },
                 "id": "7",
-                "model_answer": "b"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following is an uptake form of phosphorus?",
@@ -131,7 +131,7 @@
                     "d": "late reproductive"
                 },
                 "id": "11",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Chelates are commonly used to increase the availability of",
@@ -143,7 +143,7 @@
                     "d": "Fe"
                 },
                 "id": "12",
-                "model_answer": "d"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following is the least available source of nutrients?",
@@ -155,7 +155,7 @@
                     "d": "soil minerals"
                 },
                 "id": "13",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "If a nutrient is released to the soil during decomposition of an organic material, ______ has occurred.",
@@ -203,7 +203,7 @@
                     "d": "manganese"
                 },
                 "id": "17",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following soil textures would likely have the lowest soil fertility?",
@@ -251,7 +251,7 @@
                     "d": "no winds"
                 },
                 "id": "21",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Denitrification is the conversion of ______ to gaseous forms like dinitrogen and oxides of nitrogen.",
@@ -335,7 +335,7 @@
                     "d": "the same"
                 },
                 "id": "28",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "Nutrient concentrations ______ change with depth.",
@@ -347,7 +347,7 @@
                     "d": "always"
                 },
                 "id": "29",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "At which of the following soil test levels would you expect the greatest crop response?",
@@ -359,7 +359,7 @@
                     "d": "high"
                 },
                 "id": "30",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "How are soil surveys useful in a soil sampling plan? They ______.",
@@ -371,7 +371,7 @@
                     "d": "provide soil structure data"
                 },
                 "id": "31",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following concepts of fertilizer recommendations increases soil fertility level most slowly?",
@@ -383,7 +383,7 @@
                     "d": "customer satisfaction"
                 },
                 "id": "32",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "If a soil contains 40 lb P/acre, it contains ______ ppm P",
@@ -395,7 +395,7 @@
                     "d": "10"
                 },
                 "id": "33",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Fertilizer recommendations obtained from a plant tissue analysis are ______ used to make a foliar fertilizer recommendation during that crop year.",
@@ -407,7 +407,7 @@
                     "d": "rarely"
                 },
                 "id": "34",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "______ plant parts should be sampled to obtain reliable tissue test results.",
@@ -419,7 +419,7 @@
                     "d": "some"
                 },
                 "id": "35",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Which is the best sample pretreatment for a tissue sample prior to submitting the sample?",
@@ -431,7 +431,7 @@
                     "d": "keep cool in a paper bag"
                 },
                 "id": "36",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "______ is the plant nutrient concentration below which crop growth rate declines significantly.",
@@ -479,7 +479,7 @@
                     "d": "urea"
                 },
                 "id": "40",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "If substantial ammonia is lost after application of UAN, a ______ inhibitor might reduce this loss.",
@@ -503,7 +503,7 @@
                     "d": "ammonium nitrate"
                 },
                 "id": "42",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following P sources is a liquid?",
@@ -515,7 +515,7 @@
                     "d": "ammonium polyphosphate"
                 },
                 "id": "43",
-                "model_answer": "d"
+                "model_answer": "fail"
             },
             {
                 "question": "What is the most common form of potassium fertilizer?",
@@ -539,7 +539,7 @@
                     "d": "11-10.8-5.7"
                 },
                 "id": "45",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "The portion of a fertilizer that easily dissolves in water is ______.",
@@ -563,7 +563,7 @@
                     "d": "600"
                 },
                 "id": "47",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "How many lbs of 10-20-10 should be applied to an acre if the fertilizer recommendation is 26 lbs of P?",
@@ -587,7 +587,7 @@
                     "d": "0.3%"
                 },
                 "id": "49",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following is the best way to maximize plant available N in manure?",
@@ -659,7 +659,7 @@
                     "d": "side-dress"
                 },
                 "id": "55",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Which of the following times of nutrient application is likely to use the least tractor time?",
@@ -671,7 +671,7 @@
                     "d": "fall"
                 },
                 "id": "56",
-                "model_answer": "d"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following factors creates a situation where seed germination is likely reduced?",
@@ -719,7 +719,7 @@
                     "d": "triple super phosphate"
                 },
                 "id": "60",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following soils would have the highest lime requirement to meet a target pH of 6.5?",
@@ -743,7 +743,7 @@
                     "d": "7.8"
                 },
                 "id": "62",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Which of the following micronutrients is more available at pH 7 than at pH 5?",
@@ -755,7 +755,7 @@
                     "d": "Zn"
                 },
                 "id": "63",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Which of the following actually neutralizes soil acidity when lime is applied?",
@@ -839,7 +839,7 @@
                     "d": "interveinal chlorosis inward from leaf margins"
                 },
                 "id": "70",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Soil testing and plant tissue tests are usually ______.",
@@ -875,7 +875,7 @@
                     "d": "soil productivity"
                 },
                 "id": "73",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following is not part of the 4R system?",
@@ -911,7 +911,7 @@
                     "d": "crop harvest"
                 },
                 "id": "76",
-                "model_answer": "d"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following conditions allow N-based manure applications?",
@@ -935,7 +935,7 @@
                     "d": "10 lb/acre"
                 },
                 "id": "78",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "Sinkholes in a Karst topography area can serve as conduits for N and P movement to ______.",
@@ -971,7 +971,7 @@
                     "d": "economic returns on the farm"
                 },
                 "id": "81",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Nutrient budgets consider ______.",
@@ -1019,7 +1019,7 @@
                     "d": "leaching"
                 },
                 "id": "85",
-                "model_answer": "b"
+                "model_answer": "fail"
             }
         ],
         "soil_and_water": [
@@ -1045,7 +1045,7 @@
                     "d": "negative"
                 },
                 "id": "2",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following clays contributes most to CEC if the same amount of each clay is present?",
@@ -1069,7 +1069,7 @@
                     "d": "kaolinite"
                 },
                 "id": "4",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "If a soil has an EC of 0.6 siemens per meter and contains 20 percent sodium on the CEC, it is a ________ soil.",
@@ -1093,7 +1093,7 @@
                     "d": "loamy sand"
                 },
                 "id": "6",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following increases as a soil's clay content increases?",
@@ -1117,7 +1117,7 @@
                     "d": "clay"
                 },
                 "id": "8",
-                "model_answer": "b"
+                "model_answer": "a"
             },
             {
                 "question": "The maximum value for plant available water is ________.",
@@ -1141,7 +1141,7 @@
                     "d": "clay"
                 },
                 "id": "10",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "Which kind of soil structure would be typical for a good seed bed?",
@@ -1213,7 +1213,7 @@
                     "d": "sand"
                 },
                 "id": "16",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following can decrease bulk density?",
@@ -1225,7 +1225,7 @@
                     "d": "tillage"
                 },
                 "id": "17",
-                "model_answer": "c"
+                "model_answer": "fail"
             },
             {
                 "question": "In a typical row crop production system, most of the soil organic matter originates from ________.",
@@ -1261,7 +1261,7 @@
                     "d": "humus"
                 },
                 "id": "20",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following is not an example of a contribution of soil organic matter to soil properties?",
@@ -1273,7 +1273,7 @@
                     "d": "increased soil aeration"
                 },
                 "id": "21",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Soil organic matter is a source of ________ for crops.",
@@ -1297,7 +1297,7 @@
                     "d": "tillage"
                 },
                 "id": "23",
-                "model_answer": "d"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following is most important in carbon sequestration?",
@@ -1321,7 +1321,7 @@
                     "d": "decrease in soil water content from 30 to 10 percent of water holding capacity"
                 },
                 "id": "25",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following organic materials would be expected to mineralize the most nitrogen?",
@@ -1357,7 +1357,7 @@
                     "d": "C"
                 },
                 "id": "28",
-                "model_answer": "c"
+                "model_answer": "o"
             },
             {
                 "question": "How many acres in the S1/2, of the S1/2 of Section 29?",
@@ -1369,7 +1369,7 @@
                     "d": "160"
                 },
                 "id": "29",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "The area of a rectangular field that is 1250 feet long and 700 feet wide is ________ acres.",
@@ -1393,7 +1393,7 @@
                     "d": "11"
                 },
                 "id": "31",
-                "model_answer": "c"
+                "model_answer": "fail"
             },
             {
                 "question": "Poorly drained soils that are wet most of the year are often ________.",
@@ -1441,7 +1441,7 @@
                     "d": "4th"
                 },
                 "id": "35",
-                "model_answer": "b"
+                "model_answer": "fail"
             },
             {
                 "question": "Knowing the drainage class of soil is helpful when building a ________.",
@@ -1501,7 +1501,7 @@
                     "d": "soil texture"
                 },
                 "id": "40",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "The amount of soil that can be lost by erosion, while crop production is maintained economically for the long-term is ________.",
@@ -1561,7 +1561,7 @@
                     "d": "strip-till"
                 },
                 "id": "45",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "What is the percent crop residue cover if the average number of residue intersections is 20 at 6 inch increments over 50 feet?",
@@ -1585,7 +1585,7 @@
                     "d": "nutrient retention"
                 },
                 "id": "47",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Subsurface compaction from tillage usually starts ________.",
@@ -1633,7 +1633,7 @@
                     "d": "liming"
                 },
                 "id": "51",
-                "model_answer": "d"
+                "model_answer": "fail"
             },
             {
                 "question": "Which of the following increases soil water storage?",
@@ -1645,7 +1645,7 @@
                     "d": "deep percolation/recharge"
                 },
                 "id": "52",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following has the greatest impact on infiltration?",
@@ -1669,7 +1669,7 @@
                     "d": "slope"
                 },
                 "id": "54",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Leaching is most impacted by ________.",
@@ -1729,7 +1729,7 @@
                     "d": "phosphine formation"
                 },
                 "id": "59",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Phosphorus transport from a field can be reduced by ________.",
@@ -1765,7 +1765,7 @@
                     "d": "permanent wilting point, field capacity"
                 },
                 "id": "62",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Maximum ET generally occurs ________.",
@@ -1861,7 +1861,7 @@
                     "d": "loamy sand"
                 },
                 "id": "70",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "________ irrigation allows the most control to prevent runoff.",
@@ -1885,7 +1885,7 @@
                     "d": "mercury"
                 },
                 "id": "72",
-                "model_answer": "d"
+                "model_answer": "fail"
             },
             {
                 "question": "What standards are used to determine if a water body is impaired?",
@@ -1921,7 +1921,7 @@
                     "d": "all of the above"
                 },
                 "id": "75",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following NO3 - concentrations would be considered hazardous to an infant?",
@@ -1933,7 +1933,7 @@
                     "d": "44 mg/L"
                 },
                 "id": "76",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Well water contamination from surface water can be prevented by using a ________.",
@@ -1945,7 +1945,7 @@
                     "d": "PVC valve"
                 },
                 "id": "77",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Sediments in runoff decrease ________ in surface waters.",
@@ -1957,7 +1957,7 @@
                     "d": "P load"
                 },
                 "id": "78",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "A ________ is specifically designed to improve ground water quality before ground water can move to a stream.",
@@ -1981,7 +1981,7 @@
                     "d": "humans"
                 },
                 "id": "80",
-                "model_answer": "d"
+                "model_answer": "c"
             }
         ],
         "pest_management": [
@@ -2007,7 +2007,7 @@
                     "d": "favoring"
                 },
                 "id": "2",
-                "model_answer": "b"
+                "model_answer": "fail"
             },
             {
                 "question": "A quarantine is an example of which pest management strategy?",
@@ -2043,7 +2043,7 @@
                     "d": "information accompanying the sample"
                 },
                 "id": "5",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following causes a disease to occur in a pest reducing the pest population?",
@@ -2079,7 +2079,7 @@
                     "d": "pathogen"
                 },
                 "id": "8",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following pathogens usually survives only in living tissue?",
@@ -2091,7 +2091,7 @@
                     "d": "nematode"
                 },
                 "id": "9",
-                "model_answer": "c"
+                "model_answer": "fail"
             },
             {
                 "question": "When a pest invades the plant between plant cells, it is called _______.",
@@ -2103,7 +2103,7 @@
                     "d": "transcellular"
                 },
                 "id": "10",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "________ is a major way insects feed.",
@@ -2163,7 +2163,7 @@
                     "d": "oxygen"
                 },
                 "id": "15",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Which of the following diagnostic tools fails to show the variability in pest characteristics?",
@@ -2175,7 +2175,7 @@
                     "d": "dichotomous keys"
                 },
                 "id": "16",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Which is the most insect specific method of sampling for insects?",
@@ -2259,7 +2259,7 @@
                     "d": "aphid"
                 },
                 "id": "23",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following characteristics is used to identify broadleaf weed seedlings?",
@@ -2355,7 +2355,7 @@
                     "d": "$20"
                 },
                 "id": "31",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "If a pest can exclude or overcome a disease it is considered ______.",
@@ -2367,7 +2367,7 @@
                     "d": "tolerant"
                 },
                 "id": "32",
-                "model_answer": "c"
+                "model_answer": "fail"
             },
             {
                 "question": "A limitation of GM crops is ______.",
@@ -2427,7 +2427,7 @@
                     "d": "fertilizer application"
                 },
                 "id": "37",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "The time during the season when a crop should be kept free of weeds is the ________ period.",
@@ -2463,7 +2463,7 @@
                     "d": "not indigenous to the crop or area"
                 },
                 "id": "40",
-                "model_answer": "b"
+                "model_answer": "a"
             },
             {
                 "question": "Crop sensitivity to a pesticide can vary with ________.",
@@ -2559,7 +2559,7 @@
                     "d": "root inhibitor"
                 },
                 "id": "48",
-                "model_answer": "c"
+                "model_answer": "fail"
             },
             {
                 "question": "_________ is important when applying herbicides to herbicide resistant crops.",
@@ -2583,7 +2583,7 @@
                     "d": "chelates"
                 },
                 "id": "50",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following insecticides target insect eggs?",
@@ -2631,7 +2631,7 @@
                     "d": "little adsorption by colloids"
                 },
                 "id": "54",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "Which of the following site characteristics increases the potential for soil and water pollution by a pesticide?",
@@ -2667,7 +2667,7 @@
                     "d": "Mitigation of exposures that occur"
                 },
                 "id": "57",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "________ must provide assistance to workers who have been poisoned by a pesticide under Worker Protection Standards.",
@@ -2715,7 +2715,7 @@
                     "d": "lighted"
                 },
                 "id": "61",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Which would you do first if a pesticide spill occurs?",
@@ -2801,7 +2801,7 @@
                     "d": "increased cost"
                 },
                 "id": "6",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Fields are fallowed to conserve ________.",
@@ -2813,7 +2813,7 @@
                     "d": "pesticides"
                 },
                 "id": "7",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Pesticide carryover is most important in ________ crops.",
@@ -2861,7 +2861,7 @@
                     "d": "all crops"
                 },
                 "id": "11",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "The soil test values in the top 2 inches of soil are ________ soil test values below 2 inches in a no-till situation.",
@@ -2873,7 +2873,7 @@
                     "d": "less important than"
                 },
                 "id": "12",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following must be sufficiently high to justify conversion of non-cropland to cropland?",
@@ -2885,7 +2885,7 @@
                     "d": "erosion potential"
                 },
                 "id": "13",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Offspring of two plants which differ genetically are ________.",
@@ -2933,7 +2933,7 @@
                     "d": "all of the above"
                 },
                 "id": "17",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following is a characteristic of a well-designed field trial?",
@@ -2969,7 +2969,7 @@
                     "d": "the yield of variety A is significantly higher than variety C"
                 },
                 "id": "20",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following is not usually found on a seed information tag?",
@@ -2981,7 +2981,7 @@
                     "d": "germination percentage"
                 },
                 "id": "21",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Seed quality is usually highest for seed stored under ________.",
@@ -3017,7 +3017,7 @@
                     "d": "dealer show room"
                 },
                 "id": "24",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Which germination test is best to evaluate germination under optimum conditions?",
@@ -3029,7 +3029,7 @@
                     "d": "cold"
                 },
                 "id": "25",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "If pure seed content is 90% and germination is 90%, what is the % PLS?",
@@ -3041,7 +3041,7 @@
                     "d": "81%"
                 },
                 "id": "26",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "If % pure live seed is 80% and the recommended seeding rate is 80 lbs per acre, what adjusted seeding rate should be used?",
@@ -3053,7 +3053,7 @@
                     "d": "88 lbs per acre"
                 },
                 "id": "27",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "A benefit of using certified seed is ________.",
@@ -3137,7 +3137,7 @@
                     "d": "145,000 plants per acre"
                 },
                 "id": "34",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Seeding rate is ________ plant population.",
@@ -3149,7 +3149,7 @@
                     "d": "less than or equal to"
                 },
                 "id": "35",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Advantages of starter fertilizer include ________.",
@@ -3185,7 +3185,7 @@
                     "d": "apply pesticides"
                 },
                 "id": "38",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "If the base temperature is 60\u00b0F, the daily temperature is 80\u00b0F and the maximum temperature is 95\u00b0F, how many heat units have accumulated?",
@@ -3197,7 +3197,7 @@
                     "d": "0"
                 },
                 "id": "39",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "In many crops, night length is important in triggering ________.",
@@ -3233,7 +3233,7 @@
                     "d": "does not change"
                 },
                 "id": "42",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "Water needs of a crop typically increase during the season to a maximum, followed by ________.",
@@ -3257,7 +3257,7 @@
                     "d": "lower plant population"
                 },
                 "id": "44",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "A plant that lives 10 years is a ________.",
@@ -3293,7 +3293,7 @@
                     "d": "fibrous"
                 },
                 "id": "47",
-                "model_answer": "d"
+                "model_answer": "fail"
             },
             {
                 "question": "A crop should be replanted when stand is lost due to some stress, when ________.",
@@ -3317,7 +3317,7 @@
                     "d": "soil fertility"
                 },
                 "id": "49",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "When diagnosing a crop production problem in the field, you should ________.",
@@ -3389,7 +3389,7 @@
                     "d": "CRT"
                 },
                 "id": "55",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Sandy soils have greater ________ than clay loam soils which can affect yield.",
@@ -3401,7 +3401,7 @@
                     "d": "surface area"
                 },
                 "id": "56",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Geographical coordinates combine ________ and ________.",
@@ -3425,7 +3425,7 @@
                     "d": "increase"
                 },
                 "id": "58",
-                "model_answer": "a"
+                "model_answer": "fail"
             },
             {
                 "question": "Yield monitors are ________.",
@@ -3521,7 +3521,7 @@
                     "d": "4 bu/acre"
                 },
                 "id": "66",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "________ is a commodity crop.",
@@ -3559,7 +3559,7 @@
                     "d": "8"
                 },
                 "id": "1dae124e-0549-455c-8283-df00920188f6",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "Applying herbicides directly to cotton is harmful to the cotton because it is",
@@ -3583,7 +3583,7 @@
                     "d": "43,560"
                 },
                 "id": "bc829c1c-8993-4454-816f-b46d0ec4265d",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "At what growth stage does the embryo develop into new plant?",
@@ -3655,7 +3655,7 @@
                     "d": "12 to 18"
                 },
                 "id": "d00653e5-b2de-4806-a855-f658082314c7",
-                "model_answer": "b"
+                "model_answer": "a"
             },
             {
                 "question": "High water-holding capacity",
@@ -3678,7 +3678,7 @@
                     "d": "140"
                 },
                 "id": "87e94e15-3d43-4287-90bd-44080e98c5f9",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "How often should soil tests be taken to aid in maintaining a good forage stand?",
@@ -3702,7 +3702,7 @@
                     "d": "75%"
                 },
                 "id": "86632eff-6250-4167-b05e-ac3f86147bf9",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "If a seed tag stated percent germination at 80% and the purity at 90%, what is the pure live-seed ratio?",
@@ -3737,7 +3737,7 @@
                     "c": "late-maturing varieties"
                 },
                 "id": "a5ea1d20-f794-420b-b66f-1bf85b952f50",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "If you planted a soybean variety in extreme northern Missouri in May that was suited for extreme southeast Missouri, what would happen?",
@@ -3797,7 +3797,7 @@
                     "d": "a grading system for cotton lint"
                 },
                 "id": "7f7096b2-b823-4fa5-82a5-b9aaddb2281e",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "In southeast Missouri you are more likely to find which growth habitat of soybeans?",
@@ -3809,7 +3809,7 @@
                     "d": "determinant"
                 },
                 "id": "037aec00-4782-41fb-855e-6c07bb910f9f",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "In the botanical classification of wheat and barley, at which classification do they differ?",
@@ -3821,7 +3821,7 @@
                     "d": "Class"
                 },
                 "id": "fcb2080c-6f5e-42fd-aa22-a576506ba9c3",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "______ leaf tips indicate phosphorus deficiencies and occur more often in young plants exposed to good growing conditions after cool, wet conditions?",
@@ -3833,7 +3833,7 @@
                     "d": "pale green"
                 },
                 "id": "a63e1409-be41-4826-85bc-33b743942a97",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "Low water-holding capacity",
@@ -3867,7 +3867,7 @@
                     "d": "32"
                 },
                 "id": "5fee4ff0-385f-409d-989b-09cb5a71461f",
-                "model_answer": "b"
+                "model_answer": "fail"
             },
             {
                 "question": "Most dicots have what type of germination and emergence?",
@@ -3879,7 +3879,7 @@
                     "d": "epicotyls"
                 },
                 "id": "3219c157-00b2-40cb-ba34-0ff78f010cf7",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "The most effective method of determining insect levels in a field is",
@@ -3902,7 +3902,7 @@
                     "c": "silt soils"
                 },
                 "id": "baeaf76a-1df0-42b5-90f6-313911e70535",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Nutrients pass through quickly",
@@ -3925,7 +3925,7 @@
                     "d": "to increase the availability of nutrients"
                 },
                 "id": "c50d3dcb-388e-494d-b052-9e503327b1ef",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "The parent line for registered or certified seed.",
@@ -3996,7 +3996,7 @@
                     "d": "50 to 60%"
                 },
                 "id": "664e71d8-ac3d-439b-a846-a5b2cf3c92e3",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Requires labeling by law.",
@@ -4032,7 +4032,7 @@
                     "d": "northwest"
                 },
                 "id": "be3bef14-500f-4b5b-8921-06a9eb0b6287",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "Rice is usually planted by",
@@ -4045,7 +4045,7 @@
                     "e": "both drilling and water-seeding."
                 },
                 "id": "8247b080-c224-44a8-99ba-e72000d8f287",
-                "model_answer": "e"
+                "model_answer": "d"
             },
             {
                 "question": "seed used to produce foundation seed.",
@@ -4093,7 +4093,7 @@
                     "d": "64"
                 },
                 "id": "92e9eaa4-df71-4beb-b1cf-986cfc2f2f70",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "There is a lot of talk in the news about \"Glyphosate Resistant Horseweed.\" What caused this to happen?",
@@ -4141,7 +4141,7 @@
                     "d": "if planting under ideal conditions in 30-inch rows"
                 },
                 "id": "3af18db2-61c6-4f9c-8105-300c33c06361",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "The Universal Soil Loss Equation, A=RKLSCP, is used to calculate those factors that contribute to soil erosion. What does P stand for in the equation?",
@@ -4153,7 +4153,7 @@
                     "d": "tolerance factor"
                 },
                 "id": "c2c4bbc1-788d-4491-9dc0-7fe8db78584b",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Using natural predators of harmful insects to control pests is an example of",
@@ -4177,7 +4177,7 @@
                     "d": "no-till, strip-till, and conventional-till"
                 },
                 "id": "0cc23d44-3d8d-458a-9a63-194ee64769fa",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "What crops are examples of monocots?",
@@ -4190,7 +4190,7 @@
                     "e": "all of the choices are correct"
                 },
                 "id": "3d5c6247-ec49-4734-9240-92a60c280f6b",
-                "model_answer": "d"
+                "model_answer": "e"
             },
             {
                 "question": "What does K stand for in the fertilizer analysis N-K-P?",
@@ -4299,7 +4299,7 @@
                     "d": "S"
                 },
                 "id": "3dfc82a3-3890-46fb-b492-60bc20f29f31",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "What is only found in a monocot seed?",
@@ -4311,7 +4311,7 @@
                     "d": "hilum"
                 },
                 "id": "dc8b8616-aad0-4d23-b460-c2fe25cfd2e2",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "What is pollination?",
@@ -4398,7 +4398,7 @@
                     "e": "seed heads emerged"
                 },
                 "id": "bf2ee6d4-40e4-4783-bb67-d2f98006bfb8",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "What is the majority of the corn produced in the United States (60%) used for?",
@@ -4519,7 +4519,7 @@
                     "d": "It will yield better than wheat planted in the fall."
                 },
                 "id": "adeda306-65fa-4afb-9d32-30e3e60d9fba",
-                "model_answer": "b"
+                "model_answer": "a"
             },
             {
                 "question": "Wheat planting should be delayed after the \"fly-free\" (Hessian Fly) date that ranges from _____ at the Iowa line to _____ at the Arkansas line.",
@@ -4555,7 +4555,7 @@
                     "d": "translocates water"
                 },
                 "id": "59b8f9f3-86d7-44a1-bec2-077c16bf93d5",
-                "model_answer": "b"
+                "model_answer": "a"
             },
             {
                 "question": "Which nutrient is most important to the development of the root system for wheat and small grains?",
@@ -4580,7 +4580,7 @@
                     "e": "two cotyledons and leaves with parallel veins"
                 },
                 "id": "4a5e670b-2f65-4dc8-bbb6-3cc25685e3d6",
-                "model_answer": "d"
+                "model_answer": "e"
             },
             {
                 "question": "which of the following are quality factors in determining the price of cotton lint?",
@@ -4641,7 +4641,7 @@
                     "d": "Hard wheat is coarser than soft wheat."
                 },
                 "id": "8d8832f6-c1f0-481c-a23b-bfbbee59bc43",
-                "model_answer": "b"
+                "model_answer": "a"
             },
             {
                 "question": "Which of the following is not true for conservation tillage?",
@@ -4745,7 +4745,7 @@
                     "c": "sandy soils"
                 },
                 "id": "d32ec08e-8e4d-40f7-ad37-5628a6c45f58",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Which type of wheat is predominately grown in Missouri?",
@@ -4757,7 +4757,7 @@
                     "d": "soft red summer"
                 },
                 "id": "b828e996-b1f0-431f-b103-e946083c7242",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Why are oats primarily planted in the north central states?",
@@ -4809,6 +4809,6 @@
             }
         ]
     },
-    "date": "2024-06-14T13:28:58.081857",
-    "model_name": "gpt-4"
+    "date": "2024-06-14T14:37:42.980909",
+    "model_name": "hermes-2-pro-llama-3-8b"
 }

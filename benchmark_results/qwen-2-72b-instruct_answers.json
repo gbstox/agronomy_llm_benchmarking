@@ -131,7 +131,7 @@
                     "d": "late reproductive"
                 },
                 "id": "11",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Chelates are commonly used to increase the availability of",
@@ -155,7 +155,7 @@
                     "d": "soil minerals"
                 },
                 "id": "13",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "If a nutrient is released to the soil during decomposition of an organic material, ______ has occurred.",
@@ -335,7 +335,7 @@
                     "d": "the same"
                 },
                 "id": "28",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Nutrient concentrations ______ change with depth.",
@@ -347,7 +347,7 @@
                     "d": "always"
                 },
                 "id": "29",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "At which of the following soil test levels would you expect the greatest crop response?",
@@ -383,7 +383,7 @@
                     "d": "customer satisfaction"
                 },
                 "id": "32",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "If a soil contains 40 lb P/acre, it contains ______ ppm P",
@@ -539,7 +539,7 @@
                     "d": "11-10.8-5.7"
                 },
                 "id": "45",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "The portion of a fertilizer that easily dissolves in water is ______.",
@@ -563,7 +563,7 @@
                     "d": "600"
                 },
                 "id": "47",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "How many lbs of 10-20-10 should be applied to an acre if the fertilizer recommendation is 26 lbs of P?",
@@ -575,7 +575,7 @@
                     "d": "600"
                 },
                 "id": "48",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "If a manure contains 1.9% P on a dry basis and is 60% solids, what is the 'as is' (wet basis) P concentration?",
@@ -587,7 +587,7 @@
                     "d": "0.3%"
                 },
                 "id": "49",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Which of the following is the best way to maximize plant available N in manure?",
@@ -659,7 +659,7 @@
                     "d": "side-dress"
                 },
                 "id": "55",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Which of the following times of nutrient application is likely to use the least tractor time?",
@@ -671,7 +671,7 @@
                     "d": "fall"
                 },
                 "id": "56",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following factors creates a situation where seed germination is likely reduced?",
@@ -767,7 +767,7 @@
                     "d": "H\u207a"
                 },
                 "id": "64",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following is not used in determining a lime recommendation?",
@@ -935,7 +935,7 @@
                     "d": "10 lb/acre"
                 },
                 "id": "78",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Sinkholes in a Karst topography area can serve as conduits for N and P movement to ______.",
@@ -947,7 +947,7 @@
                     "d": "all of the above"
                 },
                 "id": "79",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "Which of the following is not part of the purpose of a nutrient management plan?",
@@ -1019,7 +1019,7 @@
                     "d": "leaching"
                 },
                 "id": "85",
-                "model_answer": "b"
+                "model_answer": "d"
             }
         ],
         "soil_and_water": [
@@ -1069,7 +1069,7 @@
                     "d": "kaolinite"
                 },
                 "id": "4",
-                "model_answer": "c"
+                "model_answer": "a"
             },
             {
                 "question": "If a soil has an EC of 0.6 siemens per meter and contains 20 percent sodium on the CEC, it is a ________ soil.",
@@ -1081,7 +1081,7 @@
                     "d": "acid"
                 },
                 "id": "5",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "What is the textural class of soil that is 10 percent clay and 35 percent sand?",
@@ -1093,7 +1093,7 @@
                     "d": "loamy sand"
                 },
                 "id": "6",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following increases as a soil's clay content increases?",
@@ -1213,7 +1213,7 @@
                     "d": "sand"
                 },
                 "id": "16",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following can decrease bulk density?",
@@ -1369,7 +1369,7 @@
                     "d": "160"
                 },
                 "id": "29",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "The area of a rectangular field that is 1250 feet long and 700 feet wide is ________ acres.",
@@ -1381,7 +1381,7 @@
                     "d": "67"
                 },
                 "id": "30",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "If a field has an 11 foot change in elevation over a distance of 1000 feet, the slope is ________%. ",
@@ -1393,7 +1393,7 @@
                     "d": "11"
                 },
                 "id": "31",
-                "model_answer": "c"
+                "model_answer": "b"
             },
             {
                 "question": "Poorly drained soils that are wet most of the year are often ________.",
@@ -1477,7 +1477,7 @@
                     "d": "incursion"
                 },
                 "id": "38",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Any factor that ________ runoff and ________ surface protection, increases erosion.",
@@ -1633,7 +1633,7 @@
                     "d": "liming"
                 },
                 "id": "51",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following increases soil water storage?",
@@ -1765,7 +1765,7 @@
                     "d": "permanent wilting point, field capacity"
                 },
                 "id": "62",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Maximum ET generally occurs ________.",
@@ -1849,7 +1849,7 @@
                     "d": "12"
                 },
                 "id": "69",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Tile drain spacing is smallest for a ________ soil.",
@@ -1861,7 +1861,7 @@
                     "d": "loamy sand"
                 },
                 "id": "70",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "________ irrigation allows the most control to prevent runoff.",
@@ -1933,7 +1933,7 @@
                     "d": "44 mg/L"
                 },
                 "id": "76",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "Well water contamination from surface water can be prevented by using a ________.",
@@ -1945,7 +1945,7 @@
                     "d": "PVC valve"
                 },
                 "id": "77",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Sediments in runoff decrease ________ in surface waters.",
@@ -1995,7 +1995,7 @@
                     "d": "all of the above"
                 },
                 "id": "1",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "IPM has a main goal of _______ pesticide use.",
@@ -2199,7 +2199,7 @@
                     "d": "random"
                 },
                 "id": "18",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Soil for a nematode analysis should be _________ before shipping.",
@@ -2259,7 +2259,7 @@
                     "d": "aphid"
                 },
                 "id": "23",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "Which of the following characteristics is used to identify broadleaf weed seedlings?",
@@ -2355,7 +2355,7 @@
                     "d": "$20"
                 },
                 "id": "31",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "If a pest can exclude or overcome a disease it is considered ______.",
@@ -2523,7 +2523,7 @@
                     "d": "low boom height"
                 },
                 "id": "45",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following is useful in managing herbicide resistant weed populations?",
@@ -2583,7 +2583,7 @@
                     "d": "chelates"
                 },
                 "id": "50",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following insecticides target insect eggs?",
@@ -2691,7 +2691,7 @@
                     "d": "100 ppb"
                 },
                 "id": "59",
-                "model_answer": "b"
+                "model_answer": "a"
             },
             {
                 "question": "Acute pesticide poisoning is how poisonous a pesticide is to humans after ______ exposure(s).",
@@ -2727,7 +2727,7 @@
                     "d": "contain the spill"
                 },
                 "id": "62",
-                "model_answer": "a"
+                "model_answer": "d"
             }
         ],
         "crop_management": [
@@ -2861,7 +2861,7 @@
                     "d": "all crops"
                 },
                 "id": "11",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "The soil test values in the top 2 inches of soil are ________ soil test values below 2 inches in a no-till situation.",
@@ -2957,7 +2957,7 @@
                     "d": "all of the above"
                 },
                 "id": "19",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "If the yields of varieties A, B and C are 45, 50, and 44 bu per acre, respectively, and the LSD is 5, which of the following is true?",
@@ -3017,7 +3017,7 @@
                     "d": "dealer show room"
                 },
                 "id": "24",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Which germination test is best to evaluate germination under optimum conditions?",
@@ -3029,7 +3029,7 @@
                     "d": "cold"
                 },
                 "id": "25",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "If pure seed content is 90% and germination is 90%, what is the % PLS?",
@@ -3053,7 +3053,7 @@
                     "d": "88 lbs per acre"
                 },
                 "id": "27",
-                "model_answer": "a"
+                "model_answer": "d"
             },
             {
                 "question": "A benefit of using certified seed is ________.",
@@ -3125,7 +3125,7 @@
                     "d": "increased seed size"
                 },
                 "id": "33",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "If you count 10 plants in 5 sq ft of a field at several points in that field, what is the approximate plant population?",
@@ -3137,7 +3137,7 @@
                     "d": "145,000 plants per acre"
                 },
                 "id": "34",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Seeding rate is ________ plant population.",
@@ -3149,7 +3149,7 @@
                     "d": "less than or equal to"
                 },
                 "id": "35",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "Advantages of starter fertilizer include ________.",
@@ -3521,7 +3521,7 @@
                     "d": "4 bu/acre"
                 },
                 "id": "66",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "________ is a commodity crop.",
@@ -3559,7 +3559,7 @@
                     "d": "8"
                 },
                 "id": "1dae124e-0549-455c-8283-df00920188f6",
-                "model_answer": "c"
+                "model_answer": "d"
             },
             {
                 "question": "Applying herbicides directly to cotton is harmful to the cotton because it is",
@@ -3749,7 +3749,7 @@
                     "d": "It would never come up."
                 },
                 "id": "6a4b3891-2069-4220-9fcd-fbefeca8c084",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "If you want to establish legumes in a grass pasture, what would you not want to do?",
@@ -3809,7 +3809,7 @@
                     "d": "determinant"
                 },
                 "id": "037aec00-4782-41fb-855e-6c07bb910f9f",
-                "model_answer": "d"
+                "model_answer": "b"
             },
             {
                 "question": "In the botanical classification of wheat and barley, at which classification do they differ?",
@@ -3855,7 +3855,7 @@
                     "c": "silt soils"
                 },
                 "id": "5a487b38-6d85-4aec-8b51-809c38f143e0",
-                "model_answer": "a"
+                "model_answer": "b"
             },
             {
                 "question": "Moisture levels higher than ___% lad to dry matter and quality loss due to heating and molding of the hay.",
@@ -3937,7 +3937,7 @@
                     "d": "breeder seed"
                 },
                 "id": "8427e980-4f13-410c-a0ec-6ac4a4ba4082",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "The part of a chromosome that determines individual plant characteristics is called a/an",
@@ -4069,7 +4069,7 @@
                     "d": "become shorter"
                 },
                 "id": "134aabdc-528f-4689-ab4e-0fd1d36eb5a0",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "Sunflower heads move toward the sun. This is an example of",
@@ -4238,7 +4238,7 @@
                     "e": "both symptoms occur across the field and stunted roots"
                 },
                 "id": "da95665f-bb93-4c5c-8171-475630701ff9",
-                "model_answer": "e"
+                "model_answer": "c"
             },
             {
                 "question": "What is a hybrid corn?",
@@ -4385,7 +4385,7 @@
                     "e": "seed heads emerged"
                 },
                 "id": "6c1bc8ac-da85-4fe9-8187-254e8bd782e1",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "What is the ideal stage of maturity for harvesting Reed Canarygrass?",
@@ -4398,7 +4398,7 @@
                     "e": "seed heads emerged"
                 },
                 "id": "bf2ee6d4-40e4-4783-bb67-d2f98006bfb8",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "What is the majority of the corn produced in the United States (60%) used for?",
@@ -4410,7 +4410,7 @@
                     "d": "plastics"
                 },
                 "id": "18ea71f0-6add-4297-91dd-419b3b1d895b",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "What is the minimum test weight per bushel for US number 1 corn?",
@@ -4422,7 +4422,7 @@
                     "d": "57 lbs"
                 },
                 "id": "d8def48d-d31d-424d-8e6b-34e6fb94a64e",
-                "model_answer": "b"
+                "model_answer": "c"
             },
             {
                 "question": "What is the movement of water and organic materials within the plant?",
@@ -4458,7 +4458,7 @@
                     "d": "leaf sheath"
                 },
                 "id": "a923c494-a13e-477a-89c2-92397740eaf4",
-                "model_answer": "b"
+                "model_answer": "d"
             },
             {
                 "question": "What plants part(s) may be used for asexual propagation?",
@@ -4531,7 +4531,7 @@
                     "d": "October 1, September 1"
                 },
                 "id": "39581e1f-10bb-4f9c-aa67-889fd3197790",
-                "model_answer": "a"
+                "model_answer": "c"
             },
             {
                 "question": "Which elements do plants obtain from the air?",
@@ -4653,7 +4653,7 @@
                     "d": "requires more traffic on a field"
                 },
                 "id": "df420ff2-c0d6-47af-a4df-38b774b0c808",
-                "model_answer": "d"
+                "model_answer": "c"
             },
             {
                 "question": "Which of the following statements would be a benefit of leaving crop residue on the planting field?",
@@ -4809,6 +4809,6 @@
             }
         ]
     },
-    "date": "2024-06-14T13:28:58.081857",
-    "model_name": "gpt-4"
+    "date": "2024-06-14T14:33:19.248376",
+    "model_name": "qwen-2-72b-instruct"
 }

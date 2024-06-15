@@ -1,25 +1,24 @@
 # Leaderboard
 
-| Model Name | Score | Date Tested | License Type |
-|------------|-------|-------------|------|
-| gpt-4o | 92.38% | 2024-05-13 | Proprietary |
-| llama-3-sonar-large-32k-chat | 88.57% | 2024-05-15 | Proprietary |
-| claude-3-opus | 86.67% | 2024-03-11 | Proprietary |
-| gpt-4 | 85.71% | 2024-01-15 | Proprietary |
-| gemini-pro-1.5 | 84.76% | 2024-05-15 | Proprietary |
-| llama-3-70b-instruct | 84.76% | 2024-04-19 | Open Source |
-| centeotl | 80.95% | 2024-02-21 | Proprietary |
-| [agronomYi-hermes-34b](https://huggingface.co/gbstox/agronomYi-hermes-34B) | 79.05% | 2024-01-15 | Open Source |
-| mistral-medium | 77.14% | 2024-01-15 | Open Source |
-| nous-hermes-yi-34b | 76.19% | 2024-01-15 | Open Source |
-| mixtral-8x7b-instruct | 72.38% | 2024-01-15 | Open Source |
-| claude-2 | 72.38% | 2024-01-15 | Proprietary |
-| yi-34b-chat | 71.43% | 2024-01-15 | Open Source |
-| norm | 69.52% | 2024-01-17 | Proprietary |
-| openhermes-2.5-mistral-7b | 69.52% | 2024-01-15 | Open Source |
-| gpt-3.5-turbo | 67.62% | 2024-01-15 | Proprietary |
-| mistral-7b-instruct | 61.9% | 2024-01-15 | Open Source |
+| Model Name | Overall Score | Date Tested | nutrient_management | soil_and_water | pest_management | crop_management | V1_benchmark_questions | License Type |
+|------------|---------------|-------------|-------|-------|-------|-------|-------|-------|
+| gpt-4o | 89.56% | 2024-06-14 | 87.06% | 88.75% | 90.32% | 91.18% | 90.48% | Proprietary |
+| claude-3-opus | 88.67% | 2024-06-14 | 89.41% | 87.5% | 87.1% | 92.65% | 86.67% | Proprietary |
+| norm | 87.74% | 2024-06-14 | 84.71% | 87.5% | 88.71% | 88.24% | 89.52% | Proprietary |
+| gemini-pro-1.5 | 85.01% | 2024-06-14 | 84.71% | 87.5% | 82.26% | 86.76% | 83.81% | Proprietary |
+| gpt-4 | 84.92% | 2024-06-14 | 83.53% | 83.75% | 83.87% | 86.76% | 86.67% | Proprietary |
+| qwen-2-72b-instruct | 84.15% | 2024-06-14 | 81.18% | 83.75% | 83.87% | 85.29% | 86.67% | Open Source |
+| llama-3-70b-instruct | 81.49% | 2024-06-14 | 78.82% | 78.75% | 82.26% | 83.82% | 83.81% | Open Source |
+| gemini-flash-1.5 | 79.53% | 2024-06-14 | 74.12% | 76.25% | 83.87% | 85.29% | 78.1% | Proprietary |
+| claude-3-haiku | 75.13% | 2024-06-14 | 71.76% | 73.75% | 79.03% | 72.06% | 79.05% | Proprietary |
+| phi-3-medium-128k-instruct | 73.49% | 2024-06-14 | 67.06% | 77.5% | 72.58% | 77.94% | 72.38% | Open Source |
+| yi-34b-chat | 71.23% | 2024-06-14 | 68.24% | 68.75% | 79.03% | 70.59% | 69.52% | Open Source |
+| gpt-3.5-turbo | 68.44% | 2024-06-14 | 67.06% | 63.75% | 69.35% | 70.59% | 71.43% | Proprietary |
+| phi-3-mini-128k-instruct | 67.53% | 2024-06-14 | 60.0% | 71.25% | 67.74% | 69.12% | 69.52% | Open Source |
+| llama-3-8b-instruct:nitro | 63.82% | 2024-06-14 | 54.12% | 68.75% | 61.29% | 72.06% | 62.86% | Open Source |
+| hermes-2-pro-llama-3-8b | 61.99% | 2024-06-14 | 57.65% | 57.5% | 62.9% | 66.18% | 65.71% | Open Source |
 
+![Overall Scores for All Models](./benchmark_results_tests/benchmark_results/all_models_overall_score.png)
 
 
 # What is this?
@@ -35,10 +34,20 @@ When building new models for agriculture, it's important to know if your model i
 
 
 # Updates
+
+## 2024-06-15
+1. Added 295 more questions to the benchmark.
+2. Added quesiton cateogires
+3. Re-ran with all models
+4. Added graphs as output for visual comparison. 
+
+
 ## 2024-01-17
 1. Updated benchmark questions to remove incorrectly formed questions (for eaxample, the most missed question across all models was "e. both symptoms occur across the field and stunted roots", which is clearly not a properly formed question). 
 
 2. Included chat prompt templates for models that require chat templates. 
 
-3. Reran benchmark against all models after fixes in place and updated leaderboard.
+3. Re-ran benchmark against all models after fixes in place and updated leaderboard.
+
+
 

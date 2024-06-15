@@ -5,6 +5,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 import openai
 import re
+import glob
+import matplotlib.pyplot as plt
+
 
 import private_utils
 
@@ -104,8 +107,22 @@ def chat_prompt(client, model_id, formatted_prompts):
             n=1,
             temperature=0.5,
         )
-        response_content = response.choices[0].message.content
-        return response_content
+        if response.choices and response.choices[0].message:
+            return response.choices[0].message.content
+        else:
+            return None
+    except openai.APIConnectionError as e:
+        print("The server could not be reached")
+        print(e.__cause__)
+        return None
+    except openai.RateLimitError as e:
+        print("A 429 status code was received; we should back off a bit.")
+        return None
+    except openai.APIStatusError as e:
+        print("Another non-200-range status code was received")
+        print(e.status_code)
+        print(e.response)
+        return None
 
 
     except openai.APIConnectionError as e:
@@ -119,61 +136,60 @@ def chat_prompt(client, model_id, formatted_prompts):
         print(e.response)
 
 
-def run_benchmark(model_id, benchmark_questions_file, prompts, retries = 3):
+def run_benchmark(model_id, benchmark_questions_file, prompts, benchmark_results_dir, retries=3):
     with open(benchmark_questions_file, 'r') as f:
-        benchmark_questions = json.load(f)
+        benchmark_questions = json.load(f)["multiple_choice"]
 
-    model_answers = {"multiple_choice": []}  # Initialize model_answers dictionary
+    model_answers = {"multiple_choice": {}}
     model_answers["date"] = datetime.datetime.now().isoformat()
     model_creator = model_id.split('/')[0]
     model_name = model_id.split('/')[-1]
     model_answers["model_name"] = model_name
 
-    # handle multiple choice questions
-    for benchmark_mc_question in benchmark_questions["multiple_choice"]:
+    for category, questions in benchmark_questions.items():
+        model_answers["multiple_choice"][category] = []
+        for benchmark_mc_question in questions:
+            prompts["user_prompt"] = f"Question: {benchmark_mc_question['question']}\n\nanswer_options: {benchmark_mc_question['answer_options']}"
+            formatted_prompts = format_multiple_choice_prompt(model_id, prompts)
 
-        prompts["user_prompt"] = f"Question: {benchmark_mc_question['question']}\n\nanswer_options: {benchmark_mc_question['answer_options']}"
+            temp_answer = "fail"
+            model_answer = None  # Initialize model_answer
+            for _ in range(retries):
+                if model_creator == "fbn":
+                    formatted_prompts["user_prompt"] = f"{formatted_prompts['system_prompt']} \n {formatted_prompts['user_prompt']}"
+                    temp_answer = private_utils.prompt_fbn_norm(model_id, formatted_prompts)
+                elif model_creator == "openai":
+                    client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+                    temp_answer = chat_prompt(client, model_name, formatted_prompts)
+                elif model_creator == "pratik":
+                    gradio_url = "https://huggingface.co/spaces/eswardivi/llama3-8b-dhenu-0.1"
+                    temp_answer = private_utils.query_gradio(gradio_url, formatted_prompts)
+                elif model_creator == "gbstox":
+                    pod_url = "https://6lgv5h2aextq69-5000.proxy.runpod.net/v1/chat/completions"
+                    temp_answer = private_utils.runpod_chat_prompt(pod_url, model_id, formatted_prompts)
+                else:
+                    client = openai.OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ['OPENROUTER_API_KEY'])
+                    temp_answer = chat_prompt(client, model_id, formatted_prompts)
 
-        formatted_prompts = format_multiple_choice_prompt(model_id, prompts) 
-        #print (json.dumps(formatted_prompts, indent =4))
+                if temp_answer:
+                    temp_answer_stripped = temp_answer.strip(' "\'*')
+                    temp_answer_stripped = re.sub(r'\s', '', temp_answer_stripped)
+                    temp_answer_stripped = temp_answer_stripped.rstrip('*')  # This line removes trailing asterisks
+                    correct = temp_answer_stripped == benchmark_mc_question.get('correct_answer')
+                    print("Correct" if correct else "Incorrect", temp_answer_stripped, f" - try #{_}, correct: {benchmark_mc_question.get('correct_answer')}, q_id = {benchmark_mc_question.get('id')}")
+                    if len(temp_answer_stripped) == 1 and temp_answer_stripped.isalpha():
+                        model_answer = temp_answer_stripped.lower()
+                        break
+                else:
+                    print(f"Invalid response received for question ID {benchmark_mc_question.get('id')}, retrying...")
 
-        temp_answer = "fail"  # default answer if retries fail
-        for _ in range(retries):  # retry n number of times
-            if model_creator == "fbn":
-                formatted_prompts["user_prompt"] = f"{formatted_prompts['system_prompt']} \n {formatted_prompts['user_prompt']}"
-                temp_answer = private_utils.prompt_fbn_norm(model_id, formatted_prompts)
-   
-            elif model_creator == "openai":
-                client = openai.OpenAI(api_key= os.environ['OPENAI_API_KEY'])
-                temp_answer = chat_prompt(client, model_name, formatted_prompts)
+            if model_answer is None:
+                model_answer = "fail"  # Default value if no valid answer is found
 
-
-            elif model_creator == "gbstox":
-                #client = openai.OpenAI(base_url="http://localhost:1234/v1", api_key="not-needed")
-                #temp_answer = chat_prompt(client, model_name, formatted_prompts)
-
-                pod_url = "https://6lgv5h2aextq69-5000.proxy.runpod.net" + "/v1/chat/completions"
-                temp_answer = private_utils.runpod_chat_prompt(pod_url, model_id, formatted_prompts)
-
-                #hf_url = "https://fj9k7daknymi38df.us-east-1.aws.endpoints.huggingface.cloud"
-                #private_utils.query_huggingface(hf_url, formatted_prompts)
-
-            else:
-                client = openai.OpenAI(base_url="https://openrouter.ai/api/v1", api_key= os.environ['OPENROUTER_API_KEY'])
-                temp_answer = chat_prompt(client, model_id, formatted_prompts)
-
-            temp_answer_stripped = temp_answer.strip(' "\'')
-            temp_answer_stripped = re.sub(r'\s', '', temp_answer_stripped)
-            print (temp_answer_stripped, f" try #{_}, correct: {benchmark_mc_question.get('correct_answer')}, q_id = {benchmark_mc_question.get('id')}")
-            if len(temp_answer_stripped) == 1 and temp_answer_stripped.isalpha():
-                model_answer = temp_answer_stripped.lower() # update the model answer
-                break  
-
-        benchmark_mc_question["model_answer"] = model_answer
-        model_answers["multiple_choice"].append(benchmark_mc_question)  # Append the question to model_answers
+            benchmark_mc_question["model_answer"] = model_answer
+            model_answers["multiple_choice"][category].append(benchmark_mc_question)
 
     Path(benchmark_results_dir).mkdir(parents=True, exist_ok=True)
-    model_name = model_name.split("/")[-1]
     with open(f'{benchmark_results_dir}/{model_name}_answers.json', 'w') as f:
         f.write(json.dumps(model_answers, indent=4))
 
@@ -192,35 +208,110 @@ def score_multile_choice_answers(model_answers_file):
     score = round((correct_answers / total_questions) * 100, 2)
     return score
 
+def score_multile_choice_answers_by_category(model_answers_file):
+    with open(model_answers_file, 'r') as f:
+        model_answers = json.load(f)["multiple_choice"]
 
-def compare_benchmark_scores():
-    benchmark_results_files = os.listdir(benchmark_results_dir)
+    scores = {}
+    for category, answers in model_answers.items():
+        correct_answers = 0
+        total_questions = len(answers)
+
+        for model_answer in answers:
+            if model_answer["model_answer"] == model_answer["correct_answer"]:
+                correct_answers += 1
+
+        score = round((correct_answers / total_questions) * 100, 2)
+        scores[category] = score
+
+    return scores
+
+def graph_individual_model_by_category(model_scores, model_name, output_dir):
+    categories = list(model_scores.keys())
+    scores = list(model_scores.values())
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(categories, scores, color='blue')
+    plt.xlabel('Category')
+    plt.ylabel('Score')
+    plt.title(f'Scores by Category for {model_name}')
+    plt.ylim([0, 100])
+    for i in range(len(scores)):
+        plt.text(i, scores[i], scores[i], ha = 'center')
+
+    # Create directory if it doesn't exist
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    plt.savefig(f'{output_dir}/{model_name}_by_category.png')
+    plt.close()
+
+def graph_all_models_by_overall_score(model_overall_scores, output_dir):
+    model_names = [model_score[0] for model_score in model_overall_scores]
+    scores = [model_score[1] for model_score in model_overall_scores]
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(model_names, scores, color='blue')
+    plt.xlabel('Model')
+    plt.ylabel('Overall Score')
+    plt.title('Overall Scores for All Models')
+    plt.ylim([0, 100])
+    for i in range(len(scores)):
+        plt.text(i, scores[i], scores[i], ha = 'center')
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+
+    # Create directory if it doesn't exist
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    plt.savefig(f'{output_dir}/all_models_overall_score.png')
+    plt.close()
+
+def compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, graphs_overall_scores_dir):
+    benchmark_results_files = glob.glob(f'{benchmark_results_dir}/*.json')
     scores = []
     for model_answers_file in benchmark_results_files:
-        score = score_multile_choice_answers(os.path.join(benchmark_results_dir, model_answers_file))
+        # Extract the filename from the path
+        filename = os.path.basename(model_answers_file)
+        model_scores = score_multile_choice_answers_by_category(os.path.join(benchmark_results_dir, filename))
         # Extract the date and model_name from the model answers file
-        with open(os.path.join(benchmark_results_dir, model_answers_file), 'r') as f:
+        with open(os.path.join(benchmark_results_dir, filename), 'r') as f:
             data = json.load(f)
             date_tested = data["date"]
             model_name = data["model_name"].split("/")[-1]
         # Only include the yyyy-mm-dd part of the date
         date_tested = date_tested.split('T')[0]
-        scores.append((model_name, score, date_tested))
+        # Calculate the overall score
+        overall_score = round(sum(model_scores.values()) / len(model_scores), 2)
+        scores.append((model_name, model_scores, overall_score, date_tested))
 
-    # Sort the scores in descending order
-    scores.sort(key=lambda x: x[1], reverse=True)
+    # Sort the scores in descending order of the overall score
+    scores.sort(key=lambda x: x[2], reverse=True)
 
     # Print the scores in a markdown table format
-    print("| Model Name | Score | Date Tested |")
-    print("|------------|-------|-------------|")
-    for model, score, date_tested in scores:
-        print(f"| {model} | {score}% | {date_tested} |")
+    print("| Model Name | Overall Score | Date Tested |", end="")
+    # Print the category names
+    for category in scores[0][1].keys():
+        print(f" {category} |", end="")
+    print()
+    print("|------------|---------------|-------------|", end="")
+    # Print the separator for each category
+    for _ in scores[0][1].keys():
+        print("-------|", end="")
+    print()
+    for model, model_scores, overall_score, date_tested in scores:
+        print(f"| {model} | {overall_score}% | {date_tested} |", end="")
+        # Print the score for each category
+        for score in model_scores.values():
+            print(f" {score}% |", end="")
+        print()
+    model_overall_scores = []
+    for model, model_scores, overall_score, date_tested in scores:
+        graph_individual_model_by_category(model_scores, model, graphs_by_category_dir)
+        model_overall_scores.append((model, overall_score))
 
-
-
-benchmark_questions_file = "./agronomy_benchmark_questions.json"
-benchmark_results_dir = './benchmark_results/'
-
+    graph_all_models_by_overall_score(model_overall_scores, graphs_overall_scores_dir)
 
 system_prompt = """
         You are a helpful and brilliant agronomist. For the following multiple choice Question, answer  with the key of the correct answer_options value. 
@@ -235,34 +326,46 @@ assistant_prompt = "Correct answer_options key:"
 prompts = {"system_prompt": system_prompt, "user_prompt": user_prompt, "assistant_prompt": assistant_prompt}
 
 model_ids = [
-    #"openai/gpt-4", 
+    #"openai/gpt-4",
+    #"openai/gpt-4o", 
     #"openai/gpt-3.5-turbo", 
-    #"openai/gpt-4-1106-preview", 
+    #"google/gemini-pro-1.5", 
+    #"google/gemini-flash-1.5",
+    #"perplexity/llama-3-sonar-large-32k-chat",
     #"anthropic/claude-2",
-    #"anthropic/claude-3-opus"
+    #"anthropic/claude-3-haiku",
+    #"anthropic/claude-3-opus",
     #"fbn/norm", 
     #"meta-llama/llama-3-8b-instruct:nitro",
+    #"meta-llama/llama-3-70b-instruct",
     #"mistralai/mixtral-8x7b-instruct",
     #"mistralai/mistral-medium",
     #"mistralai/mistral-7b-instruct",
     #"01-ai/yi-34b-chat",
+    #"qwen/qwen-2-72b-instruct",
     #"teknium/openhermes-2.5-mistral-7b",
     #"nousresearch/nous-hermes-yi-34b",
-    #"nousresearch/nous-hermes-2-mixtral-8x7b-dpo"
+    #"nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
+    #"nousresearch/hermes-2-pro-llama-3-8b",
+    #"microsoft/phi-3-medium-128k-instruct",
+    #"microsoft/phi-3-mini-128k-instruct",
+    #"pratik/llama3-8b-dhenu-0.1"
     #"gbstox/agronomistral",
     #"gbstox/agronomYi-34b"
 ]
 
+
+benchmark_questions_file = "./benchmark_questions/combined_benchmark.json"
+benchmark_results_dir = './benchmark_results_tests/benchmark_results_0'
+
+graphs_by_category_dir = f'{benchmark_results_dir}/individual_graphs'
+graphs_overall_scores_dir = benchmark_results_dir
 
 for model_id in model_ids:
     print ()
     print (model_id)
     print()
 
-    run_benchmark(model_id, benchmark_questions_file, prompts)
+    run_benchmark(model_id, benchmark_questions_file, prompts, benchmark_results_dir)
 
-compare_benchmark_scores()
-
-
-
-
+compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, graphs_overall_scores_dir)
