@@ -18,7 +18,7 @@
 | llama-3-8b-instruct:nitro | 63.82% | 2024-06-14 | 54.12% | 68.75% | 61.29% | 72.06% | 62.86% | Open Source |
 | hermes-2-pro-llama-3-8b | 61.99% | 2024-06-14 | 57.65% | 57.5% | 62.9% | 66.18% | 65.71% | Open Source |
 
-![Overall Scores for All Models](./benchmark_results_tests/benchmark_results_0/all_models_overall_score.png)
+![Overall Scores for All Models](./benchmark_results_tests/benchmark_results/all_models_overall_score.png)
 
 
 # What is this?
