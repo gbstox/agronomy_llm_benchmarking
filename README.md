@@ -1,10 +1,10 @@
 # Leaderboard
 
-| Model Name | Overall Score | Date Tested | nutrient_management | soil_and_water | pest_management | crop_management | V1_benchmark_questions | License Type |
+| Model Name | Overall Score | Date_Tested  | nutrient_management | soil_and_water | pest_management | crop_management | V1_benchmark_questions | License Type |
 |------------|---------------|-------------|-------|-------|-------|-------|-------|-------|
 | gpt-4o | 89.56% | 2024-06-14 | 87.06% | 88.75% | 90.32% | 91.18% | 90.48% | Proprietary |
 | claude-3-opus | 88.67% | 2024-06-14 | 89.41% | 87.5% | 87.1% | 92.65% | 86.67% | Proprietary |
-| norm | 87.74% | 2024-06-14 | 84.71% | 87.5% | 88.71% | 88.24% | 89.52% | Proprietary |
+| fbn-norm | 87.74% | 2024-06-14 | 84.71% | 87.5% | 88.71% | 88.24% | 89.52% | Proprietary |
 | gemini-pro-1.5 | 85.01% | 2024-06-14 | 84.71% | 87.5% | 82.26% | 86.76% | 83.81% | Proprietary |
 | gpt-4 | 84.92% | 2024-06-14 | 83.53% | 83.75% | 83.87% | 86.76% | 86.67% | Proprietary |
 | qwen-2-72b-instruct | 84.15% | 2024-06-14 | 81.18% | 83.75% | 83.87% | 85.29% | 86.67% | Open Source |
