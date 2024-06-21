@@ -2,6 +2,7 @@
 
 | Model Name | Overall Score | Date_Tested  | nutrient_management | soil_and_water | pest_management | crop_management | V1_benchmark_questions | License Type |
 |------------|---------------|-------------|-------|-------|-------|-------|-------|-------|
+| claude-3.5-sonnet | 89.81% | 2024-06-21 | 88.24% | 91.25% | 90.32% | 89.71% | 89.52% | Proprietary |
 | gpt-4o | 89.56% | 2024-06-14 | 87.06% | 88.75% | 90.32% | 91.18% | 90.48% | Proprietary |
 | claude-3-opus | 88.67% | 2024-06-14 | 89.41% | 87.5% | 87.1% | 92.65% | 86.67% | Proprietary |
 | fbn-norm | 87.74% | 2024-06-14 | 84.71% | 87.5% | 88.71% | 88.24% | 89.52% | Proprietary |

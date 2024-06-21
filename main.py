@@ -341,6 +341,7 @@ model_ids = [
     #"mistralai/mixtral-8x7b-instruct",
     #"mistralai/mistral-medium",
     #"mistralai/mistral-7b-instruct",
+    #"anthropic/claude-3.5-sonnet",
     #"01-ai/yi-34b-chat",
     #"qwen/qwen-2-72b-instruct",
     #"teknium/openhermes-2.5-mistral-7b",
@@ -356,7 +357,8 @@ model_ids = [
 
 
 benchmark_questions_file = "./benchmark_questions/combined_benchmark.json"
-benchmark_results_dir = './benchmark_results_tests/benchmark_results_0'
+#benchmark_results_dir = './benchmark_results_tests/benchmark_results_1'
+benchmark_results_dir = 'benchmark_results'
 
 graphs_by_category_dir = f'{benchmark_results_dir}/individual_graphs'
 graphs_overall_scores_dir = benchmark_results_dir
