@@ -1,5 +1,9 @@
 # Leaderboard
 
+
+![Overall Scores for All Models](./benchmark_results/all_models_overall_score.png)
+
+
 | Model Name | Overall Score | Date_Tested  | nutrient_management | soil_and_water | pest_management | crop_management | V1_benchmark_questions | License Type |
 |------------|---------------|-------------|-------|-------|-------|-------|-------|-------|
 | claude-3.5-sonnet | 89.81% | 2024-06-21 | 88.24% | 91.25% | 90.32% | 89.71% | 89.52% | Proprietary |
@@ -23,7 +27,6 @@
 | llama-3-8b-instruct:nitro | 63.82% | 2024-06-14 | 54.12% | 68.75% | 61.29% | 72.06% | 62.86% | Open Source |
 | hermes-2-pro-llama-3-8b | 61.99% | 2024-06-14 | 57.65% | 57.5% | 62.9% | 66.18% | 65.71% | Open Source |
 
-![Overall Scores for All Models](./benchmark_results/all_models_overall_score.png)
 
 
 # What is this?
