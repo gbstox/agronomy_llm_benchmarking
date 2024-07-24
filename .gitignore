@@ -35,4 +35,4 @@ venv/
 /private_utils.py
 /benchmark_results_tests
 /benchmark_questions
-
+/benchmark_results/model_results

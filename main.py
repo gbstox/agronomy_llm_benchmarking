@@ -328,6 +328,7 @@ prompts = {"system_prompt": system_prompt, "user_prompt": user_prompt, "assistan
 model_ids = [
     #"openai/gpt-4",
     #"openai/gpt-4o", 
+    #"openai/gpt-4o-mini",
     #"openai/gpt-3.5-turbo", 
     #"google/gemini-pro-1.5", 
     #"google/gemini-flash-1.5",
@@ -338,6 +339,9 @@ model_ids = [
     #"fbn/norm", 
     #"meta-llama/llama-3-8b-instruct:nitro",
     #"meta-llama/llama-3-70b-instruct",
+    #'meta-llama/llama-3.1-8b-instruct',
+    #'meta-llama/llama-3.1-70b-instruct',
+    #'meta-llama/llama-3.1-405b-instruct',
     #"mistralai/mixtral-8x7b-instruct",
     #"mistralai/mistral-medium",
     #"mistralai/mistral-7b-instruct",
@@ -357,8 +361,8 @@ model_ids = [
 
 
 benchmark_questions_file = "./benchmark_questions/combined_benchmark.json"
-#benchmark_results_dir = './benchmark_results_tests/benchmark_results_1'
-benchmark_results_dir = 'benchmark_results'
+#benchmark_results_dir = './benchmark_results_tests/model_results/benchmark_results_1'
+benchmark_results_dir = 'benchmark_results/model_results'
 
 graphs_by_category_dir = f'{benchmark_results_dir}/individual_graphs'
 graphs_overall_scores_dir = benchmark_results_dir
@@ -368,6 +372,8 @@ for model_id in model_ids:
     print (model_id)
     print()
 
+
     run_benchmark(model_id, benchmark_questions_file, prompts, benchmark_results_dir)
 
+print (benchmark_results_dir)
 compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, graphs_overall_scores_dir)
