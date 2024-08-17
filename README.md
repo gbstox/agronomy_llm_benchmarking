@@ -43,6 +43,11 @@ When building new models for agriculture, it's important to know if your model i
 
 # Updates
 
+## 2024-08-16
+1. Thank you to , who contributed community questions!
+2. Benchmarks have been run against the new community questions on select models.
+3. Nous Hermes 3 405b added & benchmarked.
+
 ## 2024-07-24
 1. Added Meta Llama 3.1 models
 2. Added OpenAI GPT4o-mini

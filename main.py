@@ -224,7 +224,13 @@ def score_multile_choice_answers_by_category(model_answers_file):
         score = round((correct_answers / total_questions) * 100, 2)
         scores[category] = score
 
-    return scores
+    # Calculate the overall score weighted by the number of questions in each category
+    total_questions = sum(len(answers) for answers in model_answers.values())
+    weighted_score_sum = sum(score * len(model_answers[category]) for category, score in scores.items())
+    overall_score = round(weighted_score_sum / total_questions, 2)
+
+    return scores, overall_score
+
 
 def graph_individual_model_by_category(model_scores, model_name, output_dir):
     categories = list(model_scores.keys())
@@ -274,7 +280,7 @@ def compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, grap
     for model_answers_file in benchmark_results_files:
         # Extract the filename from the path
         filename = os.path.basename(model_answers_file)
-        model_scores = score_multile_choice_answers_by_category(os.path.join(benchmark_results_dir, filename))
+        model_scores, overall_score = score_multile_choice_answers_by_category(os.path.join(benchmark_results_dir, filename))
         # Extract the date and model_name from the model answers file
         with open(os.path.join(benchmark_results_dir, filename), 'r') as f:
             data = json.load(f)
@@ -282,8 +288,6 @@ def compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, grap
             model_name = data["model_name"].split("/")[-1]
         # Only include the yyyy-mm-dd part of the date
         date_tested = date_tested.split('T')[0]
-        # Calculate the overall score
-        overall_score = round(sum(model_scores.values()) / len(model_scores), 2)
         scores.append((model_name, model_scores, overall_score, date_tested))
 
     # Sort the scores in descending order of the overall score
@@ -306,6 +310,7 @@ def compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, grap
         for score in model_scores.values():
             print(f" {score}% |", end="")
         print()
+
     model_overall_scores = []
     for model, model_scores, overall_score, date_tested in scores:
         graph_individual_model_by_category(model_scores, model, graphs_by_category_dir)
@@ -332,10 +337,12 @@ model_ids = [
     #"openai/gpt-3.5-turbo", 
     #"google/gemini-pro-1.5", 
     #"google/gemini-flash-1.5",
+    #"google/gemini-pro-1.5-exp"
     #"perplexity/llama-3-sonar-large-32k-chat",
     #"anthropic/claude-2",
     #"anthropic/claude-3-haiku",
     #"anthropic/claude-3-opus",
+    #"anthropic/claude-3.5-sonnet",
     #"fbn/norm", 
     #"meta-llama/llama-3-8b-instruct:nitro",
     #"meta-llama/llama-3-70b-instruct",
@@ -344,14 +351,15 @@ model_ids = [
     #'meta-llama/llama-3.1-405b-instruct',
     #"mistralai/mixtral-8x7b-instruct",
     #"mistralai/mistral-medium",
+    #'mistralai/mistral-large',
     #"mistralai/mistral-7b-instruct",
-    #"anthropic/claude-3.5-sonnet",
     #"01-ai/yi-34b-chat",
     #"qwen/qwen-2-72b-instruct",
     #"teknium/openhermes-2.5-mistral-7b",
     #"nousresearch/nous-hermes-yi-34b",
     #"nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
     #"nousresearch/hermes-2-pro-llama-3-8b",
+    #"nousresearch/hermes-3-llama-3.1-405b",
     #"microsoft/phi-3-medium-128k-instruct",
     #"microsoft/phi-3-mini-128k-instruct",
     #"pratik/llama3-8b-dhenu-0.1"
@@ -361,8 +369,8 @@ model_ids = [
 
 
 benchmark_questions_file = "./benchmark_questions/combined_benchmark.json"
-#benchmark_results_dir = './benchmark_results_tests/model_results/benchmark_results_1'
-benchmark_results_dir = 'benchmark_results/model_results'
+benchmark_results_dir = './benchmark_results_tests/model_results/benchmark_results_1'
+#benchmark_results_dir = 'benchmark_results/model_results'
 
 graphs_by_category_dir = f'{benchmark_results_dir}/individual_graphs'
 graphs_overall_scores_dir = benchmark_results_dir
