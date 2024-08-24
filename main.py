@@ -263,7 +263,7 @@ def graph_all_models_by_overall_score(model_overall_scores, output_dir):
     plt.title('Overall Scores for All Models')
     plt.ylim([0, 100])
     for i in range(len(scores)):
-        plt.text(i, scores[i], scores[i], ha = 'center')
+        plt.text(i, scores[i], scores[i], ha='center')
     plt.xticks(rotation=90)
     plt.tight_layout()
 
@@ -271,7 +271,13 @@ def graph_all_models_by_overall_score(model_overall_scores, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    plt.savefig(f'{output_dir}/all_models_overall_score.png')
+    output_file = f'{output_dir}/all_models_overall_score.png'
+    
+    # Remove the file if it exists
+    if os.path.exists(output_file):
+        os.remove(output_file)
+
+    plt.savefig(output_file)
     plt.close()
 
 def compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, graphs_overall_scores_dir):
@@ -331,46 +337,47 @@ assistant_prompt = "Correct answer_options key:"
 prompts = {"system_prompt": system_prompt, "user_prompt": user_prompt, "assistant_prompt": assistant_prompt}
 
 model_ids = [
-    #"openai/gpt-4",
-    #"openai/gpt-4o", 
-    #"openai/gpt-4o-mini",
-    #"openai/gpt-3.5-turbo", 
-    #"google/gemini-pro-1.5", 
-    #"google/gemini-flash-1.5",
-    #"google/gemini-pro-1.5-exp"
-    #"perplexity/llama-3-sonar-large-32k-chat",
+    #"01-ai/yi-34b-chat",
     #"anthropic/claude-2",
     #"anthropic/claude-3-haiku",
     #"anthropic/claude-3-opus",
     #"anthropic/claude-3.5-sonnet",
-    #"fbn/norm", 
+    #"fbn/norm",
+    #"gbstox/agronomistral",
+    #"gbstox/agronomYi-34b",
+    #"google/gemini-flash-1.5",
+    #"google/gemini-pro-1.5",
+    #"google/gemini-pro-1.5-exp",
     #"meta-llama/llama-3-8b-instruct:nitro",
     #"meta-llama/llama-3-70b-instruct",
     #'meta-llama/llama-3.1-8b-instruct',
     #'meta-llama/llama-3.1-70b-instruct',
     #'meta-llama/llama-3.1-405b-instruct',
-    #"mistralai/mixtral-8x7b-instruct",
-    #"mistralai/mistral-medium",
-    #'mistralai/mistral-large',
-    #"mistralai/mistral-7b-instruct",
-    #"01-ai/yi-34b-chat",
-    #"qwen/qwen-2-72b-instruct",
-    #"teknium/openhermes-2.5-mistral-7b",
-    #"nousresearch/nous-hermes-yi-34b",
-    #"nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
-    #"nousresearch/hermes-2-pro-llama-3-8b",
-    #"nousresearch/hermes-3-llama-3.1-405b",
     #"microsoft/phi-3-medium-128k-instruct",
     #"microsoft/phi-3-mini-128k-instruct",
-    #"pratik/llama3-8b-dhenu-0.1"
-    #"gbstox/agronomistral",
-    #"gbstox/agronomYi-34b"
+    #"mistralai/mixtral-8x7b-instruct",
+    #"mistralai/mistral-7b-instruct",
+    #"mistralai/mistral-large",
+    #"mistralai/mistral-medium",
+    #"nousresearch/hermes-2-pro-llama-3-8b",
+    #"nousresearch/hermes-3-llama-3.1-405b",
+    #"nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
+    #"nousresearch/nous-hermes-yi-34b",
+    #"openai/gpt-3.5-turbo",
+    #"openai/gpt-4",
+    #"openai/gpt-4o",
+    #"openai/gpt-4o-mini",
+    #"perplexity/llama-3-sonar-large-32k-chat",
+    #"perplexity/llama-3.1-sonar-huge-128k-online",
+    #"pratik/llama3-8b-dhenu-0.1",
+    #"qwen/qwen-2-72b-instruct",
+    #"teknium/openhermes-2.5-mistral-7b"
 ]
 
 
 benchmark_questions_file = "./benchmark_questions/combined_benchmark.json"
-benchmark_results_dir = './benchmark_results_tests/model_results/benchmark_results_1'
-#benchmark_results_dir = 'benchmark_results/model_results'
+#benchmark_results_dir = './benchmark_results_tests/model_results/benchmark_results_1'
+benchmark_results_dir = 'benchmark_results/model_results'
 
 graphs_by_category_dir = f'{benchmark_results_dir}/individual_graphs'
 graphs_overall_scores_dir = benchmark_results_dir
