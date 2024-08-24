@@ -380,7 +380,7 @@ benchmark_questions_file = "./benchmark_questions/combined_benchmark.json"
 benchmark_results_dir = 'benchmark_results/model_results'
 
 graphs_by_category_dir = f'{benchmark_results_dir}/individual_graphs'
-graphs_overall_scores_dir = benchmark_results_dir
+graphs_overall_scores_dir = f'benchmark_results/'
 
 for model_id in model_ids:
     print ()

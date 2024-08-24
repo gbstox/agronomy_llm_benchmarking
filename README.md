@@ -1,7 +1,7 @@
 # Leaderboard
 
 
-![Overall Scores for All Models](./benchmark_results/model_results/all_models_overall_score.png)
+![Overall Scores for All Models](./benchmark_results/all_models_overall_score.png)
 
 
 | Model Name | Overall Score | Date_Tested  | nutrient_management | soil_and_water | pest_management | crop_management | V1_benchmark_questions | community_questions_FBN | License Type |
