@@ -32,7 +32,7 @@ def analyze_results(benchmark_results_dir):
 
 import pandas as pd
 
-benchmark_results_dir = './benchmark_results_tests/benchmark_results_4'
+benchmark_results_dir = './benchmark_results/model_results'
 model_stats, most_missed_questions = analyze_results(benchmark_results_dir)
 df = pd.DataFrame(most_missed_questions, columns=['Question ID', 'Missed Count'])
 with open('./agronomy_benchmark_questions.json', 'r') as f:

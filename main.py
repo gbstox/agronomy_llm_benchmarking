@@ -7,6 +7,7 @@ import openai
 import re
 import glob
 import matplotlib.pyplot as plt
+#import requests
 
 
 import private_utils
@@ -122,6 +123,7 @@ def chat_prompt(client, model_id, formatted_prompts):
         print("Another non-200-range status code was received")
         print(e.status_code)
         print(e.response)
+        print(e.message)
         return None
 
 
@@ -158,15 +160,21 @@ def run_benchmark(model_id, benchmark_questions_file, prompts, benchmark_results
                 if model_creator == "fbn":
                     formatted_prompts["user_prompt"] = f"{formatted_prompts['system_prompt']} \n {formatted_prompts['user_prompt']}"
                     temp_answer = private_utils.prompt_fbn_norm(model_id, formatted_prompts)
-                elif model_creator == "openai":
-                    client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
-                    temp_answer = chat_prompt(client, model_name, formatted_prompts)
+                #elif model_creator == "openai":
+                #    client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+                #    temp_answer = chat_prompt(client, model_name, formatted_prompts)
                 elif model_creator == "pratik":
                     gradio_url = "https://huggingface.co/spaces/eswardivi/llama3-8b-dhenu-0.1"
                     temp_answer = private_utils.query_gradio(gradio_url, formatted_prompts)
                 elif model_creator == "gbstox":
                     pod_url = "https://6lgv5h2aextq69-5000.proxy.runpod.net/v1/chat/completions"
                     temp_answer = private_utils.runpod_chat_prompt(pod_url, model_id, formatted_prompts)
+                elif model_creator == "dhenu":
+                    client = openai.OpenAI(base_url="https://api.dhenu.ai/v1", api_key=os.environ['DHENU_API_KEY'])
+                    temp_answer = chat_prompt(client, model_name, formatted_prompts)
+                elif model_creator == "centeotl":
+                    temp_answer = private_utils.query_centeotl(model_name, formatted_prompts)
+
                 else:
                     client = openai.OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ['OPENROUTER_API_KEY'])
                     temp_answer = chat_prompt(client, model_id, formatted_prompts)
@@ -367,11 +375,18 @@ model_ids = [
     #"openai/gpt-4",
     #"openai/gpt-4o",
     #"openai/gpt-4o-mini",
+    #"openai/o1-preview",
+    #"openai/o1-mini",
     #"perplexity/llama-3-sonar-large-32k-chat",
     #"perplexity/llama-3.1-sonar-huge-128k-online",
     #"pratik/llama3-8b-dhenu-0.1",
     #"qwen/qwen-2-72b-instruct",
     #"teknium/openhermes-2.5-mistral-7b"
+    #"x-ai/grok-beta",
+    #"dhenu/dhenu2-in-8b-preview",
+    #"centeotl/api_llama",
+    #"centeotl/api"
+
 ]
 
 

@@ -1,0 +1,21 @@
+[tool.poetry]
+package-mode = false
+name = "agronomy-llm-benchmarking"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+python-dotenv = "^1.0.1"
+openai = "^1.54.4"
+matplotlib = "^3.9.2"
+requests = "^2.32.3"
+tenacity = "^9.0.0"
+pandas = "^2.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
