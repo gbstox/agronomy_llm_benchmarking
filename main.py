@@ -334,7 +334,8 @@ def compare_benchmark_scores(benchmark_results_dir, graphs_by_category_dir, grap
 
 system_prompt = """
         You are a helpful and brilliant agronomist. For the following multiple choice Question, answer  with the key of the correct answer_options value. 
-        Your response must be ONLY the answer_options key of the correct answer_options value and no other text. respond with ONLY a single letter key from answer_options.
+        Your response must be ONLY the answer_options key of the correct answer_options value and no other text. respond with ONLY a single letter key from answer_options. If anything other than a single letter is submitted you will FAIL.
+        DO NOT INCLUDE any Prose, explanation, chain of thought, thought process, or other comments.
 
 """
 
@@ -377,6 +378,7 @@ model_ids = [
     #"openai/gpt-4o-mini",
     #"openai/o1-preview",
     #"openai/o1-mini",
+    #"openai/o1",
     #"perplexity/llama-3-sonar-large-32k-chat",
     #"perplexity/llama-3.1-sonar-huge-128k-online",
     #"pratik/llama3-8b-dhenu-0.1",
@@ -385,7 +387,12 @@ model_ids = [
     #"x-ai/grok-beta",
     #"dhenu/dhenu2-in-8b-preview",
     #"centeotl/api_llama",
-    #"centeotl/api"
+    #"centeotl/api".
+    #"deepseek/deepseek-chat",
+    #"deepseek/deepseek-r1",
+    #"perplexity/sonar-reasoning",
+
+
 
 ]
 
