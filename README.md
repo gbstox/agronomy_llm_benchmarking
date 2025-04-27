@@ -3,47 +3,33 @@
 
 ![Overall Scores for All Models](./benchmark_results/all_models_overall_score.png)
 
+## Price x Performance
+![Overall Scores for All Models](./benchmark_results/performance_vs_price_score_color.png)
 
-| Model Name | Overall Score | Date Tested | nutrient_management | soil_and_water | pest_management | crop_management | V1_benchmark_questions | community_questions_FBN |
-|------------|---------------|-------------|-------|-------|-------|-------|-------|-------|
-| o1 | 93.41% | 2025-02-05 | 96.47% | 96.25% | 90.32% | 94.12% | 91.43% | 88.0% |
-| o1-preview | 93.18% | 2024-09-27 | 94.12% | 97.5% | 91.94% | 95.59% | 90.48% | 84.0% |
-| claude-3.5-sonnet | 89.41% | 2024-08-24 | 87.06% | 92.5% | 90.32% | 89.71% | 89.52% | 84.0% |
-| gpt-4o | 88.71% | 2024-08-24 | 87.06% | 88.75% | 90.32% | 88.24% | 91.43% | 80.0% |
-| norm | 88.0% | 2024-08-24 | 82.35% | 90.0% | 88.71% | 89.71% | 89.52% | 88.0% |
-| claude-3-opus | 87.53% | 2024-08-24 | 88.24% | 86.25% | 85.48% | 92.65% | 86.67% | 84.0% |
-| sonar-reasoning | 86.82% | 2025-02-04 | 85.88% | 86.25% | 85.48% | 88.24% | 88.57% | 84.0% |
-| o3-mini | 85.88% | 2025-02-04 | 83.53% | 92.5% | 87.1% | 88.24% | 85.71% | 64.0% |
-| api | 85.65% | 2024-11-14 | 88.24% | 85.0% | 88.71% | 80.88% | 88.57% | 72.0% |
-| llama-3.1-sonar-huge-128k-online | 85.41% | 2024-08-24 | 83.53% | 81.25% | 82.26% | 89.71% | 89.52% | 84.0% |
-| deepseek-r1 | 85.17% | 2025-02-04 | 82.35% | 82.5% | 90.32% | 86.76% | 85.71% | 84.0% |
-| gpt-4 | 85.0% | 2024-06-14 | 83.53% | 83.75% | 83.87% | 86.76% | 86.67% |
-| o1-mini | 84.94% | 2024-09-27 | 85.88% | 85.0% | 85.48% | 83.82% | 87.62% | 72.0% |
-| llama-3.1-405b-instruct | 84.0% | 2024-08-24 | 83.53% | 81.25% | 83.87% | 88.24% | 87.62% | 68.0% |
-| gemini-pro-1.5 | 83.53% | 2024-08-24 | 83.53% | 83.75% | 82.26% | 86.76% | 85.71% | 68.0% |
-| hermes-3-llama-3.1-405b | 82.82% | 2024-08-24 | 81.18% | 82.5% | 87.1% | 85.29% | 83.81% | 68.0% |
-| qwen-2-72b-instruct | 82.59% | 2024-08-24 | 82.35% | 82.5% | 82.26% | 85.29% | 85.71% | 64.0% |
-| api_llama | 81.88% | 2024-11-17 | 85.88% | 85.0% | 82.26% | 79.41% | 83.81% | 56.0% |
-| llama-3-70b-instruct | 81.5% | 2024-06-14 | 78.82% | 78.75% | 82.26% | 83.82% | 83.81% |
-| deepseek-chat | 80.71% | 2025-02-04 | 83.53% | 83.75% | 83.87% | 76.47% | 83.81% | 52.0% |
-| gpt-4o-mini | 80.47% | 2024-08-24 | 77.65% | 85.0% | 75.81% | 82.35% | 81.9% | 76.0% |
-| llama-3.1-70b-instruct | 80.23% | 2024-08-24 | 75.29% | 81.25% | 82.26% | 89.71% | 80.95% | 60.0% |
-| gemini-flash-1.5 | 79.0% | 2024-06-14 | 74.12% | 76.25% | 83.87% | 85.29% | 78.1% |
-| mistral-large | 78.12% | 2024-08-24 | 75.29% | 77.5% | 82.26% | 76.47% | 81.9% | 68.0% |
-| claude-3-haiku | 75.25% | 2024-06-14 | 71.76% | 73.75% | 79.03% | 72.06% | 79.05% |
-| phi-3-medium-128k-instruct | 74.35% | 2024-08-24 | 70.59% | 77.5% | 79.03% | 75.0% | 73.33% | 68.0% |
-| nous-hermes-yi-34b | 74.35% | 2024-08-24 | 70.59% | 76.25% | 83.87% | 72.06% | 74.29% | 64.0% |
-| grok-beta | 71.29% | 2024-10-21 | 72.94% | 68.75% | 67.74% | 67.65% | 76.19% | 72.0% |
-| yi-34b-chat | 70.75% | 2024-06-14 | 68.24% | 68.75% | 79.03% | 70.59% | 69.52% |
-| phi-3-mini-128k-instruct | 67.5% | 2024-06-14 | 60.0% | 71.25% | 67.74% | 69.12% | 69.52% |
-| gpt-3.5-turbo | 64.94% | 2024-08-24 | 62.35% | 61.25% | 70.97% | 72.06% | 70.48% | 28.0% |
-| llama-3-8b-instruct:nitro | 63.5% | 2024-06-14 | 54.12% | 68.75% | 61.29% | 72.06% | 62.86% |
-| hermes-2-pro-llama-3-8b | 62.0% | 2024-06-14 | 57.65% | 57.5% | 62.9% | 66.18% | 65.71% |
-| dhenu2-in-8b-preview | 61.88% | 2024-11-14 | 52.94% | 67.5% | 67.74% | 61.76% | 66.67% | 40.0% |
-| llama-3.1-8b-instruct | 59.53% | 2024-08-24 | 51.76% | 58.75% | 61.29% | 66.18% | 59.05% | 68.0% |
-| mistral-7b-instruct | 51.53% | 2024-08-24 | 41.18% | 50.0% | 62.9% | 60.29% | 53.33% | 32.0% |
-| mistral-medium | 29.18% | 2024-08-24 | 30.59% | 23.75% | 20.97% | 41.18% | 34.29% | 8.0% |
-| mixtral-8x7b-instruct | 18.35% | 2024-08-24 | 16.47% | 13.75% | 17.74% | 14.71% | 26.67% | 16.0% |
+
+
+| Model Name                           | Overall Score | Access      | Date Tested | Price ($/Mtok) | V1 Benchmark Questions | Community Questions Fbn | Crop Management | Nutrient Management | Pest Management | Soil And Water |
+|-------------------------------------|---------------|------------|-------------|----------------|------------------------|-------------------------|-----------------|---------------------|-----------------|----------------|
+| google/gemini-2.5-pro-preview-03-25  |         92.94% | Proprietary | 2025-04-27  |    $10.0000    |                  90.5% |                   80.0% |           97.1% |               92.9% |           95.2% |          95.0% | (395/425)
+| anthropic/claude-3.5-sonnet-20240620 |         89.18% | Proprietary | 2025-04-27  |    $15.0000    |                  89.5% |                   80.0% |           89.7% |               87.1% |           91.9% |          91.2% | (379/425)
+| openai/gpt-4o                        |         88.00% | Proprietary | 2025-04-27  |    $10.0000    |                  86.7% |                   80.0% |           88.2% |               87.1% |           88.7% |          92.5% | (374/425)
+| norm                                 |         87.53% | Proprietary | 2025-04-27  |      N/A       |                  89.5% |                   76.0% |           89.7% |               85.9% |           87.1% |          88.8% | (372/425)
+| meta-llama/llama-4-maverick          |         87.53% | Open Source | 2025-04-27  |    $0.2000     |                  89.5% |                   84.0% |           88.2% |               84.7% |           88.7% |          87.5% | (372/425)
+| deepseek/deepseek-chat               |         86.82% | Open Source | 2025-04-27  |    $0.8900     |                  89.5% |                   72.0% |           83.8% |               89.4% |           88.7% |          86.2% | (369/425)
+| meta-llama/llama-3.1-405b-instruct   |         84.24% | Open Source | 2025-04-27  |    $0.8000     |                  88.6% |                   68.0% |           88.2% |               85.9% |           83.9% |          78.8% | (358/425)
+| meta-llama/llama-3.1-70b-instruct    |         82.82% | Open Source | 2025-04-27  |    $0.2800     |                  83.8% |                   72.0% |           89.7% |               81.2% |           87.1% |          77.5% | (352/425)
+| google/gemma-3-27b-it                |         82.59% | Open Source | 2025-04-27  |    $0.2000     |                  83.8% |                   64.0% |           82.3% |               82.3% |           83.9% |          86.2% | (351/425)
+| meta-llama/llama-4-scout             |         79.06% | Open Source | 2025-04-27  |    $0.1000     |                  80.0% |                   60.0% |           79.4% |               78.8% |           82.3% |          81.2% | (336/425)
+| openai/gpt-4o-mini                   |         78.59% | Proprietary | 2025-04-27  |    $0.6000     |                  78.1% |                   72.0% |           82.3% |               74.1% |           75.8% |          85.0% | (334/425)
+| meta-llama/llama-3-70b-instruct      |         78.35% | Open Source | 2025-04-27  |    $0.4000     |                  83.8% |                   52.0% |           80.9% |               77.7% |           80.7% |          76.2% | (333/425)
+| mistralai/mixtral-8x7b-instruct      |         73.65% | Open Source | 2025-04-27  |    $0.2400     |                  79.0% |                   48.0% |           76.5% |               68.2% |           77.4% |          75.0% | (313/425)
+| dhenu2-in-8b-preview                 |         66.82% | Proprietary | 2025-04-27  |      N/A       |                  71.4% |                   52.0% |           64.7% |               61.2% |           71.0% |          70.0% | (284/425)
+| openai/gpt-3.5-turbo                 |         65.65% | Proprietary | 2025-04-27  |    $1.5000     |                  73.3% |                   32.0% |           67.7% |               62.4% |           69.3% |          65.0% | (279/425)
+| meta-llama/llama-3.1-8b-instruct     |         63.29% | Open Source | 2025-04-27  |    $0.0300     |                  66.7% |                   68.0% |           67.7% |               48.2% |           64.5% |          68.8% | (269/425)
+| mistralai/mistral-7b-instruct        |         62.59% | Open Source | 2025-04-27  |    $0.0550     |                  61.9% |                   36.0% |           75.0% |               52.9% |           69.3% |          66.2% | (266/425)
+| google/gemma-3-4b-it                 |         61.65% | Open Source | 2025-04-27  |    $0.0400     |                  62.9% |                   48.0% |           67.7% |               54.1% |           69.3% |          61.2% | (262/425)
+
+
 
 # What is this?
 We are benchmarking the ability for different models to give correct answers to Agronomy questions. This is a simple, 98 multiple-choice question benchmark today, and I plan to make it more complete and challenging in the future.
@@ -59,8 +45,14 @@ When building new models for agriculture, it's important to know if your model i
 
 # Updates
 
+## 2025-04-27
+1. Refactored code to simplify & make easier to maintain.
+2. Added price vs performance graph
+3. Fixed several formatting issues in the results display
+4. Added models
+
 ## 2024-08-16
-1. Thank you to , who contributed community questions!
+1. Thank you to Farmers Business Network, who contributed community questions!
 2. Benchmarks have been run against the new community questions on select models.
 3. Nous Hermes 3 405b added & benchmarked.
 

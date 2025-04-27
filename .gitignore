@@ -31,8 +31,7 @@ venv/
 <FINAL_CODE>
 
 # Other files
-/quizlet.txt
-/private_utils.py
+/private_api_calls.py
 /benchmark_results_tests
 /benchmark_questions
 /benchmark_results/model_results
