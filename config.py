@@ -20,8 +20,8 @@ RUN_MODE = 'missing' # Change this to 'missing' or 'reports_only' as needed
 # --- Benchmark Settings ---
 MAX_RETRIES = 3
 REQUEST_TIMEOUT = 30 # Slightly longer timeout for potentially slower models/retries
-TOKENS_TO_REQUEST = 10 # Expecting short answers (e.g., "a")
-DETERMINISTIC_TEMP = 0.0 # For consistent multiple-choice answers
+TOKENS_TO_REQUEST = 1000     # default max_tokens
+DETERMINISTIC_TEMP = 0.0   # default temperature
 
 # --- Concurrency Limits ---
 # Max number of different MODELS to benchmark simultaneously
@@ -69,6 +69,94 @@ MODELS_TO_RUN = [
     # },
 
     # --- OpenAI Compatible (via OpenRouter unless specified) ---
+    {
+        "id": "openai/gpt-5", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "openai/gpt-5", # Specific model name expected by the API
+        "access": "open source" 
+    },
+    {
+        "id": "anthropic/claude-opus-4.1", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "anthropic/claude-opus-4.1", # Specific model name expected by the API
+        "access": "open source" 
+    },
+    {
+        "id": "openai/gpt-oss-20b", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "openai/gpt-oss-20b", # Specific model name expected by the API
+        "access": "open source" 
+    },
+    {
+        "id": "openai/gpt-oss-120b", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "openai/gpt-oss-120b", # Specific model name expected by the API
+        "access": "open source" 
+    },
+    {
+        "id": "gbstockdale/gemma3-4b-agrosirus200k-merged", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://v657ryaz7toltj-8000.proxy.runpod.net/v1", # API endpoint base
+        "model_name_api": "gbstox/gemma3-4b-agrosirus200k-merged", # Specific model name expected by the API
+        "access": "open source" 
+    },
+    {
+        "id": "anthropic/claude-opus-4", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "anthropic/claude-opus-4", # Specific model name expected by the API
+        "access": "proprietary" 
+    },
+    {
+        "id": "mistralai/Mistral-Small-3.1-24B-Instruct-2503", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "mistralai/Mistral-Small-3.1-24B-Instruct-2503", # Specific model name expected by the API
+        "access": "proprietary" 
+    },
+    {
+        "id": "qwen/qwen3-235b-a22b", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "qwen/qwen3-235b-a22b", # Specific model name expected by the API
+        "access": "proprietary" 
+    },
+    {
+        "id": "qwen/qwen3-32b", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "qwen/qwen3-32b", # Specific model name expected by the API
+        "access": "proprietary" 
+    },
+    {
+        "id": "qwen/qwen3-8b", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "qwen/qwen3-8b", # Specific model name expected by the API
+        "access": "proprietary" 
+    },
+    {
+        "id": "openai/o4-mini-high", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "openai/o4-mini-high", # Specific model name expected by the API
+        "access": "proprietary" 
+    },
     {
         "id": "openai/gpt-4o", # Unique identifier for reporting/filenames
         "provider": "openai_compatible", # Type of interaction logic to use
