@@ -75,15 +75,40 @@ MODELS_TO_RUN = [
         "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
         "base_url": "https://openrouter.ai/api/v1", # API endpoint base
         "model_name_api": "openai/gpt-5", # Specific model name expected by the API
-        "access": "open source" 
+        "access": "proprietary" 
     },
+    {
+        "id": "openai/gpt-5-mini", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "openai/gpt-5-mini", # Specific model name expected by the API
+        "access": "proprietary" 
+    },
+
     {
         "id": "anthropic/claude-opus-4.1", # Unique identifier for reporting/filenames
         "provider": "openai_compatible", # Type of interaction logic to use
         "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
         "base_url": "https://openrouter.ai/api/v1", # API endpoint base
         "model_name_api": "anthropic/claude-opus-4.1", # Specific model name expected by the API
-        "access": "open source" 
+        "access": "proprietary" 
+    },
+    {
+        "id": "openai/o3", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "openai/o3", # Specific model name expected by the API
+        "access": "proprietary" 
+    },
+    {
+        "id": "openai/o3-pro", # Unique identifier for reporting/filenames
+        "provider": "openai_compatible", # Type of interaction logic to use
+        "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
+        "base_url": "https://openrouter.ai/api/v1", # API endpoint base
+        "model_name_api": "openai/o3-pro", # Specific model name expected by the API
+        "access": "proprietary" 
     },
     {
         "id": "openai/gpt-oss-20b", # Unique identifier for reporting/filenames
@@ -131,7 +156,7 @@ MODELS_TO_RUN = [
         "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
         "base_url": "https://openrouter.ai/api/v1", # API endpoint base
         "model_name_api": "qwen/qwen3-235b-a22b", # Specific model name expected by the API
-        "access": "proprietary" 
+        "access": "open source" 
     },
     {
         "id": "qwen/qwen3-32b", # Unique identifier for reporting/filenames
@@ -139,7 +164,7 @@ MODELS_TO_RUN = [
         "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
         "base_url": "https://openrouter.ai/api/v1", # API endpoint base
         "model_name_api": "qwen/qwen3-32b", # Specific model name expected by the API
-        "access": "proprietary" 
+        "access": "open source" 
     },
     {
         "id": "qwen/qwen3-8b", # Unique identifier for reporting/filenames
@@ -147,7 +172,7 @@ MODELS_TO_RUN = [
         "api_key_env": "OPENROUTER_API_KEY", # Environment variable for the API key
         "base_url": "https://openrouter.ai/api/v1", # API endpoint base
         "model_name_api": "qwen/qwen3-8b", # Specific model name expected by the API
-        "access": "proprietary" 
+        "access": "open source" 
     },
     {
         "id": "openai/o4-mini-high", # Unique identifier for reporting/filenames
@@ -198,20 +223,12 @@ MODELS_TO_RUN = [
         "access": "open source"  
     },
     {
-        "id": "google/gemini-2.5-pro-preview-03-25", 
+        "id": "google/gemini-2.5-pro", 
         "provider": "openai_compatible", 
         "api_key_env": "OPENROUTER_API_KEY", 
         "base_url": "https://openrouter.ai/api/v1", 
-        "model_name_api": "google/gemini-2.5-pro-preview-03-25",
+        "model_name_api": "google/gemini-2.5-pro",
         "access": "proprietary"  
-    },
-    {
-        "id": "anthropic/claude-3.5-sonnet",
-        "provider": "openai_compatible",
-        "api_key_env": "OPENROUTER_API_KEY",
-        "base_url": "https://openrouter.ai/api/v1",
-        "model_name_api": "anthropic/claude-3.5-sonnet-20240620",
-        "access": "proprietary" 
     },
     {
         "id": "meta-llama/llama-3-70b-instruct",
@@ -283,7 +300,7 @@ MODELS_TO_RUN = [
         "api_key_env": "DHENU_API_KEY",
         "base_url": "https://api.dhenu.ai/v1", 
         "model_name_api": "dhenu2-in-8b-preview", 
-        "access": "proprietary" 
+        "access": "open source" 
     },
     {
         "id": "deepseek/deepseek-chat",
