@@ -19,7 +19,7 @@ RUN_MODE = 'missing' # Change this to 'missing' or 'reports_only' as needed
 
 # --- Benchmark Settings ---
 MAX_RETRIES = 3
-REQUEST_TIMEOUT = 30 # Slightly longer timeout for potentially slower models/retries
+REQUEST_TIMEOUT = 180 # Extended timeout for reasoning/thinking models (3 minutes)
 TOKENS_TO_REQUEST = 1000     # default max_tokens
 DETERMINISTIC_TEMP = 0.0   # default temperature
 
@@ -40,6 +40,140 @@ ASSISTANT_PROMPT = "Correct answer_options key:" # For models supporting assista
 # Define the models and how to interact with them
 
 MODELS_TO_RUN = [
+
+    # ========== LATEST SOTA (December 2025) ==========
+    
+    # --- Anthropic Latest ---
+    {
+        "id": "anthropic/claude-sonnet-4",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "anthropic/claude-sonnet-4",
+        "access": "proprietary"
+    },
+    {
+        "id": "anthropic/claude-opus-4.5",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "anthropic/claude-opus-4.5",
+        "access": "proprietary"
+    },
+    
+    # --- Google Latest (Gemini 3) ---
+    {
+        "id": "google/gemini-3-flash-preview",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "google/gemini-3-flash-preview",
+        "access": "proprietary"
+    },
+    {
+        "id": "google/gemini-3-pro-preview",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "google/gemini-3-pro-preview",
+        "access": "proprietary"
+    },
+    
+    # --- xAI Latest (Grok 4) ---
+    {
+        "id": "x-ai/grok-4",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "x-ai/grok-4",
+        "access": "proprietary"
+    },
+    {
+        "id": "x-ai/grok-4.1-fast",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "x-ai/grok-4.1-fast",
+        "access": "proprietary"
+    },
+    {
+        "id": "x-ai/grok-code-fast-1",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "x-ai/grok-code-fast-1",
+        "access": "proprietary"
+    },
+    
+    # --- OpenAI Latest (GPT 5.2) ---
+    {
+        "id": "openai/gpt-5.2",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.2",
+        "access": "proprietary"
+    },
+    {
+        "id": "openai/gpt-5.2-pro",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.2-pro",
+        "access": "proprietary"
+    },
+    
+    # --- DeepSeek V3 (Open Source) ---
+    {
+        "id": "deepseek/deepseek-chat-v3",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "deepseek/deepseek-chat-v3",
+        "access": "open source"
+    },
+    
+    # --- Xiaomi MiMo (Open Source MoE) ---
+    {
+        "id": "xiaomi/mimo-v2-flash",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "xiaomi/mimo-v2-flash",
+        "access": "open source"
+    },
+    
+    # --- NVIDIA Nemotron (Open Source) ---
+    {
+        "id": "nvidia/nemotron-3-nano-30b-a3b",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "nvidia/nemotron-3-nano-30b-a3b",
+        "access": "open source"
+    },
+    
+    # --- Allen AI OLMo (Open Source Reasoning) ---
+    {
+        "id": "allenai/olmo-3.1-32b-think",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "allenai/olmo-3.1-32b-think",
+        "access": "open source"
+    },
+    
+    # --- Zhipu GLM (Open Source) ---
+    {
+        "id": "zhipu/glm-4.7",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "zhipu/glm-4.7",
+        "access": "open source"
+    },
+
+    # ========== EXISTING MODELS ==========
 
     # --- Centeotl ---
     # { # Uncomment for Centeotl provider
