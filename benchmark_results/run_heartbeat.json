@@ -1,7 +1,10 @@
 {
-  "timestamp": "2026-03-16T19:24:48.467580",
-  "model_id": "qwen/qwen3.5-9b",
-  "state": "model_running",
-  "processed_questions": 305,
-  "total_questions": 425
+  "timestamp": "2026-03-16T19:55:55.393583",
+  "model_id": "moonshotai/kimi-k2.5",
+  "state": "model_started",
+  "processed_questions": 424,
+  "total_questions": 425,
+  "details": {
+    "resumed_from_checkpoint": true
+  }
 }
