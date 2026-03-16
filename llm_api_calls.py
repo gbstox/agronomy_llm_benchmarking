@@ -18,6 +18,7 @@ import config
 
 # Cache for initialized OpenAI-compatible clients
 _openai_clients = {}  # { (base_url, api_key_env): client }
+RATE_LIMIT_SENTINEL = "__RATE_LIMIT__"
 
 
 def _get_openai_client(model_config):
@@ -103,8 +104,9 @@ async def _call_openai_sdk(client: AsyncOpenAI,
 
     except openai.APIConnectionError as e:
         sync_tqdm.write(f"\nError ({model_id}): Connection Error - {e}")
-    except openai.RateLimitError:
-        sync_tqdm.write(f"\nError ({model_id}): Rate Limit Exceeded.")
+    except openai.RateLimitError as e:
+        sync_tqdm.write(f"\nError ({model_id}): Rate Limit Exceeded - {e}")
+        return RATE_LIMIT_SENTINEL
     except openai.AuthenticationError:
         sync_tqdm.write(
             f"\nError ({model_id}): Authentication failed. "
@@ -117,6 +119,9 @@ async def _call_openai_sdk(client: AsyncOpenAI,
             f"('{model_name_api}')."
         )
     except openai.APIStatusError as e:
+        if e.status_code == 429:
+            sync_tqdm.write(f"\nError ({model_id}): Rate Limit Exceeded - Status 429.")
+            return RATE_LIMIT_SENTINEL
         sync_tqdm.write(
             f"\nError ({model_id}): API Error - Status {e.status_code}, "
             f"Response: {e.response}"

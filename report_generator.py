@@ -1,87 +1,14 @@
 # report_generator.py
 import os
 import json
-import datetime
 import re
-import asyncio
-import aiohttp
-from asyncio import Semaphore
 from tqdm import tqdm as sync_tqdm # For writing messages
 from pathlib import Path
 import matplotlib.pyplot as plt
 
 
 import config # For paths mostly
-
-
-# --- Pricing Helper ---
-
-_model_price_cache = {} # Cache for fetched prices { model_name_api: price_usd_per_mtok }
-_OPENROUTER_API_BASE = "https://openrouter.ai/api/v1"
-PRICE_FETCH_CONCURRENCY = 5 # Concurrency limit for price API calls
-
-async def get_model_price(session: aiohttp.ClientSession, model_config: dict) -> float | None:
-    """
-    Fetches the cheapest completion price for a model from the OpenRouter API,
-    using the 'model_name_api' field. Handles 404s gracefully.
-    """
-    model_name_api = model_config.get('model_name_api')
-    if not model_name_api:
-        sync_tqdm.write(f"  Price lookup Warning: 'model_name_api' missing for ID {model_config.get('id', 'N/A')}. Cannot fetch price.")
-        return None
-
-    if model_name_api in _model_price_cache:
-        return _model_price_cache[model_name_api]
-
-    url = f"{_OPENROUTER_API_BASE}/models/{model_name_api}/endpoints"
-
-    try:
-        async with session.get(url, timeout=aiohttp.ClientTimeout(total=15)) as response:
-            if response.status == 404:
-                _model_price_cache[model_name_api] = None # Cache the miss (model not on OpenRouter)
-                return None
-            response.raise_for_status() # Raise for other errors (5xx, 429, etc.)
-
-            text_content = await response.text()
-            try: data = json.loads(text_content)
-            except json.JSONDecodeError:
-                sync_tqdm.write(f"\n  Price lookup Error ({model_name_api}): Failed to decode JSON from {url}. Content: {text_content[:200]}...")
-                _model_price_cache[model_name_api] = None; return None
-
-            endpoints = data.get('data', {}).get('endpoints', []) if isinstance(data.get('data'), dict) else data.get('endpoints', [])
-
-            if not isinstance(endpoints, list):
-                 sync_tqdm.write(f"\n  Price lookup Error ({model_name_api}): Expected 'endpoints' list, got {type(endpoints)}. URL: {url}")
-                 _model_price_cache[model_name_api] = None; return None
-
-            completion_prices = []
-            for ep in endpoints:
-                if not isinstance(ep, dict): continue
-                price_str = ep.get('pricing', {}).get('completion') if isinstance(ep.get('pricing'), dict) else None
-                if price_str is not None:
-                    try: completion_prices.append(float(price_str))
-                    except (ValueError, TypeError): pass # Ignore invalid price formats silently
-
-            if not completion_prices:
-                _model_price_cache[model_name_api] = None; return None # No valid prices found
-
-            min_price_per_token = min(completion_prices)
-            price_usd_per_mtok = min_price_per_token * 1_000_000
-            _model_price_cache[model_name_api] = price_usd_per_mtok
-            return price_usd_per_mtok
-
-    # Log errors but still cache failure (None)
-    except aiohttp.ClientResponseError as e:
-        sync_tqdm.write(f"\n  Price lookup Error ({model_name_api}): HTTP Error {e.status} for {url}")
-    except aiohttp.ClientError as e:
-        sync_tqdm.write(f"\n  Price lookup Error ({model_name_api}): Connection/Client Error - {e}")
-    except asyncio.TimeoutError:
-        sync_tqdm.write(f"\n  Price lookup Error ({model_name_api}): Request timed out for {url}")
-    except Exception as e:
-        sync_tqdm.write(f"\n  Price lookup Error ({model_name_api}): Unexpected error - {type(e).__name__}: {e}")
-
-    _model_price_cache[model_name_api] = None # Cache failure
-    return None
+import openrouter_catalog
 
 
 # --- Scoring Logic ---
@@ -298,68 +225,35 @@ async def generate_reports(results_dir, graphs_base_dir):
     all_scores_summary = []
     all_category_keys = set()
 
-    print(f"Found {len(results_files)} results files. Processing scores and fetching prices...") # Standard print ok
+    print(f"Found {len(results_files)} results files. Processing scores and fetching metadata...") # Standard print ok
 
-    price_semaphore = Semaphore(PRICE_FETCH_CONCURRENCY)
-    model_configs_for_pricing = [] # Will store info needed for pricing lookups
-    price_tasks = []
+    openrouter_metadata = {}
+    try:
+        openrouter_metadata = openrouter_catalog.fetch_openrouter_model_metadata_map(
+            project_root=Path(__file__).resolve().parent,
+            api_key_env=config.OPENROUTER_DISCOVERY_API_KEY_ENV,
+        )
+        print(f"  Loaded OpenRouter metadata for {len(openrouter_metadata)} models.")
+    except Exception as e:
+        print(f"  Warning: Could not load OpenRouter metadata: {type(e).__name__} - {e}")
 
-    # --- Step 1: Read basic info and prepare price lookups ---
+    # --- Score results and combine with price/access metadata ---
     for filepath in results_files:
-        model_config_for_price = None
-        try:
-            with open(filepath, 'r') as f: data = json.load(f)
-            # Use model_name from results file for price lookup consistency
-            model_name_api = data.get('model_name')
-            model_id_reporting = data.get('model_id') # ID for reporting/warnings
-
-            if not model_name_api:
-                print(f"Warning: Skipping price check for {filepath.name} ('{model_id_reporting}') due to missing 'model_name' in results.")
-                model_configs_for_pricing.append(None)
-                continue
-
-            model_config_for_price = {
-                'id': model_id_reporting, # Store ID for reference
-                'model_name_api': model_name_api # API name used for the run
-            }
-            model_configs_for_pricing.append(model_config_for_price)
-        except Exception as e:
-            print(f"Error reading initial data from {filepath.name}: {e}. Skipping file.")
-            model_configs_for_pricing.append(None) # Mark as skipped
-
-    # --- Step 2: Fetch prices asynchronously ---
-    async with aiohttp.ClientSession() as session:
-        async def fetch_price_with_limit(config):
-            if config is None: return None # Skip if config failed earlier
-            async with price_semaphore:
-                await asyncio.sleep(0.1) # Small delay
-                return await get_model_price(session, config)
-
-        print(f"  Fetching prices (max concurrency: {PRICE_FETCH_CONCURRENCY})...")
-        price_tasks = [asyncio.create_task(fetch_price_with_limit(config)) for config in model_configs_for_pricing]
-        price_results_gathered = await asyncio.gather(*price_tasks, return_exceptions=True)
-        print("  ...Price fetching complete.") # Standard print ok
-
-    # --- Step 3: Score results and combine with price info ---
-    for i, filepath in enumerate(results_files):
-        if model_configs_for_pricing[i] is None: continue # Skip files that failed initial read
 
         try:
             with open(filepath, 'r') as f: data = json.load(f)
         except Exception as e:
             print(f"Error re-reading {filepath.name} for scoring: {e}"); continue
 
-        model_name_reporting = data.get("model_name", model_configs_for_pricing[i]['id']) # Fallback ID
+        model_name_api = data.get("model_name")
+        model_name_reporting = model_name_api or data.get("model_id", filepath.stem) # Fallback ID
         date_tested = data.get("date", "Unknown").split('T')[0]
-        access_type = data.get("access", "unknown") # Read access type from results
-        price_result = price_results_gathered[i]
-        model_price = None
+        live_metadata = openrouter_metadata.get(model_name_api, {}) if model_name_api else {}
+        access_type = live_metadata.get("access") or data.get("access", "unknown")
+        model_price = live_metadata.get("price_usd_per_mtok")
 
-        if isinstance(price_result, Exception):
-             # Log error, but don't crash the report
-            sync_tqdm.write(f"\n  Warning: Exception during price fetch for {model_name_reporting}: {price_result}")
-        elif price_result is not None:
-            model_price = price_result
+        if access_type == "unknown":
+            access_type = data.get("access", "unknown")
 
         if "run_error" in data:
             summary = {

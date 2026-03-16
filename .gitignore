@@ -10,6 +10,7 @@ __pycache__/
 
 # Ignore the virtual environment folder
 venv/
+.venv/
 
 # Ignore the database file
 *.db
@@ -35,4 +36,5 @@ venv/
 /benchmark_results_tests
 /benchmark_questions
 /benchmark_results/model_results
+/benchmark_results/cron_logs
 /result_analysis.py

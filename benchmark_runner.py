@@ -13,7 +13,7 @@ import traceback
 
 # Import shared config and NEW central API caller
 import config
-from llm_api_calls import call_llm_api 
+from llm_api_calls import RATE_LIMIT_SENTINEL, call_llm_api 
 
 
 # --- Core Benchmark Logic ---
@@ -54,6 +54,9 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
     provider = model_config["provider"]
     model_name_reporting = model_config.get("model_name_api", model_id.split('/')[-1])
     access_type = model_config.get("access", "unknown") # Get access type or default
+    question_concurrency = model_config.get("question_concurrency", config.QUESTIONS_CONCURRENCY_PER_MODEL)
+    max_retries = model_config.get("max_retries", config.MAX_RETRIES)
+    rate_limit_backoff_seconds = model_config.get("rate_limit_backoff_seconds", config.RATE_LIMIT_RETRY_BASE_DELAY_SECONDS)
 
     sync_tqdm.write(f"---> Preparing Benchmark for: {model_id}")
 
@@ -64,13 +67,16 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
         "access": access_type, # Store access type in results
         "date": datetime.datetime.now().isoformat(),
         "benchmark_file": config.BENCHMARK_QUESTIONS_FILE,
+        "benchmark_status": "complete",
+        "question_concurrency": question_concurrency,
+        "max_retries": max_retries,
         "multiple_choice": {}
     }
 
 
     # Prepare Question Tasks
     tasks = []
-    question_semaphore = Semaphore(config.QUESTIONS_CONCURRENCY_PER_MODEL)
+    question_semaphore = Semaphore(question_concurrency)
     all_question_data = []
     for category, questions in benchmark_questions.items():
         model_results["multiple_choice"][category] = []
@@ -86,6 +92,7 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
     total_questions_count = len(all_question_data)
     if total_questions_count == 0:
         sync_tqdm.write(f"\n  Warning ({model_id}): No valid questions found to process. Saving empty results.")
+        model_results["benchmark_status"] = "run_error"
         model_results["run_error"] = "No valid questions loaded or found."
         results_dir_path = Path(results_dir); results_dir_path.mkdir(parents=True, exist_ok=True)
         safe_filename = _get_safe_results_filename(model_id)
@@ -109,7 +116,7 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
             raw_answer = None
             processed_answer = "fail" # Default to fail
             last_error = None
-            for attempt in range(config.MAX_RETRIES):
+            for attempt in range(max_retries):
                 try:
                     # --- USE THE NEW CENTRAL API CALLER ---
                     raw_answer = await call_llm_api(
@@ -120,7 +127,10 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
                     )
                     # --- END NEW CALL ---
 
-                    if raw_answer is not None:
+                    if raw_answer == RATE_LIMIT_SENTINEL:
+                        processed_answer = "error_rate_limit"
+                        last_error = f"Rate limited on attempt {attempt + 1}."
+                    elif raw_answer is not None:
                         parsed = parse_model_response(raw_answer)
                         if parsed != "fail":
                             processed_answer = parsed # Got a valid letter
@@ -134,8 +144,11 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
                         last_error = f"API call failed or returned no content on attempt {attempt + 1} (see log above for details)."
 
                     # If we are here, it means the attempt failed (parse fail or API error)
-                    if attempt < config.MAX_RETRIES - 1:
-                         delay = 1.5 ** attempt # Exponential backoff
+                    if attempt < max_retries - 1:
+                         if processed_answer == "error_rate_limit":
+                             delay = rate_limit_backoff_seconds * (2 ** attempt)
+                         else:
+                             delay = 1.5 ** attempt # Exponential backoff
                          await asyncio.sleep(delay)
                     # On last attempt, processed_answer remains "fail" or "error_api"
 
@@ -144,14 +157,14 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
                     sync_tqdm.write(f"\n    {task_id}: Unexpected error during attempt {attempt + 1}: {e}\n{traceback.format_exc()}")
                     last_error = f"Unexpected error: {e}"; processed_answer = "error_unexpected"
                     # Optionally break here, or let retries continue if it might be transient
-                    if attempt < config.MAX_RETRIES - 1: await asyncio.sleep(1) # Short delay before next retry
+                    if attempt < max_retries - 1: await asyncio.sleep(1) # Short delay before next retry
 
 
             result_entry = question_data.copy()
             result_entry["model_answer"] = processed_answer
             result_entry["raw_model_response"] = str(raw_answer) if raw_answer is not None else ""
             # Only record last_error if the final answer is an error/fail state
-            if processed_answer in ["fail", "error_api", "error_provider", "error_unexpected", "error_task"]:
+            if processed_answer in ["fail", "error_api", "error_provider", "error_unexpected", "error_task", "error_rate_limit"]:
                  result_entry["last_error"] = last_error if last_error else "Unknown error state"
             return category, result_entry
 
@@ -219,6 +232,30 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
             if "PROCESSING_ERRORS" not in model_results["multiple_choice"]: model_results["multiple_choice"]["PROCESSING_ERRORS"] = []
             model_results["multiple_choice"]["PROCESSING_ERRORS"].append({ "id": "COLLECTION_ERROR", "model_answer": "error_task", "raw_model_response": str(item)})
 
+    rate_limit_failures = 0
+    api_failures = 0
+    for answers in model_results["multiple_choice"].values():
+        if not isinstance(answers, list):
+            continue
+        for answer in answers:
+            if not isinstance(answer, dict):
+                continue
+            model_answer = answer.get("model_answer")
+            if model_answer == "error_rate_limit":
+                rate_limit_failures += 1
+            elif model_answer == "error_api":
+                api_failures += 1
+
+    if "run_error" in model_results:
+        model_results["benchmark_status"] = "run_error"
+    elif rate_limit_failures > 0:
+        model_results["benchmark_status"] = "rate_limited"
+    elif processed_count != total_questions_count:
+        model_results["benchmark_status"] = "incomplete"
+
+    model_results["rate_limit_failures"] = rate_limit_failures
+    model_results["api_failures"] = api_failures
+
 
     # Save Final Results
     end_time = time.time()
@@ -261,6 +298,7 @@ async def run_model_with_semaphore(semaphore: Semaphore, model_config, benchmark
                 "model_name": model_config.get("model_name_api", model_id),
                 "provider": model_config.get("provider"),
                 "access": access_type, # Include access type in error report
+                "benchmark_status": "run_error",
                 "run_error": f"Critical task execution error: {type(e).__name__}: {e}",
                 "date": datetime.datetime.now().isoformat(),
                 "benchmark_file": config.BENCHMARK_QUESTIONS_FILE,

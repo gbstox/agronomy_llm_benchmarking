@@ -17,11 +17,39 @@ GRAPHS_BASE_DIR = 'benchmark_results'
 #   'reports_only': Do not run any models, only generate reports from existing results.
 RUN_MODE = 'missing' # Change this to 'missing' or 'reports_only' as needed
 
+# --- Model Selection ---
+# Controls how the benchmark builds the candidate model list before RUN_MODE is
+# applied.
+# Options:
+#   'configured_only': Use only MODELS_TO_RUN below.
+#   'configured_plus_new_openrouter': Start with MODELS_TO_RUN and append any
+#       new text-capable OpenRouter models created after the newest result file.
+MODEL_SELECTION_MODE = "configured_plus_new_openrouter"
+
+# Optional exact-ID allowlist applied after model selection/discovery.
+# Leave empty to allow all selected models.
+# Example:
+# MODEL_ID_ALLOWLIST = ["openai/gpt-5.4", "anthropic/claude-opus-4.6"]
+MODEL_ID_ALLOWLIST = []
+
+# --- OpenRouter Discovery ---
+OPENROUTER_DISCOVERY_API_KEY_ENV = "OPENROUTER_API_KEY"
+OPENROUTER_DISCOVERY_STATE_FILE = "benchmark_results/openrouter_discovery_state.json"
+OPENROUTER_SKIP_FREE_VARIANTS_WHEN_BASE_EXISTS = True
+OPENROUTER_SKIP_CLOAKED_MODELS = True
+OPENROUTER_DISCOVERED_MODEL_QUESTION_CONCURRENCY = 3
+OPENROUTER_DISCOVERED_MODEL_MAX_RETRIES = 4
+OPENROUTER_DISCOVERED_MODEL_RATE_LIMIT_BACKOFF_SECONDS = 15
+OPENROUTER_DISCOVERED_FREE_MODEL_QUESTION_CONCURRENCY = 1
+OPENROUTER_DISCOVERED_FREE_MODEL_MAX_RETRIES = 6
+OPENROUTER_DISCOVERED_FREE_MODEL_RATE_LIMIT_BACKOFF_SECONDS = 30
+
 # --- Benchmark Settings ---
 MAX_RETRIES = 3
 REQUEST_TIMEOUT = 180 # Extended timeout for reasoning/thinking models (3 minutes)
 TOKENS_TO_REQUEST = 1000     # default max_tokens
 DETERMINISTIC_TEMP = 0.0   # default temperature
+RATE_LIMIT_RETRY_BASE_DELAY_SECONDS = 15
 
 # --- Concurrency Limits ---
 # Max number of different MODELS to benchmark simultaneously
