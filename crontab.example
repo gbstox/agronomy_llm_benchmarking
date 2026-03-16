@@ -1,11 +1,8 @@
-# Install manually on the target machine, for example:
-#   crontab /absolute/path/to/this/file
-#
-# Update the repo path below before installing.
-
 SHELL=/bin/bash
-PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PYTHON_BIN=/srv/apps/agronomy-llm-benchmarking/venv/bin/python
 
 # Poll OpenRouter every 6 hours.
-# The repo's benchmark logic will only run newly discovered / incomplete models.
-15 */6 * * * /absolute/path/to/agronomy_llm_benchmarking/run_benchmark_cron.sh
+# The repo's benchmark logic will only run newly discovered / incomplete models,
+# then commit and push tracked leaderboard updates when they change.
+15 */6 * * * /srv/apps/agronomy-llm-benchmarking/run_benchmark_cron.sh

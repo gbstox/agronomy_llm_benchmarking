@@ -37,4 +37,6 @@ venv/
 /benchmark_questions
 /benchmark_results/model_results
 /benchmark_results/cron_logs
+/benchmark_results/openrouter_discovery_state.json
 /result_analysis.py
+/scratchpad.txt
