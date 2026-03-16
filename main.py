@@ -20,6 +20,59 @@ def _get_safe_results_filename(model_id):
     return re.sub(r'[\\/*?:"<>|]', '_', model_id) + "_answers.json"
 
 
+def _get_model_identity_variants(model_config):
+    """Returns equivalent identifiers used across config, results, and README."""
+    variants = set()
+    for value in (
+        model_config.get("id"),
+        model_config.get("model_name_api"),
+    ):
+        if not value or not isinstance(value, str):
+            continue
+        normalized = value.strip()
+        if not normalized:
+            continue
+        variants.add(normalized)
+        variants.add(normalized.lower())
+        variants.add(normalized.split("/")[-1])
+        variants.add(normalized.split("/")[-1].lower())
+    return variants
+
+
+def _load_repo_benchmarked_model_ids(readme_path: Path):
+    """Parses the tracked README leaderboard to find already-benchmarked models."""
+    if not readme_path.exists():
+        return set()
+
+    benchmarked_ids = set()
+    try:
+        with open(readme_path, "r") as f:
+            for raw_line in f:
+                line = raw_line.strip()
+                if not line.startswith("|"):
+                    continue
+                columns = [column.strip() for column in line.split("|")[1:-1]]
+                if not columns:
+                    continue
+                model_name = columns[0]
+                if (
+                    not model_name
+                    or model_name == "Model Name"
+                    or set(model_name) == {"-"}
+                ):
+                    continue
+
+                benchmarked_ids.add(model_name)
+                benchmarked_ids.add(model_name.lower())
+                benchmarked_ids.add(model_name.split("/")[-1])
+                benchmarked_ids.add(model_name.split("/")[-1].lower())
+    except OSError as e:
+        print(f"\n--- README Benchmark History Warning: Could not read {readme_path}: {e} ---")
+        return set()
+
+    return benchmarked_ids
+
+
 def _should_rerun_result(results_filepath: Path):
     """Decides whether an existing results file should be rerun."""
     if not results_filepath.exists():
@@ -32,10 +85,31 @@ def _should_rerun_result(results_filepath: Path):
         return True, f"Existing results unreadable: {e}"
 
     status = existing_data.get("benchmark_status")
-    if status in {"rate_limited", "incomplete", "run_error"}:
+    completed_questions = existing_data.get("completed_questions")
+    total_questions = existing_data.get("total_questions")
+    if existing_data.get("retryable") is False or status == "fatal_api_error":
+        return False, "Existing results marked non-retryable"
+    if status in {"in_progress", "rate_limited", "incomplete", "run_error"}:
+        api_failures = int(existing_data.get("api_failures", 0) or 0)
+        fatal_api_failures = int(existing_data.get("fatal_api_failures", 0) or 0)
+        if (
+            status == "in_progress"
+            and isinstance(completed_questions, int)
+            and isinstance(total_questions, int)
+            and total_questions > 0
+            and completed_questions >= total_questions
+            and api_failures == 0
+            and fatal_api_failures == 0
+            and "run_error" not in existing_data
+        ):
+            return False, "Existing results already finished all questions"
         return True, f"Existing results marked '{status}'"
     if "run_error" in existing_data:
         return True, "Existing results contain run_error"
+    api_failures = int(existing_data.get("api_failures", 0) or 0)
+    fatal_api_failures = int(existing_data.get("fatal_api_failures", 0) or 0)
+    if api_failures > 0 or fatal_api_failures > 0:
+        return True, "Existing results contain API failures"
 
     return False, "Results file exists"
 
@@ -85,6 +159,7 @@ async def main():
     models_to_run_this_session = []
     if config.RUN_MODE != 'reports_only':
         initial_models_to_run = list(config.MODELS_TO_RUN)
+        repo_benchmarked_model_ids = _load_repo_benchmarked_model_ids(Path("README.md"))
         selection_mode = getattr(config, "MODEL_SELECTION_MODE", "configured_only")
         print(f"\n--- Model Selection Mode: {selection_mode} ---")
 
@@ -126,6 +201,9 @@ async def main():
             print("\n--- Mode 'MISSING': Checking for existing results... ---")
             results_dir_path = Path(config.BENCHMARK_RESULTS_DIR)
             for model_config in initial_models_to_run:
+                if _get_model_identity_variants(model_config) & repo_benchmarked_model_ids:
+                    print(f"  -> Skipping: {model_config['id']} (Already benchmarked in tracked repo leaderboard)")
+                    continue
                 safe_filename = _get_safe_results_filename(model_config['id'])
                 results_filepath = results_dir_path / safe_filename
                 should_rerun, reason = _should_rerun_result(results_filepath)

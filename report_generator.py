@@ -10,8 +10,218 @@ import matplotlib.pyplot as plt
 import config # For paths mostly
 import openrouter_catalog
 
+FIXED_SUMMARY_COLUMNS = 5
+
 
 # --- Scoring Logic ---
+
+def _parse_percent(value):
+    cleaned = str(value).strip().replace("%", "")
+    if not cleaned or cleaned == "N/A":
+        return None
+    try:
+        return float(cleaned)
+    except ValueError:
+        return None
+
+
+def _parse_price(value):
+    cleaned = str(value).strip()
+    if not cleaned or cleaned == "N/A":
+        return None
+    cleaned = cleaned.replace("$", "").strip()
+    try:
+        return float(cleaned)
+    except ValueError:
+        return None
+
+
+def _normalize_category_name(column_name):
+    return column_name.strip().lower().replace(" ", "_")
+
+
+def load_existing_readme_summaries(readme_path):
+    """Parses the tracked README leaderboard so partial local runs can merge safely."""
+    path = Path(readme_path)
+    if not path.is_file():
+        return [], set()
+
+    try:
+        lines = path.read_text().splitlines()
+    except OSError as e:
+        print(f"Warning: Could not read existing README summaries from {readme_path}: {e}")
+        return [], set()
+
+    header_idx = next((idx for idx, line in enumerate(lines) if line.startswith("| Model Name")), None)
+    if header_idx is None or header_idx + 1 >= len(lines):
+        return [], set()
+
+    headers = [column.strip() for column in lines[header_idx].split("|")[1:-1]]
+    if len(headers) <= FIXED_SUMMARY_COLUMNS:
+        return [], set()
+
+    category_headers = headers[FIXED_SUMMARY_COLUMNS:]
+    category_keys = {_normalize_category_name(header) for header in category_headers}
+    summaries = []
+
+    for line in lines[header_idx + 2:]:
+        if not line.startswith("|"):
+            break
+
+        parts = line.split("|")
+        if len(parts) < len(headers) + 1:
+            continue
+
+        columns = [parts[idx].strip() for idx in range(1, len(headers) + 1)]
+        model_name = columns[0]
+        if not model_name:
+            continue
+
+        category_scores = {}
+        for header, value in zip(category_headers, columns[FIXED_SUMMARY_COLUMNS:]):
+            parsed_score = _parse_percent(value)
+            if parsed_score is not None:
+                category_scores[_normalize_category_name(header)] = parsed_score
+
+        score_match = re.search(r"\((\d+)/(\d+|N/A)\)\s*$", line)
+        correct = int(score_match.group(1)) if score_match else 0
+        total_questions = score_match.group(2) if score_match else "N/A"
+        if isinstance(total_questions, str) and total_questions.isdigit():
+            total_questions = int(total_questions)
+
+        summary = {
+            "model_name": model_name,
+            "overall_score": _parse_percent(columns[1]) or 0.0,
+            "access": columns[2].strip().lower(),
+            "date_tested": columns[3].strip(),
+            "price_usd_per_mtok": _parse_price(columns[4]),
+            "category_scores": category_scores,
+            "correct": correct,
+            "total_questions": total_questions,
+        }
+        summaries.append(summary)
+
+    return summaries, category_keys
+
+
+def _build_markdown_table_lines(all_scores_summary, ordered_categories):
+    model_col_width = max(
+        12,
+        max((len(str(item.get("model_name", ""))) for item in all_scores_summary), default=12),
+    )
+    access_col_width = max(
+        11,
+        max((len(str(item.get("access", ""))) for item in all_scores_summary), default=11),
+    )
+    price_col_width = 14
+    date_col_width = 11
+
+    header = (
+        f"| {'Model Name':<{model_col_width}} | Overall Score | "
+        f"{'Access':<{access_col_width}} | Date Tested | Price ($/Mtok) |"
+    )
+    separator = (
+        f"|{'-' * (model_col_width + 1)}|---------------|"
+        f"{'-' * (access_col_width + 1)}|-------------|----------------|"
+    )
+
+    cat_col_widths = {}
+    for cat in ordered_categories:
+        cat_title = cat.replace("_", " ").title()
+        col_width = max(len(cat_title), 7)
+        cat_col_widths[cat] = col_width
+        header += f" {cat_title:<{col_width}} |"
+        separator += "-" * (col_width + 2) + "|"
+
+    table_lines = [header, separator]
+    for item in all_scores_summary:
+        name = item.get("model_name", "Unknown")
+        access = item.get("access", "unknown").replace("_", " ").title()
+
+        if "run_error" in item:
+            overall_str = "N/A".center(13)
+            access_str = access.ljust(access_col_width)
+            price_str = "N/A".center(price_col_width)
+            date_str = item.get("date_tested", "N/A").ljust(date_col_width)
+            total_qs_str = item.get("total_questions", "N/A")
+            run_failed_msg = f"RUN FAILED ({total_qs_str} Qs)"
+
+            row = (
+                f"| {name:<{model_col_width}} | {overall_str} | {access_str} | "
+                f"{date_str} | {price_str} |"
+            )
+            for cat in ordered_categories:
+                col_width = cat_col_widths[cat]
+                row += f" {'N/A'.center(col_width)} |"
+            table_lines.append(row + f"  ({run_failed_msg})")
+            continue
+
+        overall_str = f"{item['overall_score']:>13.2f}%"
+        access_str = access.ljust(access_col_width)
+        price = item.get("price_usd_per_mtok")
+        price_str = (
+            f"${price:.4f}".center(price_col_width)
+            if price is not None
+            else "N/A".center(price_col_width)
+        )
+        date_str = item["date_tested"].ljust(date_col_width)
+        correct = item["correct"]
+        total_qs = item["total_questions"]
+        correct_total_info = f"({correct}/{total_qs})"
+
+        row = (
+            f"| {name:<{model_col_width}} | {overall_str} | {access_str} | "
+            f"{date_str} | {price_str} |"
+        )
+        for cat in ordered_categories:
+            col_width = cat_col_widths[cat]
+            score = item["category_scores"].get(cat, 0.0)
+            score_str = (
+                f"{score:>{col_width - 1}.1f}%"
+                if total_qs > 0
+                else "N/A".center(col_width)
+            )
+            row += f" {score_str} |"
+        table_lines.append(row + f" {correct_total_info}")
+
+    return table_lines
+
+
+def _write_readme_leaderboard(readme_path, table_lines):
+    path = Path(readme_path)
+    try:
+        existing_lines = path.read_text().splitlines() if path.is_file() else []
+    except OSError as e:
+        print(f"Warning: Could not read README for leaderboard update: {e}")
+        return
+
+    start_idx = next(
+        (idx for idx, line in enumerate(existing_lines) if line.startswith("| Model Name")),
+        None,
+    )
+    if start_idx is not None:
+        end_idx = start_idx + 1
+        while end_idx < len(existing_lines) and existing_lines[end_idx].startswith("|"):
+            end_idx += 1
+        updated_lines = existing_lines[:start_idx] + table_lines + existing_lines[end_idx:]
+    else:
+        insert_idx = next(
+            (idx for idx, line in enumerate(existing_lines) if line.startswith("# What is this?")),
+            len(existing_lines),
+        )
+        updated_lines = existing_lines[:insert_idx]
+        if updated_lines and updated_lines[-1] != "":
+            updated_lines.append("")
+        updated_lines.extend(table_lines)
+        if insert_idx < len(existing_lines) and updated_lines and updated_lines[-1] != "":
+            updated_lines.append("")
+        updated_lines.extend(existing_lines[insert_idx:])
+
+    try:
+        path.write_text("\n".join(updated_lines).rstrip() + "\n")
+        print(f"Updated README leaderboard: {path}")
+    except OSError as e:
+        print(f"Warning: Could not write updated README leaderboard: {e}")
 
 def score_results(model_answers_data):
     """
@@ -224,6 +434,7 @@ async def generate_reports(results_dir, graphs_base_dir):
 
     all_scores_summary = []
     all_category_keys = set()
+    skipped_non_complete_results = 0
 
     print(f"Found {len(results_files)} results files. Processing scores and fetching metadata...") # Standard print ok
 
@@ -255,28 +466,37 @@ async def generate_reports(results_dir, graphs_base_dir):
         if access_type == "unknown":
             access_type = data.get("access", "unknown")
 
-        if "run_error" in data:
-            summary = {
-                "model_name": model_name_reporting,
-                "date_tested": date_tested,
-                "access": access_type,
-                "run_error": data['run_error'],
-                "overall_score": 0.0, # Assign 0 score for run errors
-                "category_scores": {},
-                "price_usd_per_mtok": model_price,
-                "correct": 0,
-                "total_questions": 'N/A' # Indicate not applicable due to run error
-            }
-            all_scores_summary.append(summary)
+        benchmark_status = data.get("benchmark_status", "complete")
+        api_failures = int(data.get("api_failures", 0) or 0)
+        fatal_api_failures = int(data.get("fatal_api_failures", 0) or 0)
+        if (
+            "run_error" in data
+            or benchmark_status != "complete"
+            or api_failures > 0
+            or fatal_api_failures > 0
+        ):
+            skipped_non_complete_results += 1
+            run_issue = data.get("run_error") or (
+                f"Benchmark status '{benchmark_status}' "
+                f"(api_failures={api_failures}, fatal_api_failures={fatal_api_failures})"
+            )
+            print(
+                f"  Skipping incomplete leaderboard row for {model_name_reporting}: "
+                f"{run_issue}"
+            )
             continue
 
         # Call the updated scoring function
         # Signature: category_scores, overall_score, total_correct, total_questions_attempted
         category_scores, overall_score, correct, total_qs_attempted = score_results(data)
+        normalized_category_scores = {
+            _normalize_category_name(category): score
+            for category, score in category_scores.items()
+        }
 
         summary = {
             "model_name": model_name_reporting,
-            "category_scores": category_scores,
+            "category_scores": normalized_category_scores,
             "overall_score": overall_score,
             "access": access_type, # Add access type to summary
             "date_tested": date_tested,
@@ -285,8 +505,27 @@ async def generate_reports(results_dir, graphs_base_dir):
             "price_usd_per_mtok": model_price
         }
         all_scores_summary.append(summary)
-        all_category_keys.update(category_scores.keys())
+        all_category_keys.update(normalized_category_scores.keys())
 
+    readme_path = Path(__file__).resolve().parent / "README.md"
+    existing_readme_summaries, existing_category_keys = load_existing_readme_summaries(
+        readme_path
+    )
+    for summary in existing_readme_summaries:
+        live_metadata = openrouter_metadata.get(summary.get("model_name"), {})
+        live_access = live_metadata.get("access")
+        if live_access and live_access != "unknown":
+            summary["access"] = live_access
+        live_price = live_metadata.get("price_usd_per_mtok")
+        if live_price is not None:
+            summary["price_usd_per_mtok"] = live_price
+    existing_names = {item.get("model_name") for item in all_scores_summary}
+    for summary in existing_readme_summaries:
+        if summary.get("model_name") in existing_names:
+            continue
+        all_scores_summary.append(summary)
+        all_category_keys.update(summary.get("category_scores", {}).keys())
+    all_category_keys.update(existing_category_keys)
 
     # --- Generate Table and Plots ---
     if not all_scores_summary:
@@ -296,71 +535,18 @@ async def generate_reports(results_dir, graphs_base_dir):
     all_scores_summary.sort(key=lambda item: ('run_error' in item, -item.get('overall_score', -1)))
     ordered_categories = sorted(list(all_category_keys))
 
+    if skipped_non_complete_results:
+        print(
+            f"Skipped {skipped_non_complete_results} non-complete result file(s) "
+            "from the published README/charts refresh."
+        )
+
     # Markdown Table
     print("\n--- Benchmark Results Table (Markdown Format) ---") # Standard print ok
     if not all_scores_summary: print("| No models processed successfully. |"); return
-
-    # Determine column widths
-    model_col_width = max(12, max((len(str(item.get('model_name', ''))) for item in all_scores_summary), default=12))
-    access_col_width = max(11, max((len(str(item.get('access', ''))) for item in all_scores_summary), default=11)) # Width for Access column
-    price_col_width = 14 # Keep price width fixed for now
-    date_col_width = 11 # Keep date width fixed
-
-    # Build Header Row
-    header = f"| {'Model Name':<{model_col_width}} | Overall Score | {'Access':<{access_col_width}} | Date Tested | Price ($/Mtok) |"
-    separator = f"|{'-' * (model_col_width+1)}|---------------|{'-'*(access_col_width+1)}|-------------|----------------|" # Adjusted separator
-
-    cat_col_widths = {}
-    for cat in ordered_categories:
-        cat_title = cat.replace('_', ' ').title()
-        # Calculate width based on title and typical score format 'XX.X%'
-        col_width = max(len(cat_title), 7) # Minimum width for score %
-        cat_col_widths[cat] = col_width
-        header += f" {cat_title:<{col_width}} |"
-        separator += "-" * (col_width + 2) + "|"
-
-    print(header)
-    print(separator)
-
-    # Build Data Rows
-    for item in all_scores_summary:
-        name = item.get('model_name', 'Unknown')
-        access = item.get('access', 'unknown').replace('_', ' ').title() # Format access type
-
-        if 'run_error' in item:
-            overall_str = "N/A".center(13)
-            access_str = access.ljust(access_col_width) # Show access even on error
-            price_str = "N/A".center(price_col_width)
-            date_str = item.get('date_tested','N/A').ljust(date_col_width)
-            total_qs_str = item.get('total_questions', 'N/A') # Get total Qs if available
-            run_failed_msg = f"RUN FAILED ({total_qs_str} Qs)"
-
-            # Basic row structure for failed runs
-            row = f"| {name:<{model_col_width}} | {overall_str} | {access_str} | {date_str} | {price_str} |"
-            # Add placeholders for category scores
-            for cat in ordered_categories:
-                 col_width = cat_col_widths[cat]; row += f" {'N/A'.center(col_width)} |"
-            print(row + f"  ({run_failed_msg})") # Add failure reason parenthesis
-
-        else:
-            overall_str = f"{item['overall_score']:>13.2f}%"
-            access_str = access.ljust(access_col_width)
-            price = item.get('price_usd_per_mtok')
-            price_str = f"${price:.4f}".center(price_col_width) if price is not None else "N/A".center(price_col_width)
-            date_str = item['date_tested'].ljust(date_col_width)
-            correct = item['correct']
-            total_qs = item['total_questions']
-            # Correct/Total info can be added if desired, e.g. in parenthesis or a separate column
-            correct_total_info = f"({correct}/{total_qs})"
-
-
-            row = f"| {name:<{model_col_width}} | {overall_str} | {access_str} | {date_str} | {price_str} |"
-            for cat in ordered_categories:
-                col_width = cat_col_widths[cat]
-                score = item['category_scores'].get(cat, 0.0)
-                score_str = f"{score:>{col_width-1}.1f}%" if total_qs > 0 else "N/A".center(col_width) # Handle case with 0 questions
-                row += f" {score_str} |"
-            print(row + f" {correct_total_info}") # Append correct/total info
+    table_lines = _build_markdown_table_lines(all_scores_summary, ordered_categories)
+    for line in table_lines:
+        print(line)
 
 
     print("--- End of Table ---")
@@ -378,5 +564,7 @@ async def generate_reports(results_dir, graphs_base_dir):
 
     print(f"Generating performance vs. price plot in: {overall_graph_dir}")
     plot_performance_vs_price(all_scores_summary, overall_graph_dir)
+
+    _write_readme_leaderboard(readme_path, table_lines)
 
     print("\n--- Reporting Complete ---")

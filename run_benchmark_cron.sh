@@ -3,6 +3,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-}"
+RUNNER_SCRIPT="${RUNNER_SCRIPT:-$REPO_ROOT/run_benchmark_until_complete.sh}"
 LOG_DIR="${LOG_DIR:-$REPO_ROOT/benchmark_results/cron_logs}"
 LOCK_DIR="${LOCK_DIR:-$REPO_ROOT/.benchmark-cron.lock}"
 GIT_REMOTE="${GIT_REMOTE:-origin}"
@@ -42,6 +43,11 @@ if [[ -z "$PYTHON_BIN" ]]; then
     exit 1
 fi
 
+if [[ ! -x "$RUNNER_SCRIPT" ]]; then
+    log_runner "Missing resilient runner script at $RUNNER_SCRIPT."
+    exit 1
+fi
+
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
     log_runner "Skipping run because another benchmark job appears active."
     exit 0
@@ -65,8 +71,8 @@ if ! git pull --ff-only "$GIT_REMOTE" "$GIT_BRANCH" >> "$LOG_DIR/git-$(date '+%Y
     exit 1
 fi
 
-log_runner "Starting scheduled benchmark run with $PYTHON_BIN."
-if ! "$PYTHON_BIN" -u main.py >> "$LOG_DIR/benchmark-$(date '+%Y-%m-%d').log" 2>&1; then
+log_runner "Starting scheduled resilient benchmark run with $PYTHON_BIN."
+if ! PYTHON_BIN="$PYTHON_BIN" LOG_DIR="$LOG_DIR" "$RUNNER_SCRIPT"; then
     log_runner "Benchmark run failed. See benchmark log for details."
     exit 1
 fi

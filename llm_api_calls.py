@@ -18,7 +18,10 @@ import config
 
 # Cache for initialized OpenAI-compatible clients
 _openai_clients = {}  # { (base_url, api_key_env): client }
+_request_semaphores = {}  # { (provider, base_url, api_key_env, limit): asyncio.Semaphore }
 RATE_LIMIT_SENTINEL = "__RATE_LIMIT__"
+API_ERROR_SENTINEL = "__API_ERROR__"
+FATAL_API_ERROR_SENTINEL = "__FATAL_API_ERROR__"
 
 
 def _get_openai_client(model_config):
@@ -57,6 +60,32 @@ def _param(model_config, key, default):
     Falls back to global default when the key is not present in the model entry.
     """
     return model_config.get(key, default)
+
+
+def _get_request_semaphore(model_config):
+    """Returns a shared semaphore for the model's upstream provider."""
+    provider = model_config.get("provider")
+    if provider != "openai_compatible":
+        return None
+
+    limit = int(
+        model_config.get(
+            "max_parallel_requests",
+            config.OPENAI_COMPATIBLE_MAX_PARALLEL_REQUESTS,
+        )
+    )
+    if limit <= 0:
+        return None
+
+    semaphore_key = (
+        provider,
+        model_config.get("base_url"),
+        model_config.get("api_key_env"),
+        limit,
+    )
+    if semaphore_key not in _request_semaphores:
+        _request_semaphores[semaphore_key] = asyncio.Semaphore(limit)
+    return _request_semaphores[semaphore_key]
 
 
 # ---------------------------------------------------------------------------
@@ -100,10 +129,11 @@ async def _call_openai_sdk(client: AsyncOpenAI,
         ):
             return response.choices[0].message.content.strip()
         sync_tqdm.write(f"\nWarning ({model_id}): No response content received.")
-        return None
+        return API_ERROR_SENTINEL
 
     except openai.APIConnectionError as e:
         sync_tqdm.write(f"\nError ({model_id}): Connection Error - {e}")
+        return API_ERROR_SENTINEL
     except openai.RateLimitError as e:
         sync_tqdm.write(f"\nError ({model_id}): Rate Limit Exceeded - {e}")
         return RATE_LIMIT_SENTINEL
@@ -113,26 +143,36 @@ async def _call_openai_sdk(client: AsyncOpenAI,
             f"Check API key ({model_config['api_key_env']}) and endpoint "
             f"({model_config.get('base_url')})."
         )
+        return FATAL_API_ERROR_SENTINEL
     except openai.NotFoundError:
         sync_tqdm.write(
             f"\nError ({model_id}): Model not found "
             f"('{model_name_api}')."
         )
+        return FATAL_API_ERROR_SENTINEL
     except openai.APIStatusError as e:
         if e.status_code == 429:
             sync_tqdm.write(f"\nError ({model_id}): Rate Limit Exceeded - Status 429.")
             return RATE_LIMIT_SENTINEL
+        if e.status_code in {400, 401, 403, 404}:
+            sync_tqdm.write(
+                f"\nError ({model_id}): Non-retryable API Error - Status {e.status_code}."
+            )
+            return FATAL_API_ERROR_SENTINEL
         sync_tqdm.write(
             f"\nError ({model_id}): API Error - Status {e.status_code}, "
             f"Response: {e.response}"
         )
+        return API_ERROR_SENTINEL
     except asyncio.TimeoutError:
         sync_tqdm.write(f"\nError ({model_id}): Request timed out.")
+        return API_ERROR_SENTINEL
     except Exception as e:
         sync_tqdm.write(
             f"\nError ({model_id}): Unexpected API error - {type(e).__name__}: {e}"
         )
-    return None
+        return API_ERROR_SENTINEL
+    return API_ERROR_SENTINEL
 
 
 async def _call_fbn(model_config, system_prompt, user_prompt):
@@ -359,14 +399,25 @@ async def call_llm_api(model_config,
 
     try:
         if provider == "openai_compatible":
-            client = _get_openai_client(model_config)
-            return await _call_openai_sdk(
-                client,
-                model_config,
-                system_prompt,
-                user_prompt,
-                assistant_prompt,
-            )
+            semaphore = _get_request_semaphore(model_config)
+            if semaphore is None:
+                client = _get_openai_client(model_config)
+                return await _call_openai_sdk(
+                    client,
+                    model_config,
+                    system_prompt,
+                    user_prompt,
+                    assistant_prompt,
+                )
+            async with semaphore:
+                client = _get_openai_client(model_config)
+                return await _call_openai_sdk(
+                    client,
+                    model_config,
+                    system_prompt,
+                    user_prompt,
+                    assistant_prompt,
+                )
         elif provider == "fbn":
             return await _call_fbn(model_config, system_prompt, user_prompt)
         elif provider == "centeotl":
@@ -380,9 +431,11 @@ async def call_llm_api(model_config,
             return None
     except (ValueError, RuntimeError) as e:
         sync_tqdm.write(f"\nError ({model_id}): Client initialization failed - {e}")
+        return FATAL_API_ERROR_SENTINEL
     except Exception as e:
         sync_tqdm.write(
             f"\nError ({model_id}): Unexpected error in call_llm_api "
             f"({provider}) - {type(e).__name__}: {e}"
         )
-    return None
+        return API_ERROR_SENTINEL
+    return API_ERROR_SENTINEL

@@ -144,11 +144,13 @@ def _is_cloaked_model(model_data: dict) -> bool:
 
 def _infer_access_type(model_data: dict) -> str:
     model_id = model_data.get("id", "")
-
-    if str(model_data.get("hugging_face_id", "")).strip():
-        return "open source"
+    raw_hugging_face_id = model_data.get("hugging_face_id")
+    hugging_face_id = raw_hugging_face_id.strip() if isinstance(raw_hugging_face_id, str) else ""
 
     if any(model_id.startswith(prefix) for prefix in _OPEN_SOURCE_PREFIXES):
+        return "open source"
+
+    if hugging_face_id:
         return "open source"
 
     if any(model_id.startswith(prefix) for prefix in _PROPRIETARY_PREFIXES):
@@ -209,6 +211,15 @@ def _save_discovery_state(state_file: Path, state_data: dict) -> None:
     state_file.write_text(json.dumps(state_data, indent=4))
 
 
+def _parse_state_datetime(raw_value) -> datetime | None:
+    if not raw_value or not isinstance(raw_value, str):
+        return None
+    try:
+        return datetime.fromisoformat(raw_value)
+    except ValueError:
+        return None
+
+
 def _clear_discovery_state(state_file: Path) -> None:
     if state_file.exists():
         state_file.unlink()
@@ -225,9 +236,30 @@ def _result_is_complete(results_dir: Path, model_id: str) -> bool:
         return False
 
     status = data.get("benchmark_status")
-    if status in {"rate_limited", "incomplete", "run_error"}:
+    completed_questions = data.get("completed_questions")
+    total_questions = data.get("total_questions")
+    if data.get("retryable") is False or status == "fatal_api_error":
+        return True
+    if status in {"in_progress", "rate_limited", "incomplete", "run_error"}:
+        api_failures = int(data.get("api_failures", 0) or 0)
+        fatal_api_failures = int(data.get("fatal_api_failures", 0) or 0)
+        if (
+            status == "in_progress"
+            and isinstance(completed_questions, int)
+            and isinstance(total_questions, int)
+            and total_questions > 0
+            and completed_questions >= total_questions
+            and api_failures == 0
+            and fatal_api_failures == 0
+            and "run_error" not in data
+        ):
+            return True
         return False
     if "run_error" in data:
+        return False
+    api_failures = int(data.get("api_failures", 0) or 0)
+    fatal_api_failures = int(data.get("fatal_api_failures", 0) or 0)
+    if api_failures > 0 or fatal_api_failures > 0:
         return False
     return True
 
@@ -281,8 +313,8 @@ def build_new_openrouter_model_configs(
 ) -> tuple[datetime | None, list[dict]]:
     """
     Returns OpenRouter-backed model configs for text-capable models created
-    within the configured lookback window, while persisting unfinished discovery
-    work across runs.
+    after the persisted discovery watermark. On first use, the watermark is
+    seeded to the configured lookback window to enable a one-time backfill.
     """
     root_path = Path(project_root)
     results_path = Path(results_dir)
@@ -293,25 +325,28 @@ def build_new_openrouter_model_configs(
     all_models = _fetch_openrouter_models(api_key)
     metadata_map = _build_metadata_map_from_models(all_models)
     preferred_model_ids = _build_preferred_model_ids(metadata_map)
-    state_data = _load_discovery_state(state_file)
+    state_data = _load_discovery_state(state_file) or {}
     recent_model_cutoff = datetime.now() - timedelta(days=config.OPENROUTER_INITIAL_LOOKBACK_DAYS)
+    persisted_last_catalog_sync_at = _parse_state_datetime(state_data.get("last_catalog_sync_at"))
+    has_pending_state = isinstance(state_data.get("pending_model_ids"), list) and state_data.get("pending_model_ids")
+    legacy_pending_state = has_pending_state and persisted_last_catalog_sync_at is None
 
     latest_result_date = None
     candidate_ids = []
-    if state_data and isinstance(state_data.get("pending_model_ids"), list):
-        reference_date_raw = state_data.get("reference_result_date")
-        if reference_date_raw:
-            try:
-                latest_result_date = datetime.fromisoformat(reference_date_raw)
-            except ValueError:
-                latest_result_date = None
+    if has_pending_state and not legacy_pending_state:
+        latest_result_date = (
+            _parse_state_datetime(state_data.get("reference_result_date"))
+            or persisted_last_catalog_sync_at
+            or recent_model_cutoff
+        )
         candidate_ids = [
             model_id
             for model_id in state_data["pending_model_ids"]
             if model_id not in known_ids and model_id in preferred_model_ids
         ]
     else:
-        latest_result_date = recent_model_cutoff
+        latest_result_date = persisted_last_catalog_sync_at or recent_model_cutoff
+        current_catalog_sync_at = datetime.now()
 
         for model_data in sorted(all_models, key=lambda item: item.get("created", 0)):
             created_ts = model_data.get("created")
@@ -338,9 +373,11 @@ def build_new_openrouter_model_configs(
             state_file,
             {
                 "reference_result_date": latest_result_date.isoformat(),
+                "last_catalog_sync_at": current_catalog_sync_at.isoformat(),
                 "pending_model_ids": candidate_ids,
             },
         )
+        persisted_last_catalog_sync_at = current_catalog_sync_at
 
     new_model_configs = []
     remaining_candidate_ids = []
@@ -372,10 +409,18 @@ def build_new_openrouter_model_configs(
             state_file,
             {
                 "reference_result_date": latest_result_date.isoformat() if latest_result_date else None,
+                "last_catalog_sync_at": persisted_last_catalog_sync_at.isoformat() if persisted_last_catalog_sync_at else None,
                 "pending_model_ids": remaining_candidate_ids,
             },
         )
     else:
-        _clear_discovery_state(state_file)
+        _save_discovery_state(
+            state_file,
+            {
+                "reference_result_date": latest_result_date.isoformat() if latest_result_date else None,
+                "last_catalog_sync_at": persisted_last_catalog_sync_at.isoformat() if persisted_last_catalog_sync_at else None,
+                "pending_model_ids": [],
+            },
+        )
 
     return latest_result_date, new_model_configs
