@@ -96,9 +96,7 @@ async def main():
                     api_key_env=config.OPENROUTER_DISCOVERY_API_KEY_ENV,
                     existing_model_ids={model["id"] for model in initial_models_to_run},
                 )
-                if latest_result_date is None:
-                    print("\n--- OpenRouter Discovery: No prior benchmark results found, skipping 'since last run' discovery. ---")
-                elif discovered_openrouter_models:
+                if discovered_openrouter_models:
                     print(
                         f"\n--- OpenRouter Discovery: Found {len(discovered_openrouter_models)} new text models "
                         f"since {latest_result_date.strftime('%Y-%m-%d %H:%M:%S')}. ---"

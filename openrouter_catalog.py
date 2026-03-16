@@ -2,7 +2,7 @@ import json
 import os
 import re
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import config
@@ -237,6 +237,8 @@ def _build_preferred_model_ids(metadata_map: dict[str, dict]) -> set[str]:
     for model_id, metadata in metadata_map.items():
         if metadata.get("is_cloaked"):
             continue
+        if config.OPENROUTER_SKIP_ALL_FREE_VARIANTS and metadata.get("is_free_variant"):
+            continue
         family_key = metadata.get("canonical_slug") or model_id
         family_members.setdefault(family_key, []).append(metadata)
 
@@ -278,8 +280,9 @@ def build_new_openrouter_model_configs(
     existing_model_ids: set[str] | None = None,
 ) -> tuple[datetime | None, list[dict]]:
     """
-    Returns OpenRouter-backed model configs for text-capable models created after
-    the newest existing benchmark result.
+    Returns OpenRouter-backed model configs for text-capable models created
+    within the configured lookback window, while persisting unfinished discovery
+    work across runs.
     """
     root_path = Path(project_root)
     results_path = Path(results_dir)
@@ -291,6 +294,7 @@ def build_new_openrouter_model_configs(
     metadata_map = _build_metadata_map_from_models(all_models)
     preferred_model_ids = _build_preferred_model_ids(metadata_map)
     state_data = _load_discovery_state(state_file)
+    recent_model_cutoff = datetime.now() - timedelta(days=config.OPENROUTER_INITIAL_LOOKBACK_DAYS)
 
     latest_result_date = None
     candidate_ids = []
@@ -307,9 +311,7 @@ def build_new_openrouter_model_configs(
             if model_id not in known_ids and model_id in preferred_model_ids
         ]
     else:
-        latest_result_date = _load_latest_result_date(results_path)
-        if latest_result_date is None:
-            return None, []
+        latest_result_date = recent_model_cutoff
 
         for model_data in sorted(all_models, key=lambda item: item.get("created", 0)):
             created_ts = model_data.get("created")
@@ -362,15 +364,6 @@ def build_new_openrouter_model_configs(
             "max_retries": config.OPENROUTER_DISCOVERED_MODEL_MAX_RETRIES,
             "rate_limit_backoff_seconds": config.OPENROUTER_DISCOVERED_MODEL_RATE_LIMIT_BACKOFF_SECONDS,
         }
-
-        if model_id.endswith(":free"):
-            discovered_model_config.update(
-                {
-                    "question_concurrency": config.OPENROUTER_DISCOVERED_FREE_MODEL_QUESTION_CONCURRENCY,
-                    "max_retries": config.OPENROUTER_DISCOVERED_FREE_MODEL_MAX_RETRIES,
-                    "rate_limit_backoff_seconds": config.OPENROUTER_DISCOVERED_FREE_MODEL_RATE_LIMIT_BACKOFF_SECONDS,
-                }
-            )
 
         new_model_configs.append(discovered_model_config)
 
