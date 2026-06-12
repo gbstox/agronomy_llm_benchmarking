@@ -89,6 +89,24 @@ MODELS_TO_RUN = [
     # ========== LATEST SOTA (June 2026) ==========
 
     {
+        "id": "openai/gpt-5.5",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.5",
+        "access": "proprietary"
+    },
+    {
+        "id": "anthropic/claude-opus-4.8",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "anthropic/claude-opus-4.8",
+        "access": "proprietary",
+        # Rejects assistant message prefill (400), like claude-fable-5
+        "assistant_prompt": None
+    },
+    {
         "id": "anthropic/claude-fable-5",
         "provider": "openai_compatible",
         "api_key_env": "OPENROUTER_API_KEY",

@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-06-12T00:04:44.365823",
-  "model_id": "anthropic/claude-fable-5",
+  "timestamp": "2026-06-12T02:10:09.936454",
+  "model_id": "openai/gpt-5.5",
   "state": "model_finished",
   "processed_questions": 425,
   "total_questions": 425,
