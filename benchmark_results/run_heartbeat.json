@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-03-16T19:55:55.393583",
-  "model_id": "moonshotai/kimi-k2.5",
-  "state": "model_started",
-  "processed_questions": 424,
+  "timestamp": "2026-06-12T00:04:44.365823",
+  "model_id": "anthropic/claude-fable-5",
+  "state": "model_finished",
+  "processed_questions": 425,
   "total_questions": 425,
   "details": {
-    "resumed_from_checkpoint": true
+    "benchmark_status": "complete"
   }
 }

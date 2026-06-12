@@ -86,6 +86,47 @@ ASSISTANT_PROMPT = "Correct answer_options key:" # For models supporting assista
 
 MODELS_TO_RUN = [
 
+    # ========== LATEST SOTA (June 2026) ==========
+
+    {
+        "id": "anthropic/claude-fable-5",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "anthropic/claude-fable-5",
+        "access": "proprietary",
+        # Rejects assistant message prefill (400 from all providers)
+        "assistant_prompt": None
+    },
+    {
+        "id": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "nvidia/nemotron-3-ultra-550b-a55b",
+        "access": "open source",
+        # Reasoning model: needs headroom so the final answer isn't crowded
+        # out by reasoning tokens, and returns empty content under assistant prefill.
+        "max_tokens": 4000,
+        "assistant_prompt": None
+    },
+    {
+        "id": "qwen/qwen3.7-plus",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "qwen/qwen3.7-plus",
+        "access": "proprietary"
+    },
+    {
+        "id": "minimax/minimax-m3",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "minimax/minimax-m3",
+        "access": "open source"
+    },
+
     # ========== LATEST SOTA (December 2025) ==========
     
     # --- Anthropic Latest ---

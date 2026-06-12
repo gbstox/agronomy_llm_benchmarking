@@ -18,6 +18,7 @@ from llm_api_calls import (
     API_ERROR_SENTINEL,
     FATAL_API_ERROR_SENTINEL,
     RATE_LIMIT_SENTINEL,
+    REFUSAL_SENTINEL,
     call_llm_api,
 )
 
@@ -114,7 +115,7 @@ def _is_terminal_result_entry(result_entry):
     normalized = model_answer.strip().lower()
     if not normalized:
         return False
-    if normalized == "fail":
+    if normalized in {"fail", "refusal"}:
         return True
     return len(normalized) == 1 and normalized.isalpha()
 
@@ -477,6 +478,10 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
                         processed_answer = "error_fatal_api"
                         last_error = "Encountered non-retryable API/provider error."
                         break
+                    elif raw_answer == REFUSAL_SENTINEL:
+                        processed_answer = "refusal"
+                        last_error = f"Model refused to answer (content_filter) on attempt {attempt + 1}."
+                        break
                     elif raw_answer not in {None, API_ERROR_SENTINEL}:
                         parsed = parse_model_response(raw_answer)
                         if parsed != "fail":
@@ -521,7 +526,7 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
             result_entry["model_answer"] = processed_answer
             result_entry["raw_model_response"] = str(raw_answer) if raw_answer is not None else ""
             # Only record last_error if the final answer is an error/fail state
-            if processed_answer in ["fail", "error_api", "error_provider", "error_unexpected", "error_task", "error_rate_limit", "error_fatal_api"]:
+            if processed_answer in ["fail", "refusal", "error_api", "error_provider", "error_unexpected", "error_task", "error_rate_limit", "error_fatal_api"]:
                  result_entry["last_error"] = last_error if last_error else "Unknown error state"
             return question_key, category, result_entry
 

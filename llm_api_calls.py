@@ -22,6 +22,8 @@ _request_semaphores = {}  # { (provider, base_url, api_key_env, limit): asyncio.
 RATE_LIMIT_SENTINEL = "__RATE_LIMIT__"
 API_ERROR_SENTINEL = "__API_ERROR__"
 FATAL_API_ERROR_SENTINEL = "__FATAL_API_ERROR__"
+# Model declined to answer (content filter / refusal). Terminal, not retryable.
+REFUSAL_SENTINEL = "__REFUSAL__"
 
 
 def _get_openai_client(model_config):
@@ -105,6 +107,10 @@ async def _call_openai_sdk(client: AsyncOpenAI,
     model_name_api = model_config["model_name_api"]
     model_id = model_config.get("id", model_name_api)
 
+    # Some models (e.g. anthropic/claude-fable-5) reject assistant prefill;
+    # a per-model "assistant_prompt": None override disables it.
+    assistant_prompt = _param(model_config, "assistant_prompt", assistant_prompt)
+
     try:
         messages = []
         if system_prompt:
@@ -128,6 +134,13 @@ async def _call_openai_sdk(client: AsyncOpenAI,
             and response.choices[0].message.content
         ):
             return response.choices[0].message.content.strip()
+        # Empty content with a content-filter finish reason is a deterministic
+        # refusal, not a transient error: treat it as terminal so it is scored
+        # as wrong instead of being retried into a circuit-breaker abort.
+        finish_reason = response.choices[0].finish_reason if response.choices else None
+        if finish_reason == "content_filter":
+            sync_tqdm.write(f"\nNotice ({model_id}): Model refused (content_filter).")
+            return REFUSAL_SENTINEL
         sync_tqdm.write(f"\nWarning ({model_id}): No response content received.")
         return API_ERROR_SENTINEL
 
