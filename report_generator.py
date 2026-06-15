@@ -173,14 +173,16 @@ def _build_markdown_table_lines(all_scores_summary, ordered_categories):
             f"| {name:<{model_col_width}} | {overall_str} | {access_str} | "
             f"{date_str} | {price_str} |"
         )
+        category_scores = item.get("category_scores", {})
         for cat in ordered_categories:
             col_width = cat_col_widths[cat]
-            score = item["category_scores"].get(cat, 0.0)
-            score_str = (
-                f"{score:>{col_width - 1}.1f}%"
-                if total_qs > 0
-                else "N/A".center(col_width)
-            )
+            if total_qs <= 0 or cat not in category_scores:
+                # Either a failed run, or a category this model did not attempt
+                # (e.g. image questions on a text-only model): show N/A.
+                score_str = "N/A".center(col_width)
+            else:
+                score = category_scores[cat]
+                score_str = f"{score:>{col_width - 1}.1f}%"
             row += f" {score_str} |"
         table_lines.append(row + f" {correct_total_info}")
 
@@ -238,10 +240,20 @@ def score_results(model_answers_data):
         sync_tqdm.write(f"Warning: Invalid or missing 'multiple_choice' data for model {model_answers_data.get('model_id','?')}")
         return category_scores, 0.0, 0, 0 # Return defaults indicating failure to score
 
+    overall_excluded = {
+        _normalize_category_name(cat)
+        for cat in getattr(config, "OVERALL_EXCLUDED_CATEGORIES", set())
+    }
+
     for category, answers in multiple_choice_data.items():
         if not isinstance(answers, list):
              sync_tqdm.write(f"Warning: Invalid answers format for category '{category}' in model {model_answers_data.get('model_id','?')}. Skipping category.")
              continue # Skip malformed category data
+
+        if not answers:
+            # No attempted questions in this category for this model; omit it so
+            # the report can show N/A instead of a misleading 0%.
+            continue
 
         correct_in_category = 0
         questions_in_category = 0
@@ -264,12 +276,20 @@ def score_results(model_answers_data):
             # else: # Any other case (fail, error_*, None, incorrect letter) counts as 0 points
                  # No need for explicit else, just don't increment correct_in_category
 
-        total_correct += correct_in_category
-        total_questions_attempted += questions_in_category
+        if questions_in_category == 0:
+            continue
 
         # Calculate score based on total questions attempted in the category
-        category_score = round((correct_in_category / questions_in_category) * 100, 2) if questions_in_category > 0 else 0.0
+        category_score = round((correct_in_category / questions_in_category) * 100, 2)
         category_scores[category] = category_score
+
+        # Excluded categories (e.g. image identification) are reported separately
+        # and must not affect the overall (text) score or the correct/total count.
+        if _normalize_category_name(category) in overall_excluded:
+            continue
+
+        total_correct += correct_in_category
+        total_questions_attempted += questions_in_category
 
     # Calculate overall score based on total questions attempted across all categories
     overall_score = round((total_correct / total_questions_attempted) * 100, 2) if total_questions_attempted > 0 else 0.0

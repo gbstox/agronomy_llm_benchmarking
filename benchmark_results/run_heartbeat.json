@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-06-12T02:10:09.936454",
-  "model_id": "openai/gpt-5.5",
+  "timestamp": "2026-06-14T23:20:59.063942",
+  "model_id": "qwen/qwen3.5-397b-a17b",
   "state": "model_finished",
-  "processed_questions": 425,
-  "total_questions": 425,
+  "processed_questions": 575,
+  "total_questions": 575,
   "details": {
     "benchmark_status": "complete"
   }

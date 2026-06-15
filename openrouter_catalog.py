@@ -120,6 +120,12 @@ def _is_text_model(model_data: dict) -> bool:
     return "text" in input_modalities and "text" in output_modalities
 
 
+def _is_vision_model(model_data: dict) -> bool:
+    architecture = model_data.get("architecture") or {}
+    input_modalities = architecture.get("input_modalities") or []
+    return "image" in input_modalities
+
+
 def _is_free_variant(model_data: dict) -> bool:
     model_id = model_data.get("id", "")
     name = str(model_data.get("name", "")).lower()
@@ -183,6 +189,7 @@ def _build_metadata_map_from_models(all_models: list[dict]) -> dict[str, dict]:
             "canonical_slug": str(model_data.get("canonical_slug", "")).strip() or model_id,
             "is_free_variant": _is_free_variant(model_data),
             "is_cloaked": _is_cloaked_model(model_data),
+            "supports_vision": _is_vision_model(model_data),
         }
 
     return metadata_map
@@ -305,6 +312,31 @@ def fetch_openrouter_model_metadata_map(
     return metadata_map
 
 
+def annotate_vision_support(
+    model_configs: list[dict],
+    project_root: str | Path,
+    api_key_env: str,
+) -> list[dict]:
+    """Sets model_config['supports_vision'] for each config using OpenRouter metadata.
+
+    Configs that already declare 'supports_vision' (e.g. discovered models) are left
+    as-is. Models not present in the OpenRouter catalog default to non-vision.
+    """
+    try:
+        metadata_map = fetch_openrouter_model_metadata_map(project_root, api_key_env)
+    except Exception:
+        metadata_map = {}
+
+    for model_config in model_configs:
+        if "supports_vision" in model_config:
+            continue
+        lookup_id = model_config.get("model_name_api") or model_config.get("id")
+        metadata = metadata_map.get(lookup_id, {})
+        model_config["supports_vision"] = bool(metadata.get("supports_vision", False))
+
+    return model_configs
+
+
 def build_new_openrouter_model_configs(
     project_root: str | Path,
     results_dir: str | Path,
@@ -397,6 +429,7 @@ def build_new_openrouter_model_configs(
             "base_url": _OPENROUTER_BASE_URL,
             "model_name_api": model_id,
             "access": metadata_map.get(model_id, {}).get("access", "unknown"),
+            "supports_vision": metadata_map.get(model_id, {}).get("supports_vision", False),
             "question_concurrency": config.OPENROUTER_DISCOVERED_MODEL_QUESTION_CONCURRENCY,
             "max_retries": config.OPENROUTER_DISCOVERED_MODEL_MAX_RETRIES,
             "rate_limit_backoff_seconds": config.OPENROUTER_DISCOVERED_MODEL_RATE_LIMIT_BACKOFF_SECONDS,

@@ -1,7 +1,9 @@
 # benchmark_runner.py
 import os
+import base64
 import json
 import datetime
+import mimetypes
 import re
 import time
 import random
@@ -53,6 +55,28 @@ def parse_model_response(raw_response):
 def _get_safe_results_filename(model_id):
     """Generates a safe filename for results based on model ID."""
     return re.sub(r'[\\/*?:"<>|]', '_', model_id) + "_answers.json"
+
+
+def _question_images_base_dir():
+    """Directory that image paths in question entries are resolved against."""
+    return Path(config.BENCHMARK_QUESTIONS_FILE).resolve().parent
+
+
+def _encode_image_data_url(image_rel_path, base_dir):
+    """Reads an image file and returns a base64 data URL, or None on failure."""
+    if not image_rel_path:
+        return None
+    image_path = (Path(base_dir) / image_rel_path).resolve()
+    try:
+        raw = image_path.read_bytes()
+    except OSError as e:
+        sync_tqdm.write(f"\nWarning: Could not read question image '{image_path}': {e}")
+        return None
+    mime_type, _ = mimetypes.guess_type(str(image_path))
+    if not mime_type or not mime_type.startswith("image/"):
+        mime_type = "image/jpeg"
+    encoded = base64.b64encode(raw).decode("ascii")
+    return f"data:{mime_type};base64,{encoded}"
 
 
 def _get_retry_delay(base_seconds, attempt_index):
@@ -376,6 +400,10 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
 
 
     # Prepare Question Tasks
+    supports_vision = bool(model_config.get("supports_vision", False))
+    images_base_dir = _question_images_base_dir()
+    image_data_url_cache = {}
+    skipped_image_questions = 0
     question_semaphore = Semaphore(question_concurrency)
     all_question_data = []
     for category, questions in benchmark_questions.items():
@@ -387,6 +415,12 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
                  question_key = _make_question_key(category, q_data.get("id"))
                  if question_key is None:
                      continue
+                 # Image questions are only answerable by vision-capable models.
+                 # For text-only models we skip them entirely so they report N/A
+                 # rather than counting as wrong.
+                 if q_data.get("image") and not supports_vision:
+                     skipped_image_questions += 1
+                     continue
                  all_question_data.append({
                      "category": category,
                      "data": q_data,
@@ -394,6 +428,11 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
                  })
              else:
                  sync_tqdm.write(f"\nWarning ({model_id}): Skipping invalid question data in category '{category}': {str(q_data)[:100]}...")
+
+    if skipped_image_questions:
+        sync_tqdm.write(
+            f"  -> Skipping {skipped_image_questions} image question(s) for non-vision model {model_id}."
+        )
 
     result_entries_by_key = _load_resume_result_entries(results_filepath, benchmark_questions)
     resumed_count = len(result_entries_by_key)
@@ -453,6 +492,14 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
             api_error_attempts = 0
             parse_fail_attempts = 0
             rate_limit_attempts = 0
+            image_rel_path = question_data.get("image")
+            image_data_url = None
+            if image_rel_path:
+                if image_rel_path not in image_data_url_cache:
+                    image_data_url_cache[image_rel_path] = _encode_image_data_url(
+                        image_rel_path, images_base_dir
+                    )
+                image_data_url = image_data_url_cache[image_rel_path]
             for attempt in range(max_retries):
                 try:
                     # --- USE THE NEW CENTRAL API CALLER ---
@@ -460,7 +507,8 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
                         model_config,
                         base_prompts["SYSTEM_PROMPT"],
                         current_user_prompt,
-                        base_prompts.get("ASSISTANT_PROMPT") # Pass assistant prompt if available
+                        base_prompts.get("ASSISTANT_PROMPT"), # Pass assistant prompt if available
+                        image_data_url=image_data_url,
                     )
                     # --- END NEW CALL ---
 

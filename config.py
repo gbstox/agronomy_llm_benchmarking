@@ -74,6 +74,21 @@ MAX_CONCURRENT_MODELS = 6
 # Max number of QUESTIONS to process concurrently *within* a single model's run
 QUESTIONS_CONCURRENCY_PER_MODEL = 2 # Adjust based on API rate limits
 
+# --- Image Questions ---
+# Category name used for image-input identification questions. This category is
+# only run on vision-capable models and is reported as a separate column that is
+# EXCLUDED from the overall (text) score so existing scores stay comparable.
+IMAGE_QUESTION_CATEGORY = "image_identification"
+# Categories excluded from the overall score / correct-total counts.
+OVERALL_EXCLUDED_CATEGORIES = {IMAGE_QUESTION_CATEGORY}
+# Directory (relative to the benchmark questions file) holding question images.
+IMAGE_QUESTIONS_DIR = "images"
+# When True (in 'missing' mode), only run models that are already complete on all
+# non-image questions and are missing only image questions. This scopes a run to
+# backfilling image scores onto the existing leaderboard without triggering full
+# reruns of new/incomplete models.
+IMAGE_BACKFILL_ONLY = False
+
 # --- Base Prompts ---
 SYSTEM_PROMPT = """You are a helpful and brilliant agronomist. For the following multiple choice Question, answer with the key of the correct answer_options value. Your response must be ONLY the answer_options key of the correct answer_options value and no other text. respond with ONLY a single letter key from answer_options. If anything other than a single letter is submitted you will FAIL. DO NOT INCLUDE any Prose, explanation, chain of thought, thought process, or other comments. [NO PROSE] [NO REASONING]"""
 

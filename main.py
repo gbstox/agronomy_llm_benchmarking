@@ -114,6 +114,127 @@ def _should_rerun_result(results_filepath: Path):
     return False, "Results file exists"
 
 
+def _read_result_json(results_filepath: Path):
+    try:
+        return json.loads(results_filepath.read_text())
+    except (OSError, json.JSONDecodeError, ValueError):
+        return {}
+
+
+def _expected_question_keys(benchmark_questions, supports_vision):
+    """Question keys a model is expected to answer (image questions need vision)."""
+    keys = set()
+    for category, questions in (benchmark_questions or {}).items():
+        if not isinstance(questions, list):
+            continue
+        for q_data in questions:
+            if not isinstance(q_data, dict) or "id" not in q_data:
+                continue
+            if q_data.get("image") and not supports_vision:
+                continue
+            key = benchmark_runner._make_question_key(category, q_data.get("id"))
+            if key is not None:
+                keys.add(key)
+    return keys
+
+
+def _image_question_keys(benchmark_questions):
+    """Question keys that require image input."""
+    keys = set()
+    for category, questions in (benchmark_questions or {}).items():
+        if not isinstance(questions, list):
+            continue
+        for q_data in questions:
+            if isinstance(q_data, dict) and q_data.get("image") and "id" in q_data:
+                key = benchmark_runner._make_question_key(category, q_data.get("id"))
+                if key is not None:
+                    keys.add(key)
+    return keys
+
+
+def _terminal_answered_keys(results_filepath: Path, benchmark_questions):
+    """Question keys already answered with a terminal (non-retryable) result."""
+    try:
+        return set(
+            benchmark_runner._load_resume_result_entries(
+                results_filepath, benchmark_questions
+            ).keys()
+        )
+    except Exception:
+        return set()
+
+
+def _decide_model_run(model_config, results_filepath: Path, benchmark_questions, in_readme):
+    """Decides whether to run a model in 'missing' mode.
+
+    Generalized over the question set: a model is run when it is missing terminal
+    answers for any question it is expected to answer. This naturally picks up
+    newly added questions (e.g. image questions for vision-capable models) for
+    models that already have a results file, while leaving fully-answered models
+    and documented-but-not-local models untouched.
+    """
+    supports_vision = bool(model_config.get("supports_vision", False))
+    expected_keys = _expected_question_keys(benchmark_questions, supports_vision)
+
+    if not results_filepath.exists():
+        if in_readme:
+            return False, "Already benchmarked in tracked repo leaderboard (no local answers)"
+        if not expected_keys:
+            return False, "No applicable questions to run"
+        return True, "No results file found"
+
+    data = _read_result_json(results_filepath)
+    if data.get("retryable") is False or data.get("benchmark_status") == "fatal_api_error":
+        return False, "Existing results marked non-retryable"
+
+    answered_keys = _terminal_answered_keys(results_filepath, benchmark_questions)
+    missing_keys = expected_keys - answered_keys
+    if not missing_keys:
+        return False, "All applicable questions already answered"
+
+    if getattr(config, "IMAGE_BACKFILL_ONLY", False):
+        image_keys = _image_question_keys(benchmark_questions)
+        missing_image = missing_keys & image_keys
+        missing_non_image = missing_keys - image_keys
+        if missing_image and not missing_non_image:
+            return True, f"Image backfill: {len(missing_image)} image question(s)"
+        return False, "Image-backfill mode: skipping (text questions missing or no images)"
+
+    return True, f"Missing {len(missing_keys)} question(s) (resume/append)"
+
+
+def _build_rerun_configs_from_results(results_dir, existing_ids):
+    """Reconstructs OpenRouter model configs from existing result files.
+
+    Previously-benchmarked models (e.g. auto-discovered ones) are not present in
+    MODELS_TO_RUN, so without this they could never be re-selected to answer
+    newly added questions (such as image questions). Only OpenRouter-backed
+    ('openai_compatible') results are reconstructed; non-vision models will be
+    filtered out later by the missing-question / vision-gating logic.
+    """
+    rerun_configs = []
+    seen = set(existing_ids)
+    results_path = Path(results_dir)
+    for result_file in sorted(results_path.glob("*_answers.json")):
+        data = _read_result_json(result_file)
+        model_id = data.get("model_id")
+        if not model_id or model_id in seen:
+            continue
+        if data.get("provider") != "openai_compatible":
+            continue
+        model_name_api = data.get("model_name") or model_id
+        rerun_configs.append({
+            "id": model_id,
+            "provider": "openai_compatible",
+            "api_key_env": config.OPENROUTER_DISCOVERY_API_KEY_ENV,
+            "base_url": "https://openrouter.ai/api/v1",
+            "model_name_api": model_name_api,
+            "access": data.get("access", "unknown"),
+        })
+        seen.add(model_id)
+    return rerun_configs
+
+
 def _apply_model_allowlist(model_configs, allowlist):
     """Filters model configs to an explicit allowlist when provided."""
     if not allowlist:
@@ -189,9 +310,30 @@ async def main():
         elif selection_mode != "configured_only":
             print(f"\n--- Model Selection Warning: Unknown MODEL_SELECTION_MODE '{selection_mode}'. Falling back to configured_only. ---")
 
+        # In 'missing' mode, also reconstruct configs for already-benchmarked models
+        # so they can be re-selected to answer newly added questions (e.g. images).
+        if config.RUN_MODE == 'missing':
+            rerun_configs = _build_rerun_configs_from_results(
+                config.BENCHMARK_RESULTS_DIR,
+                {model["id"] for model in initial_models_to_run},
+            )
+            if rerun_configs:
+                print(
+                    f"\n--- Reconstructed {len(rerun_configs)} model config(s) from existing "
+                    "results for possible new-question reruns. ---"
+                )
+                initial_models_to_run.extend(rerun_configs)
+
         initial_models_to_run = _apply_model_allowlist(
             initial_models_to_run,
             getattr(config, "MODEL_ID_ALLOWLIST", []),
+        )
+
+        # Tag each model with vision capability so image questions can be gated.
+        openrouter_catalog.annotate_vision_support(
+            initial_models_to_run,
+            project_root=Path(__file__).resolve().parent,
+            api_key_env=config.OPENROUTER_DISCOVERY_API_KEY_ENV,
         )
 
         if config.RUN_MODE == 'all':
@@ -200,15 +342,24 @@ async def main():
         elif config.RUN_MODE == 'missing':
             print("\n--- Mode 'MISSING': Checking for existing results... ---")
             results_dir_path = Path(config.BENCHMARK_RESULTS_DIR)
+            benchmark_questions_for_selection = (
+                benchmark_runner.load_benchmark_questions(config.BENCHMARK_QUESTIONS_FILE) or {}
+            )
             for model_config in initial_models_to_run:
-                if _get_model_identity_variants(model_config) & repo_benchmarked_model_ids:
-                    print(f"  -> Skipping: {model_config['id']} (Already benchmarked in tracked repo leaderboard)")
-                    continue
+                in_readme = bool(
+                    _get_model_identity_variants(model_config) & repo_benchmarked_model_ids
+                )
                 safe_filename = _get_safe_results_filename(model_config['id'])
                 results_filepath = results_dir_path / safe_filename
-                should_rerun, reason = _should_rerun_result(results_filepath)
-                if should_rerun:
-                    print(f"  -> Will run: {model_config['id']} ({reason})")
+                should_run, reason = _decide_model_run(
+                    model_config,
+                    results_filepath,
+                    benchmark_questions_for_selection,
+                    in_readme,
+                )
+                if should_run:
+                    vision_tag = " [vision]" if model_config.get("supports_vision") else ""
+                    print(f"  -> Will run: {model_config['id']}{vision_tag} ({reason})")
                     models_to_run_this_session.append(model_config)
                 else:
                     print(f"  -> Skipping: {model_config['id']} ({reason})")

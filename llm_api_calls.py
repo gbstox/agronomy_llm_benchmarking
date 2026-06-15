@@ -99,10 +99,12 @@ async def _call_openai_sdk(client: AsyncOpenAI,
                            model_config,
                            system_prompt,
                            user_prompt,
-                           assistant_prompt):
+                           assistant_prompt,
+                           image_data_url=None):
     """
     Sends a chat completion request to an OpenAI-compatible endpoint.
     Respects per-model overrides for temperature / max_tokens.
+    When image_data_url is provided, the user turn is sent as multimodal content.
     """
     model_name_api = model_config["model_name_api"]
     model_id = model_config.get("id", model_name_api)
@@ -110,13 +112,26 @@ async def _call_openai_sdk(client: AsyncOpenAI,
     # Some models (e.g. anthropic/claude-fable-5) reject assistant prefill;
     # a per-model "assistant_prompt": None override disables it.
     assistant_prompt = _param(model_config, "assistant_prompt", assistant_prompt)
+    # Assistant prefill cannot follow image content for most providers; drop it
+    # so the conversation ends on the user image turn.
+    if image_data_url:
+        assistant_prompt = None
 
     try:
         messages = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
-        if user_prompt:
-            messages.append({"role": "user", "content": user_prompt})
+        if user_prompt or image_data_url:
+            if image_data_url:
+                user_content = []
+                if user_prompt:
+                    user_content.append({"type": "text", "text": user_prompt})
+                user_content.append(
+                    {"type": "image_url", "image_url": {"url": image_data_url}}
+                )
+                messages.append({"role": "user", "content": user_content})
+            else:
+                messages.append({"role": "user", "content": user_prompt})
         if assistant_prompt:
             messages.append({"role": "assistant", "content": assistant_prompt})
 
@@ -400,7 +415,8 @@ async def _call_cropwizard(model_config, system_prompt, user_prompt):
 async def call_llm_api(model_config,
                        system_prompt,
                        user_prompt,
-                       assistant_prompt=None):
+                       assistant_prompt=None,
+                       image_data_url=None):
     """
     Routes a benchmark question to the correct provider handler.
 
@@ -421,6 +437,7 @@ async def call_llm_api(model_config,
                     system_prompt,
                     user_prompt,
                     assistant_prompt,
+                    image_data_url,
                 )
             async with semaphore:
                 client = _get_openai_client(model_config)
@@ -430,6 +447,7 @@ async def call_llm_api(model_config,
                     system_prompt,
                     user_prompt,
                     assistant_prompt,
+                    image_data_url,
                 )
         elif provider == "fbn":
             return await _call_fbn(model_config, system_prompt, user_prompt)
