@@ -36,7 +36,30 @@ QUESTIONS_DIR = QUESTIONS_FILE.parent
 IMAGES_DIR = QUESTIONS_DIR / config.IMAGE_QUESTIONS_DIR
 CATEGORY = config.IMAGE_QUESTION_CATEGORY
 
-OPTION_KEYS = ["a", "b", "c", "d"]
+OPTION_KEYS = ["a", "b", "c", "d", "e", "f", "g", "h"]
+NUM_OPTIONS = len(OPTION_KEYS)
+
+# Morphological "type" keywords for IP102 pests, longest/most-specific first so
+# e.g. "planthopper" matches before "hopper" and "spider mite" before "mite".
+# Same-type insects are strong visual look-alikes (all cutworms look alike, etc.).
+PEST_TYPE_KEYWORDS = [
+    "leafhopper", "planthopper", "plant hopper", "hopper",
+    "spider mite", "mite", "red spider", "spider",
+    "blister beetle", "flea beetle", "beetle",
+    "leaf roller", "leaf caterpillar", "caterpillar",
+    "armyworm", "army worm", "cutworm", "budworm", "bollworm", "webworm", "wireworm", "worm",
+    "aphid", "borer", "weevil", "thrips", "thrip", "sawfly", "midge",
+    "maggot", "flies", "fly", "moth", "locust", "cricket", "grub", "stemfly",
+    "scale", "mealybug", "whitefly", "leafminer", "gall", "bug",
+]
+
+# Weed fine-morphology groups (true look-alikes: grass-vs-grass, pigweed-vs-pigweed).
+WEED_MORPHOLOGY_GROUPS = {
+    "grass": ["Crabgrass", "Goosegrass"],
+    "sedge": ["Nutsedge"],
+    "pigweed": ["Palmer Amaranth", "Waterhemp"],
+    "spurge": ["Spotted Spurge"],
+}
 
 PLANTVILLAGE_API = "https://api.github.com/repos/spMohanty/PlantVillage-Dataset/contents/raw/color"
 HF_ROWS = "https://datasets-server.huggingface.co/rows"
@@ -145,22 +168,32 @@ def _clean_ip102(label_name):
 
 
 def _build_question(qid, image_rel_path, prompt, correct_label, distractor_pool, rng, source,
-                    preferred_distractors=None):
-    """Build a 4-option MCQ.
+                    preferred_tiers=None):
+    """Build an MCQ with NUM_OPTIONS options and look-alike-first distractors.
 
-    When ``preferred_distractors`` is given (e.g. same-plant disease conditions),
-    those are used first so the question can't be solved by a coarser cue (like
-    plant name); any remaining slots are filled from ``distractor_pool``.
+    ``preferred_tiers`` is an ordered list of candidate-label lists, tightest
+    first (e.g. [same-genus pests, same-crop pests]). Distractor slots are filled
+    from the tightest tier first, then progressively looser tiers, then the global
+    ``distractor_pool``. This forces the model to discriminate among true
+    look-alikes rather than eliminating obviously-different options.
     """
+    n_distractors = NUM_OPTIONS - 1
     chosen = []
-    if preferred_distractors:
-        pref = list({d for d in preferred_distractors if d != correct_label})
-        rng.shuffle(pref)
-        chosen = pref[:3]
-    if len(chosen) < 3:
-        rest = list(set(distractor_pool) - {correct_label} - set(chosen))
+    seen = {correct_label}
+    for tier in (preferred_tiers or []):
+        candidates = [d for d in tier if d not in seen]
+        rng.shuffle(candidates)
+        for d in candidates:
+            if len(chosen) >= n_distractors:
+                break
+            chosen.append(d)
+            seen.add(d)
+        if len(chosen) >= n_distractors:
+            break
+    if len(chosen) < n_distractors:
+        rest = [d for d in set(distractor_pool) if d not in seen]
         rng.shuffle(rest)
-        chosen += rest[: 3 - len(chosen)]
+        chosen += rest[: n_distractors - len(chosen)]
     options = chosen + [correct_label]
     rng.shuffle(options)
     answer_options = {key: opt for key, opt in zip(OPTION_KEYS, options)}
@@ -173,6 +206,35 @@ def _build_question(qid, image_rel_path, prompt, correct_label, distractor_pool,
         "correct_answer": correct_key,
         "source": source,
     }
+
+
+def _ip102_type_groups(clean_names):
+    """Returns (label -> type, type -> [labels]) by morphological keyword/genus.
+
+    Falls back to the scientific genus (first token of a binomial) when no
+    common-name keyword matches, so look-alike insects are grouped together.
+    """
+    label_to_type = {}
+    type_to_labels = {}
+    for label in clean_names:
+        low = label.lower()
+        type_key = next((kw for kw in PEST_TYPE_KEYWORDS if kw in low), None)
+        if type_key is None:
+            # Genus from a capitalized binomial like "Toxoptera citricidus".
+            tokens = label.split()
+            type_key = f"genus:{tokens[0].lower()}" if tokens and tokens[0][:1].isupper() else "other"
+        label_to_type[label] = type_key
+        type_to_labels.setdefault(type_key, []).append(label)
+    return label_to_type, type_to_labels
+
+
+def _weed_morphology_map():
+    """Returns species -> fine-morphology group label."""
+    species_to_group = {}
+    for group, members in WEED_MORPHOLOGY_GROUPS.items():
+        for sp in members:
+            species_to_group[sp] = group
+    return species_to_group
 
 
 def _plantvillage_plant_to_labels(class_names):
@@ -234,7 +296,7 @@ def build_disease(n, rng, prompt):
             same_plant = plant_to_labels.get(plant, [])
             questions.append(_build_question(
                 f"img_disease_{idx:03d}", rel, prompt, label, label_pool, rng, "PlantVillage",
-                preferred_distractors=same_plant))
+                preferred_tiers=[same_plant]))
             idx += 1
             progressed = True
         if not progressed:
@@ -333,6 +395,7 @@ def build_pests(n, rng, prompt):
 
     _, crop_to_labels = _ip102_crop_groups(clean_names)
     label_to_crop = {lbl: crop for crop, lbls in crop_to_labels.items() for lbl in lbls}
+    label_to_type, type_to_labels = _ip102_type_groups(clean_names)
 
     rows = _collect_label_rows(IP102_DATASET, "test", n, rng, resolver)
     questions = []
@@ -340,10 +403,11 @@ def build_pests(n, rng, prompt):
         try:
             rel = f"{config.IMAGE_QUESTIONS_DIR}/pests/{_slug(label)}_{idx}.jpg"
             _download(src, QUESTIONS_DIR / rel)
+            same_type = type_to_labels.get(label_to_type.get(label), [])
             same_crop = crop_to_labels.get(label_to_crop.get(label), [])
             questions.append(_build_question(
                 f"img_pest_{idx:03d}", rel, prompt, label, clean_names, rng, "IP102",
-                preferred_distractors=same_crop))
+                preferred_tiers=[same_type, same_crop]))
         except Exception as e:
             print(f"  [pests] skip {label}: {type(e).__name__} {e}")
     print(f"  [pests] built {len(questions)} questions")
@@ -379,15 +443,17 @@ def build_weeds(n, rng, prompt):
 
     species_pool = list({lbl for _, lbl, _ in tagged} | set(cotton_names))
     source_groups = _weed_source_groups()
+    morph_map = _weed_morphology_map()
     questions = []
     for idx, (source, label, src) in enumerate(tagged):
         try:
             rel = f"{config.IMAGE_QUESTIONS_DIR}/weeds/{_slug(label)}_{idx}.jpg"
             _download(src, QUESTIONS_DIR / rel)
+            morph_group = [s for s in WEED_MORPHOLOGY_GROUPS.get(morph_map.get(label), [])]
             same_source = source_groups.get(source, [])
             questions.append(_build_question(
                 f"img_weed_{idx:03d}", rel, prompt, label, species_pool, rng, source,
-                preferred_distractors=same_source))
+                preferred_tiers=[morph_group, same_source]))
         except Exception as e:
             print(f"  [weeds] skip {label}: {type(e).__name__} {e}")
     print(f"  [weeds] built {len(questions)} questions")
