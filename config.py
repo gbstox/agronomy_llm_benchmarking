@@ -129,7 +129,10 @@ MODELS_TO_RUN = [
         "model_name_api": "anthropic/claude-fable-5",
         "access": "proprietary",
         # Rejects assistant message prefill (400 from all providers)
-        "assistant_prompt": None
+        "assistant_prompt": None,
+        # Advertises vision but the endpoint 404s on image requests; exclude from
+        # image questions so it isn't repeatedly selected and failed.
+        "supports_vision": False
     },
     {
         "id": "nvidia/nemotron-3-ultra-550b-a55b",
@@ -158,6 +161,14 @@ MODELS_TO_RUN = [
         "base_url": "https://openrouter.ai/api/v1",
         "model_name_api": "minimax/minimax-m3",
         "access": "open source"
+    },
+    {
+        "id": "z-ai/glm-5.2",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "z-ai/glm-5.2",
+        "access": "proprietary"
     },
 
     # ========== LATEST SOTA (December 2025) ==========

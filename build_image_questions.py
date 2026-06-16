@@ -47,6 +47,45 @@ COTTONWEED_DATASET = "alexsenden/cottonweedid15_partitioned"
 
 USER_AGENT = "agronomy-benchmark-image-builder"
 
+# IP102 is organized into 8 crop super-classes; the 102 classes are contiguous
+# by crop. Same-crop pests are genuinely confusable (same context, similar
+# morphology), so distractors are drawn from the same crop group.
+IP102_CROP_RANGES = [
+    ("rice", 0, 13), ("corn", 14, 26), ("wheat", 27, 37), ("beet", 38, 43),
+    ("alfalfa", 44, 58), ("vitis", 59, 72), ("citrus", 73, 92), ("mango", 93, 101),
+]
+
+# Stable weed species vocabularies, grouped by source. Same-source distractors
+# remove the cross-context tell (row-crop top-down vs rangeland) and force
+# species-level discrimination among look-alikes (e.g. Palmer Amaranth vs Waterhemp).
+COTTONWEED_SPECIES = [
+    "Carpetweed", "Crabgrass", "Eclipta", "Goosegrass", "Morningglory", "Nutsedge",
+    "Palmer Amaranth", "Prickly Sida", "Purslane", "Ragweed", "Sicklepod",
+    "Spotted Spurge", "Spurred Anoda", "Swinecress", "Waterhemp",
+]
+DEEPWEEDS_SPECIES = [
+    "Chinee apple", "Lantana", "Parkinsonia", "Parthenium", "Prickly acacia",
+    "Rubber vine", "Siam weed", "Snake weed",
+]
+
+
+def _ip102_crop_groups(clean_names):
+    """Returns (label -> crop, crop -> [labels]) using IP102's crop super-classes."""
+    label_to_crop = {}
+    crop_to_labels = {}
+    for crop, lo, hi in IP102_CROP_RANGES:
+        for i in range(lo, hi + 1):
+            if i < len(clean_names):
+                label = clean_names[i]
+                label_to_crop[label] = crop
+                crop_to_labels.setdefault(crop, []).append(label)
+    return label_to_crop, crop_to_labels
+
+
+def _weed_source_groups():
+    """Returns source -> [species] for same-source weed distractors."""
+    return {"CottonWeedID15": list(COTTONWEED_SPECIES), "DeepWeeds": list(DEEPWEEDS_SPECIES)}
+
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
 
@@ -105,10 +144,24 @@ def _clean_ip102(label_name):
     return re.sub(r"^\s*\d+\s+", "", label_name).strip()
 
 
-def _build_question(qid, image_rel_path, prompt, correct_label, distractor_pool, rng, source):
-    pool = list(set(distractor_pool) - {correct_label})
-    distractors = rng.sample(pool, k=min(3, len(pool)))
-    options = distractors + [correct_label]
+def _build_question(qid, image_rel_path, prompt, correct_label, distractor_pool, rng, source,
+                    preferred_distractors=None):
+    """Build a 4-option MCQ.
+
+    When ``preferred_distractors`` is given (e.g. same-plant disease conditions),
+    those are used first so the question can't be solved by a coarser cue (like
+    plant name); any remaining slots are filled from ``distractor_pool``.
+    """
+    chosen = []
+    if preferred_distractors:
+        pref = list({d for d in preferred_distractors if d != correct_label})
+        rng.shuffle(pref)
+        chosen = pref[:3]
+    if len(chosen) < 3:
+        rest = list(set(distractor_pool) - {correct_label} - set(chosen))
+        rng.shuffle(rest)
+        chosen += rest[: 3 - len(chosen)]
+    options = chosen + [correct_label]
     rng.shuffle(options)
     answer_options = {key: opt for key, opt in zip(OPTION_KEYS, options)}
     correct_key = next(key for key, opt in answer_options.items() if opt == correct_label)
@@ -122,6 +175,16 @@ def _build_question(qid, image_rel_path, prompt, correct_label, distractor_pool,
     }
 
 
+def _plantvillage_plant_to_labels(class_names):
+    """Map each plant to its full set of pretty labels (for same-plant distractors)."""
+    plant_to_labels = {}
+    for class_name in class_names:
+        label = _pretty_plantvillage(class_name)
+        plant = label.split(" - ")[0]
+        plant_to_labels.setdefault(plant, []).append(label)
+    return plant_to_labels
+
+
 # ----------------------------------------------------------------------------
 # Disease (PlantVillage GitHub) - round-robin across classes for diversity
 # ----------------------------------------------------------------------------
@@ -129,6 +192,7 @@ def build_disease(n, rng, prompt):
     print("[disease] Listing PlantVillage classes...")
     classes = [item["name"] for item in _http_json(PLANTVILLAGE_API) if item["type"] == "dir"]
     label_pool = [_pretty_plantvillage(c) for c in classes]
+    plant_to_labels = _plantvillage_plant_to_labels(classes)
     rng.shuffle(classes)
 
     file_cache = {}
@@ -166,8 +230,11 @@ def build_disease(n, rng, prompt):
                 print(f"  [disease] dl fail {class_name}: {e}")
                 continue
             label = _pretty_plantvillage(class_name)
+            plant = label.split(" - ")[0]
+            same_plant = plant_to_labels.get(plant, [])
             questions.append(_build_question(
-                f"img_disease_{idx:03d}", rel, prompt, label, label_pool, rng, "PlantVillage"))
+                f"img_disease_{idx:03d}", rel, prompt, label, label_pool, rng, "PlantVillage",
+                preferred_distractors=same_plant))
             idx += 1
             progressed = True
         if not progressed:
@@ -264,14 +331,19 @@ def build_pests(n, rng, prompt):
             return clean_names[idx]
         return None
 
+    _, crop_to_labels = _ip102_crop_groups(clean_names)
+    label_to_crop = {lbl: crop for crop, lbls in crop_to_labels.items() for lbl in lbls}
+
     rows = _collect_label_rows(IP102_DATASET, "test", n, rng, resolver)
     questions = []
     for idx, (label, src) in enumerate(rows):
         try:
             rel = f"{config.IMAGE_QUESTIONS_DIR}/pests/{_slug(label)}_{idx}.jpg"
             _download(src, QUESTIONS_DIR / rel)
+            same_crop = crop_to_labels.get(label_to_crop.get(label), [])
             questions.append(_build_question(
-                f"img_pest_{idx:03d}", rel, prompt, label, clean_names, rng, "IP102"))
+                f"img_pest_{idx:03d}", rel, prompt, label, clean_names, rng, "IP102",
+                preferred_distractors=same_crop))
         except Exception as e:
             print(f"  [pests] skip {label}: {type(e).__name__} {e}")
     print(f"  [pests] built {len(questions)} questions")
@@ -306,13 +378,16 @@ def build_weeds(n, rng, prompt):
     rng.shuffle(tagged)
 
     species_pool = list({lbl for _, lbl, _ in tagged} | set(cotton_names))
+    source_groups = _weed_source_groups()
     questions = []
     for idx, (source, label, src) in enumerate(tagged):
         try:
             rel = f"{config.IMAGE_QUESTIONS_DIR}/weeds/{_slug(label)}_{idx}.jpg"
             _download(src, QUESTIONS_DIR / rel)
+            same_source = source_groups.get(source, [])
             questions.append(_build_question(
-                f"img_weed_{idx:03d}", rel, prompt, label, species_pool, rng, source))
+                f"img_weed_{idx:03d}", rel, prompt, label, species_pool, rng, source,
+                preferred_distractors=same_source))
         except Exception as e:
             print(f"  [weeds] skip {label}: {type(e).__name__} {e}")
     print(f"  [weeds] built {len(questions)} questions")
