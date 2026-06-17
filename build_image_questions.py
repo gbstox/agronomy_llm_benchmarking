@@ -469,30 +469,34 @@ def main():
     rng = random.Random(args.seed)
     IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
-    all_questions = []
-    all_questions += build_disease(
-        args.per_bucket, rng,
-        "The image shows a plant leaf. Which plant and condition (healthy or disease) is shown?")
-    all_questions += build_pests(
-        args.per_bucket, rng,
-        "The image shows an agricultural insect pest. Which pest is shown?")
-    all_questions += build_weeds(
-        args.per_bucket, rng,
-        "The image shows a weed plant. Which weed species is shown?")
+    bucket_questions = {
+        config.IMAGE_BUCKET_CATEGORIES["disease"]: build_disease(
+            args.per_bucket, rng,
+            "The image shows a plant leaf. Which plant and condition (healthy or disease) is shown?"),
+        config.IMAGE_BUCKET_CATEGORIES["pests"]: build_pests(
+            args.per_bucket, rng,
+            "The image shows an agricultural insect pest. Which pest is shown?"),
+        config.IMAGE_BUCKET_CATEGORIES["weeds"]: build_weeds(
+            args.per_bucket, rng,
+            "The image shows a weed plant. Which weed species is shown?"),
+    }
 
-    if not all_questions:
+    total = sum(len(v) for v in bucket_questions.values())
+    if not total:
         print("No questions built; aborting without modifying the benchmark file.")
         return
 
     with open(QUESTIONS_FILE, "r") as f:
         benchmark = json.load(f)
     benchmark.setdefault("multiple_choice", {})
-    benchmark["multiple_choice"][CATEGORY] = all_questions
+    for category, questions in bucket_questions.items():
+        benchmark["multiple_choice"][category] = questions
 
     with open(QUESTIONS_FILE, "w") as f:
         json.dump(benchmark, f, indent=2)
 
-    print(f"\nWrote {len(all_questions)} image questions to '{QUESTIONS_FILE}' under '{CATEGORY}'.")
+    print(f"\nWrote {total} image questions to '{QUESTIONS_FILE}' under "
+          f"{list(bucket_questions.keys())}.")
     print(f"Images saved under '{IMAGES_DIR}'.")
 
 

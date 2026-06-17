@@ -75,12 +75,20 @@ MAX_CONCURRENT_MODELS = 6
 QUESTIONS_CONCURRENCY_PER_MODEL = 2 # Adjust based on API rate limits
 
 # --- Image Questions ---
-# Category name used for image-input identification questions. This category is
-# only run on vision-capable models and is reported as a separate column that is
+# Image-input identification questions are split by subject so each is reported
+# as its own column. These are only run on vision-capable models and are all
 # EXCLUDED from the overall (text) score so existing scores stay comparable.
+# Maps the builder's image bucket -> benchmark category name.
+IMAGE_BUCKET_CATEGORIES = {
+    "disease": "image_disease",
+    "pests": "image_pest",
+    "weeds": "image_weed",
+}
+IMAGE_QUESTION_CATEGORIES = list(IMAGE_BUCKET_CATEGORIES.values())
+# Back-compat alias (some older scripts referenced a single category).
 IMAGE_QUESTION_CATEGORY = "image_identification"
 # Categories excluded from the overall score / correct-total counts.
-OVERALL_EXCLUDED_CATEGORIES = {IMAGE_QUESTION_CATEGORY}
+OVERALL_EXCLUDED_CATEGORIES = set(IMAGE_QUESTION_CATEGORIES) | {IMAGE_QUESTION_CATEGORY}
 # Directory (relative to the benchmark questions file) holding question images.
 IMAGE_QUESTIONS_DIR = "images"
 # When True (in 'missing' mode), only run models that are already complete on all
