@@ -135,14 +135,26 @@ async def _call_openai_sdk(client: AsyncOpenAI,
         if assistant_prompt:
             messages.append({"role": "assistant", "content": assistant_prompt})
 
-        response = await client.chat.completions.create(
-            model=model_name_api,
-            messages=messages,
-            max_tokens=_param(model_config, "max_tokens", config.TOKENS_TO_REQUEST),
-            n=1,
-            temperature=_param(model_config, "temperature", config.DETERMINISTIC_TEMP),
-            # stream=False
-        )
+        request_kwargs = {
+            "model": model_name_api,
+            "messages": messages,
+            "max_tokens": _param(
+                model_config, "max_tokens", config.TOKENS_TO_REQUEST
+            ),
+            "n": 1,
+            "temperature": _param(
+                model_config, "temperature", config.DETERMINISTIC_TEMP
+            ),
+        }
+        # OpenRouter-specific provider routing is passed through the SDK via
+        # extra_body. Quantization is resolved before the run and filtered to one
+        # highest-precision tier, so fallback providers cannot silently downgrade
+        # a model to FP4/INT4.
+        provider_routing = model_config.get("openrouter_provider_routing")
+        if provider_routing:
+            request_kwargs["extra_body"] = {"provider": provider_routing}
+
+        response = await client.chat.completions.create(**request_kwargs)
         if (
             response.choices
             and response.choices[0].message

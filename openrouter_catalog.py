@@ -11,6 +11,7 @@ import config
 _OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 _OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 _openrouter_catalog_cache = {}
+_openrouter_endpoint_cache = {}
 
 _OPEN_SOURCE_PREFIXES = {
     "allenai/",
@@ -310,6 +311,100 @@ def fetch_openrouter_model_metadata_map(
 
     _openrouter_catalog_cache[cache_key] = metadata_map
     return metadata_map
+
+
+def _fetch_openrouter_model_endpoints(model_id: str, api_key: str) -> list[dict]:
+    """Fetches OpenRouter provider endpoints for one model (cached per process)."""
+    if model_id in _openrouter_endpoint_cache:
+        return _openrouter_endpoint_cache[model_id]
+
+    request = urllib.request.Request(
+        f"{_OPENROUTER_MODELS_URL}/{model_id}/endpoints",
+        headers={"Authorization": f"Bearer {api_key}"},
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+
+    data = payload.get("data") or {}
+    endpoints = data.get("endpoints") or payload.get("endpoints") or []
+    if not isinstance(endpoints, list):
+        endpoints = []
+    _openrouter_endpoint_cache[model_id] = endpoints
+    return endpoints
+
+
+def _select_best_quantization(endpoints: list[dict]) -> tuple[str | None, list[str]]:
+    """Selects the highest-precision known quantization exposed by OpenRouter.
+
+    Closed/first-party models generally report only ``unknown``; in that case we
+    explicitly route to ``unknown`` (provider-managed native precision). For
+    open-weight models, lower quants (FP4/INT4) are excluded whenever a higher
+    precision endpoint exists.
+    """
+    available = {
+        str(endpoint.get("quantization", "")).strip().lower()
+        for endpoint in endpoints
+        if endpoint.get("quantization")
+    }
+    available.discard("")
+
+    preference = tuple(
+        getattr(
+            config,
+            "OPENROUTER_QUANTIZATION_PREFERENCE",
+            ("fp32", "bf16", "fp16", "fp8", "int8", "fp6", "fp4", "int4"),
+        )
+    )
+    for quantization in preference:
+        if quantization in available:
+            return quantization, sorted(available)
+    if "unknown" in available:
+        return "unknown", sorted(available)
+    return None, sorted(available)
+
+
+def annotate_best_quantization(
+    model_configs: list[dict],
+    project_root: str | Path,
+    api_key_env: str,
+) -> list[dict]:
+    """Adds deterministic highest-precision OpenRouter routing to model configs.
+
+    Only OpenRouter-backed configs are modified. If endpoint discovery fails, the
+    request is left unfiltered rather than blocking the benchmark.
+    """
+    if not getattr(config, "OPENROUTER_ENFORCE_BEST_QUANTIZATION", True):
+        return model_configs
+
+    api_key = _load_openrouter_api_key(Path(project_root), api_key_env)
+    for model_config in model_configs:
+        if model_config.get("provider") != "openai_compatible":
+            continue
+        if "openrouter.ai" not in str(model_config.get("base_url", "")):
+            continue
+
+        model_id = model_config.get("model_name_api") or model_config.get("id")
+        try:
+            endpoints = _fetch_openrouter_model_endpoints(model_id, api_key)
+            selected, available = _select_best_quantization(endpoints)
+        except Exception as exc:
+            model_config["quantization_resolution_error"] = (
+                f"{type(exc).__name__}: {exc}"
+            )
+            continue
+
+        model_config["available_quantizations"] = available
+        if selected:
+            model_config["openrouter_quantization"] = selected
+            model_config["openrouter_provider_routing"] = {
+                "quantizations": [selected],
+                "sort": getattr(
+                    config, "OPENROUTER_PROVIDER_SORT_WITHIN_QUANTIZATION", "throughput"
+                ),
+                "allow_fallbacks": True,
+            }
+
+    return model_configs
 
 
 def annotate_vision_support(

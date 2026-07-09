@@ -45,6 +45,15 @@ OPENROUTER_DISCOVERED_MODEL_RATE_LIMIT_BACKOFF_SECONDS = 20
 OPENROUTER_DISCOVERED_FREE_MODEL_QUESTION_CONCURRENCY = 1
 OPENROUTER_DISCOVERED_FREE_MODEL_MAX_RETRIES = 6
 OPENROUTER_DISCOVERED_FREE_MODEL_RATE_LIMIT_BACKOFF_SECONDS = 30
+# Route each model only through its highest-precision OpenRouter endpoints.
+# Preference is quality-first; providers are ranked by throughput only after
+# filtering to a single quantization. Closed/first-party models usually expose
+# precision as "unknown", which is treated as provider-managed native precision.
+OPENROUTER_ENFORCE_BEST_QUANTIZATION = True
+OPENROUTER_QUANTIZATION_PREFERENCE = (
+    "fp32", "bf16", "fp16", "fp8", "int8", "fp6", "fp4", "int4",
+)
+OPENROUTER_PROVIDER_SORT_WITHIN_QUANTIZATION = "throughput"
 
 # --- Benchmark Settings ---
 MAX_RETRIES = 5
@@ -109,7 +118,82 @@ ASSISTANT_PROMPT = "Correct answer_options key:" # For models supporting assista
 
 MODELS_TO_RUN = [
 
-    # ========== LATEST SOTA (June 2026) ==========
+    # ========== LATEST SOTA (July 2026) ==========
+
+    {
+        "id": "openai/gpt-5.6-luna-pro",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.6-luna-pro",
+        "access": "proprietary"
+    },
+    {
+        "id": "openai/gpt-5.6-luna",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.6-luna",
+        "access": "proprietary"
+    },
+    {
+        "id": "openai/gpt-5.6-terra-pro",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.6-terra-pro",
+        "access": "proprietary"
+    },
+    {
+        "id": "openai/gpt-5.6-terra",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.6-terra",
+        "access": "proprietary"
+    },
+    {
+        "id": "openai/gpt-5.6-sol-pro",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.6-sol-pro",
+        "access": "proprietary"
+    },
+    {
+        "id": "openai/gpt-5.6-sol",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-5.6-sol",
+        "access": "proprietary"
+    },
+    {
+        "id": "x-ai/grok-4.5",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "x-ai/grok-4.5",
+        "access": "proprietary"
+    },
+    {
+        "id": "tencent/hy3",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "tencent/hy3",
+        "access": "open source"
+    },
+    {
+        "id": "anthropic/claude-sonnet-5",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "anthropic/claude-sonnet-5",
+        "access": "proprietary",
+        # Current Anthropic models reject assistant-message prefill.
+        "assistant_prompt": None
+    },
 
     {
         "id": "openai/gpt-5.5",

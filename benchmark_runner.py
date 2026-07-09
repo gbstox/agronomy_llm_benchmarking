@@ -394,6 +394,11 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
         "retryable": True,
         "question_concurrency": question_concurrency,
         "max_retries": max_retries,
+        "openrouter_quantization": model_config.get("openrouter_quantization"),
+        "available_quantizations": model_config.get("available_quantizations", []),
+        "openrouter_provider_routing": model_config.get(
+            "openrouter_provider_routing"
+        ),
         "multiple_choice": {},
         "resumed_from_checkpoint": False,
     }

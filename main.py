@@ -368,6 +368,26 @@ async def main():
 
         # Execute benchmark runs if any models were selected``
         if models_to_run_this_session:
+            openrouter_catalog.annotate_best_quantization(
+                models_to_run_this_session,
+                project_root=Path(__file__).resolve().parent,
+                api_key_env=config.OPENROUTER_DISCOVERY_API_KEY_ENV,
+            )
+            print("\n--- OpenRouter Quantization Routing (quality-first) ---")
+            for model_config in models_to_run_this_session:
+                quantization = model_config.get("openrouter_quantization")
+                available = model_config.get("available_quantizations", [])
+                if quantization:
+                    print(
+                        f"  -> {model_config['id']}: {quantization} "
+                        f"(available: {', '.join(available) or 'unknown'})"
+                    )
+                elif model_config.get("quantization_resolution_error"):
+                    print(
+                        f"  -> Warning {model_config['id']}: "
+                        f"{model_config['quantization_resolution_error']}; "
+                        "using default routing"
+                    )
             await benchmark_runner.run_benchmarks(
                 models_to_run=models_to_run_this_session,
                 benchmark_questions_file=config.BENCHMARK_QUESTIONS_FILE,
