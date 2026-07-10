@@ -199,6 +199,92 @@ def _summarize_result_entries(result_entries_by_key, extra_result_entries):
     return rate_limit_failures, api_failures, fatal_api_failures
 
 
+def _number(value, default=0):
+    try:
+        return value if isinstance(value, (int, float)) else float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _aggregate_usage_records(records):
+    """Aggregates exact OpenRouter usage records, including retry attempts."""
+    summary = {
+        "requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "reasoning_tokens": 0,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "image_tokens": 0,
+        "cost_usd": 0.0,
+        "upstream_inference_cost_usd": 0.0,
+    }
+    for usage in records:
+        if not isinstance(usage, dict):
+            continue
+        summary["requests"] += int(_number(usage.get("requests"), 1))
+        summary["prompt_tokens"] += int(_number(usage.get("prompt_tokens")))
+        summary["completion_tokens"] += int(
+            _number(usage.get("completion_tokens"))
+        )
+        summary["total_tokens"] += int(_number(usage.get("total_tokens")))
+        completion_details = usage.get("completion_tokens_details") or {}
+        prompt_details = usage.get("prompt_tokens_details") or {}
+        summary["reasoning_tokens"] += int(
+            _number(completion_details.get("reasoning_tokens"))
+        )
+        summary["image_tokens"] += int(
+            _number(completion_details.get("image_tokens"))
+            + _number(prompt_details.get("image_tokens"))
+        )
+        summary["cached_tokens"] += int(
+            _number(prompt_details.get("cached_tokens"))
+        )
+        summary["cache_write_tokens"] += int(
+            _number(prompt_details.get("cache_write_tokens"))
+        )
+        summary["cost_usd"] += _number(
+            usage.get("cost_usd", usage.get("cost"))
+        )
+        cost_details = usage.get("cost_details") or {}
+        summary["upstream_inference_cost_usd"] += _number(
+            usage.get(
+                "upstream_inference_cost_usd",
+                cost_details.get("upstream_inference_cost"),
+            )
+        )
+    summary["cost_usd"] = round(summary["cost_usd"], 10)
+    summary["upstream_inference_cost_usd"] = round(
+        summary["upstream_inference_cost_usd"], 10
+    )
+    return summary
+
+
+def _summarize_usage_entries(result_entries_by_key, extra_result_entries):
+    records = []
+    providers = set()
+    generation_ids = []
+    all_entries = list(result_entries_by_key.values()) + [
+        entry for _, entry in extra_result_entries
+    ]
+    for entry in all_entries:
+        if not isinstance(entry, dict):
+            continue
+        usage = entry.get("api_usage")
+        if isinstance(usage, dict):
+            records.append(usage)
+        for provider in entry.get("openrouter_providers", []):
+            if provider:
+                providers.add(provider)
+        generation_ids.extend(entry.get("generation_ids", []))
+
+    summary = _aggregate_usage_records(records)
+    summary["providers"] = sorted(providers)
+    summary["generation_count"] = len(generation_ids)
+    return summary
+
+
 def _write_model_results(results_filepath, model_results):
     temp_path = results_filepath.parent / (
         f"{results_filepath.name}.{os.getpid()}.{time.time_ns()}.tmp"
@@ -250,6 +336,11 @@ def _persist_model_results(
     model_results["rate_limit_failures"] = rate_limit_failures
     model_results["api_failures"] = api_failures
     model_results["fatal_api_failures"] = fatal_api_failures
+    usage_summary = _summarize_usage_entries(
+        result_entries_by_key, extra_result_entries
+    )
+    model_results["usage_summary"] = usage_summary
+    model_results["benchmark_cost_usd"] = usage_summary["cost_usd"]
 
     _write_model_results(results_filepath, model_results)
 
@@ -497,6 +588,9 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
             api_error_attempts = 0
             parse_fail_attempts = 0
             rate_limit_attempts = 0
+            api_usage_records = []
+            generation_ids = []
+            openrouter_providers = set()
             image_rel_path = question_data.get("image")
             image_data_url = None
             if image_rel_path:
@@ -508,7 +602,7 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
             for attempt in range(max_retries):
                 try:
                     # --- USE THE NEW CENTRAL API CALLER ---
-                    raw_answer = await call_llm_api(
+                    api_response = await call_llm_api(
                         model_config,
                         base_prompts["SYSTEM_PROMPT"],
                         current_user_prompt,
@@ -516,6 +610,19 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
                         image_data_url=image_data_url,
                     )
                     # --- END NEW CALL ---
+                    if isinstance(api_response, dict) and "content" in api_response:
+                        raw_answer = api_response.get("content")
+                        usage = api_response.get("usage")
+                        if isinstance(usage, dict):
+                            api_usage_records.append(usage)
+                        generation_id = api_response.get("generation_id")
+                        if generation_id:
+                            generation_ids.append(generation_id)
+                        upstream_provider = api_response.get("provider")
+                        if upstream_provider:
+                            openrouter_providers.add(upstream_provider)
+                    else:
+                        raw_answer = api_response
 
                     if raw_answer == RATE_LIMIT_SENTINEL:
                         rate_limit_attempts += 1
@@ -578,6 +685,9 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
             result_entry = question_data.copy()
             result_entry["model_answer"] = processed_answer
             result_entry["raw_model_response"] = str(raw_answer) if raw_answer is not None else ""
+            result_entry["api_usage"] = _aggregate_usage_records(api_usage_records)
+            result_entry["generation_ids"] = generation_ids
+            result_entry["openrouter_providers"] = sorted(openrouter_providers)
             # Only record last_error if the final answer is an error/fail state
             if processed_answer in ["fail", "refusal", "error_api", "error_provider", "error_unexpected", "error_task", "error_rate_limit", "error_fatal_api"]:
                  result_entry["last_error"] = last_error if last_error else "Unknown error state"
@@ -737,7 +847,11 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
     model_results["rate_limit_failures"] = rate_limit_failures
     model_results["api_failures"] = api_failures
     model_results["fatal_api_failures"] = fatal_api_failures
-
+    usage_summary = _summarize_usage_entries(
+        result_entries_by_key, extra_result_entries
+    )
+    model_results["usage_summary"] = usage_summary
+    model_results["benchmark_cost_usd"] = usage_summary["cost_usd"]
 
     # Save Final Results
     end_time = time.time()

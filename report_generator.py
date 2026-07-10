@@ -225,6 +225,44 @@ def _write_readme_leaderboard(readme_path, table_lines):
     except OSError as e:
         print(f"Warning: Could not write updated README leaderboard: {e}")
 
+
+def _write_benchmark_usage_summary(output_path, all_scores_summary):
+    """Publishes aggregate-only cost/token data (never question content)."""
+    models = []
+    for item in all_scores_summary:
+        cost = item.get("benchmark_cost_usd")
+        usage = item.get("usage_summary") or {}
+        if cost is None or not usage:
+            continue
+        models.append({
+            "model_name": item.get("model_name"),
+            "date_tested": item.get("date_tested"),
+            "overall_score": item.get("overall_score"),
+            "benchmark_cost_usd": cost,
+            "requests": usage.get("requests", 0),
+            "prompt_tokens": usage.get("prompt_tokens", 0),
+            "completion_tokens": usage.get("completion_tokens", 0),
+            "reasoning_tokens": usage.get("reasoning_tokens", 0),
+            "total_tokens": usage.get("total_tokens", 0),
+            "cached_tokens": usage.get("cached_tokens", 0),
+            "cache_write_tokens": usage.get("cache_write_tokens", 0),
+            "image_tokens": usage.get("image_tokens", 0),
+            "providers": usage.get("providers", []),
+        })
+    payload = {
+        "description": (
+            "Actual OpenRouter usage charged during benchmark runs. "
+            "Aggregate metadata only; questions and answers remain private."
+        ),
+        "models": models,
+    }
+    try:
+        Path(output_path).write_text(json.dumps(payload, indent=2) + "\n")
+        print(f"Updated benchmark usage summary: {output_path}")
+    except OSError as e:
+        print(f"Warning: Could not write benchmark usage summary: {e}")
+
+
 def score_results(model_answers_data):
     """
     Calculates scores from the loaded results data for a single model.
@@ -522,7 +560,9 @@ async def generate_reports(results_dir, graphs_base_dir):
             "date_tested": date_tested,
             "correct": correct,
             "total_questions": total_qs_attempted, # Store total questions attempted
-            "price_usd_per_mtok": model_price
+            "price_usd_per_mtok": model_price,
+            "benchmark_cost_usd": data.get("benchmark_cost_usd"),
+            "usage_summary": data.get("usage_summary") or {},
         }
         all_scores_summary.append(summary)
         all_category_keys.update(normalized_category_scores.keys())
@@ -586,5 +626,9 @@ async def generate_reports(results_dir, graphs_base_dir):
     plot_performance_vs_price(all_scores_summary, overall_graph_dir)
 
     _write_readme_leaderboard(readme_path, table_lines)
+    _write_benchmark_usage_summary(
+        Path(graphs_base_dir) / "benchmark_usage_summary.json",
+        all_scores_summary,
+    )
 
     print("\n--- Reporting Complete ---")

@@ -1,0 +1,1235 @@
+{
+  "description": "Actual OpenRouter usage charged during benchmark runs. Aggregate metadata only; questions and answers remain private.",
+  "models": [
+    {
+      "model_name": "google/gemini-3.1-pro-preview-customtools",
+      "date_tested": "2026-07-09",
+      "overall_score": 93.88,
+      "benchmark_cost_usd": 2.481222,
+      "requests": 576,
+      "prompt_tokens": 280119,
+      "completion_tokens": 160082,
+      "reasoning_tokens": 0,
+      "total_tokens": 440201,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google AI Studio"
+      ]
+    },
+    {
+      "model_name": "google/gemini-3.1-pro-preview",
+      "date_tested": "2026-07-09",
+      "overall_score": 93.88,
+      "benchmark_cost_usd": 2.51226,
+      "requests": 575,
+      "prompt_tokens": 280086,
+      "completion_tokens": 162674,
+      "reasoning_tokens": 0,
+      "total_tokens": 442760,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google",
+        "Google AI Studio"
+      ]
+    },
+    {
+      "model_name": "x-ai/grok-4.5",
+      "date_tested": "2026-07-09",
+      "overall_score": 92.24,
+      "benchmark_cost_usd": 2.69217,
+      "requests": 575,
+      "prompt_tokens": 302508,
+      "completion_tokens": 380787,
+      "reasoning_tokens": 0,
+      "total_tokens": 683295,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "xAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.5",
+      "date_tested": "2026-07-09",
+      "overall_score": 91.76,
+      "benchmark_cost_usd": 2.85953,
+      "requests": 576,
+      "prompt_tokens": 187498,
+      "completion_tokens": 65106,
+      "reasoning_tokens": 0,
+      "total_tokens": 252604,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.6-sol-pro",
+      "date_tested": "2026-07-09",
+      "overall_score": 91.29,
+      "benchmark_cost_usd": 10.280645,
+      "requests": 575,
+      "prompt_tokens": 1564544,
+      "completion_tokens": 118605,
+      "reasoning_tokens": 0,
+      "total_tokens": 1683149,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.6-sol",
+      "date_tested": "2026-07-09",
+      "overall_score": 91.29,
+      "benchmark_cost_usd": 2.99938375,
+      "requests": 575,
+      "prompt_tokens": 354014,
+      "completion_tokens": 32528,
+      "reasoning_tokens": 0,
+      "total_tokens": 386542,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "google/gemini-3.1-flash-image-preview",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.82,
+      "benchmark_cost_usd": 0.080002,
+      "requests": 576,
+      "prompt_tokens": 156536,
+      "completion_tokens": 578,
+      "reasoning_tokens": 0,
+      "total_tokens": 157114,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google",
+        "Google AI Studio"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.3-codex",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.82,
+      "benchmark_cost_usd": 1.26051975,
+      "requests": 576,
+      "prompt_tokens": 220144,
+      "completion_tokens": 63428,
+      "reasoning_tokens": 0,
+      "total_tokens": 283572,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5",
+      "date_tested": "2026-07-10",
+      "overall_score": 90.82,
+      "benchmark_cost_usd": 2.2649235,
+      "requests": 604,
+      "prompt_tokens": 181127,
+      "completion_tokens": 206659,
+      "reasoning_tokens": 0,
+      "total_tokens": 387786,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.3-chat",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.59,
+      "benchmark_cost_usd": 0.90441925,
+      "requests": 575,
+      "prompt_tokens": 219859,
+      "completion_tokens": 37119,
+      "reasoning_tokens": 0,
+      "total_tokens": 256978,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3.5-plus-02-15",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.59,
+      "benchmark_cost_usd": 1.24649902,
+      "requests": 575,
+      "prompt_tokens": 193859,
+      "completion_tokens": 766728,
+      "reasoning_tokens": 0,
+      "total_tokens": 960587,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Alibaba"
+      ]
+    },
+    {
+      "model_name": "nvidia/nemotron-3-ultra-550b-a55b",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.35,
+      "benchmark_cost_usd": 0.5916997,
+      "requests": 434,
+      "prompt_tokens": 92209,
+      "completion_tokens": 253048,
+      "reasoning_tokens": 0,
+      "total_tokens": 345257,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.6-terra-pro",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.35,
+      "benchmark_cost_usd": 6.21450475,
+      "requests": 575,
+      "prompt_tokens": 2135110,
+      "completion_tokens": 163636,
+      "reasoning_tokens": 0,
+      "total_tokens": 2298746,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.6-terra",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.35,
+      "benchmark_cost_usd": 1.677096875,
+      "requests": 575,
+      "prompt_tokens": 354014,
+      "completion_tokens": 43472,
+      "reasoning_tokens": 0,
+      "total_tokens": 397486,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.2-codex",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.12,
+      "benchmark_cost_usd": 0.92624,
+      "requests": 575,
+      "prompt_tokens": 203464,
+      "completion_tokens": 40727,
+      "reasoning_tokens": 0,
+      "total_tokens": 244191,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.4-pro",
+      "date_tested": "2026-07-10",
+      "overall_score": 90.12,
+      "benchmark_cost_usd": 27.53016,
+      "requests": 601,
+      "prompt_tokens": 162523,
+      "completion_tokens": 143367,
+      "reasoning_tokens": 0,
+      "total_tokens": 305890,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/o3",
+      "date_tested": "2026-07-09",
+      "overall_score": 90.12,
+      "benchmark_cost_usd": 1.48611,
+      "requests": 589,
+      "prompt_tokens": 177743,
+      "completion_tokens": 141328,
+      "reasoning_tokens": 0,
+      "total_tokens": 319071,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "anthropic/claude-opus-4.8",
+      "date_tested": "2026-07-09",
+      "overall_score": 89.65,
+      "benchmark_cost_usd": 1.495205,
+      "requests": 576,
+      "prompt_tokens": 290844,
+      "completion_tokens": 1879,
+      "reasoning_tokens": 0,
+      "total_tokens": 292723,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Anthropic"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.2",
+      "date_tested": "2026-07-09",
+      "overall_score": 89.65,
+      "benchmark_cost_usd": 1.11019685,
+      "requests": 576,
+      "prompt_tokens": 220139,
+      "completion_tokens": 58461,
+      "reasoning_tokens": 0,
+      "total_tokens": 278600,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.6-luna-pro",
+      "date_tested": "2026-07-09",
+      "overall_score": 89.65,
+      "benchmark_cost_usd": 3.014097,
+      "requests": 575,
+      "prompt_tokens": 1590339,
+      "completion_tokens": 240021,
+      "reasoning_tokens": 0,
+      "total_tokens": 1830360,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "z-ai/glm-5.2",
+      "date_tested": "2026-07-10",
+      "overall_score": 89.65,
+      "benchmark_cost_usd": 0.6019324309,
+      "requests": 438,
+      "prompt_tokens": 92081,
+      "completion_tokens": 101233,
+      "reasoning_tokens": 0,
+      "total_tokens": 193314,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "AkashML",
+        "Ambient",
+        "Baidu",
+        "Io Net"
+      ]
+    },
+    {
+      "model_name": "z-ai/glm-5",
+      "date_tested": "2026-07-10",
+      "overall_score": 89.65,
+      "benchmark_cost_usd": 0.33319231,
+      "requests": 447,
+      "prompt_tokens": 93524,
+      "completion_tokens": 143896,
+      "reasoning_tokens": 0,
+      "total_tokens": 237420,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Chutes",
+        "GMICloud",
+        "Novita",
+        "StreamLake"
+      ]
+    },
+    {
+      "model_name": "z-ai/glm-5-turbo",
+      "date_tested": "2026-07-10",
+      "overall_score": 89.41,
+      "benchmark_cost_usd": 0.73389224,
+      "requests": 448,
+      "prompt_tokens": 90076,
+      "completion_tokens": 159644,
+      "reasoning_tokens": 0,
+      "total_tokens": 249720,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "AtlasCloud"
+      ]
+    },
+    {
+      "model_name": "anthropic/claude-opus-4.1",
+      "date_tested": "2026-07-09",
+      "overall_score": 89.18,
+      "benchmark_cost_usd": 3.08445,
+      "requests": 578,
+      "prompt_tokens": 190805,
+      "completion_tokens": 2965,
+      "reasoning_tokens": 0,
+      "total_tokens": 193770,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Amazon Bedrock",
+        "Anthropic"
+      ]
+    },
+    {
+      "model_name": "moonshotai/kimi-k2.5",
+      "date_tested": "2026-07-09",
+      "overall_score": 89.18,
+      "benchmark_cost_usd": 1.36056042,
+      "requests": 576,
+      "prompt_tokens": 231678,
+      "completion_tokens": 459043,
+      "reasoning_tokens": 0,
+      "total_tokens": 690721,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "StreamLake"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3.5-27b",
+      "date_tested": "2026-07-10",
+      "overall_score": 88.94,
+      "benchmark_cost_usd": 1.5773838,
+      "requests": 577,
+      "prompt_tokens": 192874,
+      "completion_tokens": 633134,
+      "reasoning_tokens": 0,
+      "total_tokens": 826008,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Novita"
+      ]
+    },
+    {
+      "model_name": "anthropic/claude-opus-4",
+      "date_tested": "2026-07-09",
+      "overall_score": 88.71,
+      "benchmark_cost_usd": 3.04038,
+      "requests": 576,
+      "prompt_tokens": 190121,
+      "completion_tokens": 2561,
+      "reasoning_tokens": 0,
+      "total_tokens": 192682,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google"
+      ]
+    },
+    {
+      "model_name": "google/gemini-2.5-pro",
+      "date_tested": "2026-07-09",
+      "overall_score": 88.71,
+      "benchmark_cost_usd": 5.43676875,
+      "requests": 577,
+      "prompt_tokens": 240982,
+      "completion_tokens": 515092,
+      "reasoning_tokens": 0,
+      "total_tokens": 756074,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google"
+      ]
+    },
+    {
+      "model_name": "minimax/minimax-m3",
+      "date_tested": "2026-07-10",
+      "overall_score": 88.71,
+      "benchmark_cost_usd": 0.1729404,
+      "requests": 585,
+      "prompt_tokens": 244952,
+      "completion_tokens": 112831,
+      "reasoning_tokens": 0,
+      "total_tokens": 357783,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3.7-plus",
+      "date_tested": "2026-07-09",
+      "overall_score": 88.71,
+      "benchmark_cost_usd": 0.360825024,
+      "requests": 575,
+      "prompt_tokens": 193859,
+      "completion_tokens": 233865,
+      "reasoning_tokens": 0,
+      "total_tokens": 427724,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Alibaba"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.6-luna",
+      "date_tested": "2026-07-09",
+      "overall_score": 88.24,
+      "benchmark_cost_usd": 0.72424475,
+      "requests": 575,
+      "prompt_tokens": 354014,
+      "completion_tokens": 52373,
+      "reasoning_tokens": 0,
+      "total_tokens": 406387,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "anthropic/claude-opus-4.5",
+      "date_tested": "2026-07-09",
+      "overall_score": 87.76,
+      "benchmark_cost_usd": 1.0126,
+      "requests": 575,
+      "prompt_tokens": 189904,
+      "completion_tokens": 2616,
+      "reasoning_tokens": 0,
+      "total_tokens": 192520,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google"
+      ]
+    },
+    {
+      "model_name": "openai/o4-mini-high",
+      "date_tested": "2026-07-10",
+      "overall_score": 87.76,
+      "benchmark_cost_usd": 1.6243315,
+      "requests": 648,
+      "prompt_tokens": 246145,
+      "completion_tokens": 311182,
+      "reasoning_tokens": 0,
+      "total_tokens": 557327,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "anthropic/claude-sonnet-5",
+      "date_tested": "2026-07-09",
+      "overall_score": 87.53,
+      "benchmark_cost_usd": 0.626926,
+      "requests": 575,
+      "prompt_tokens": 290569,
+      "completion_tokens": 4702,
+      "reasoning_tokens": 0,
+      "total_tokens": 295271,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "Google"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3.5-122b-a10b",
+      "date_tested": "2026-07-09",
+      "overall_score": 87.06,
+      "benchmark_cost_usd": 1.95879,
+      "requests": 575,
+      "prompt_tokens": 194159,
+      "completion_tokens": 587852,
+      "reasoning_tokens": 0,
+      "total_tokens": 782011,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Novita"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3.5-flash-02-23",
+      "date_tested": "2026-07-09",
+      "overall_score": 87.06,
+      "benchmark_cost_usd": 0.284912355,
+      "requests": 577,
+      "prompt_tokens": 194335,
+      "completion_tokens": 1047233,
+      "reasoning_tokens": 0,
+      "total_tokens": 1241568,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Alibaba"
+      ]
+    },
+    {
+      "model_name": "google/gemini-3.1-flash-lite-preview",
+      "date_tested": "2026-07-09",
+      "overall_score": 86.82,
+      "benchmark_cost_usd": 0.07089825,
+      "requests": 578,
+      "prompt_tokens": 280119,
+      "completion_tokens": 579,
+      "reasoning_tokens": 0,
+      "total_tokens": 280698,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google AI Studio"
+      ]
+    },
+    {
+      "model_name": "minimax/minimax-m2.5",
+      "date_tested": "2026-07-10",
+      "overall_score": 86.82,
+      "benchmark_cost_usd": 0.15445351,
+      "requests": 449,
+      "prompt_tokens": 97040,
+      "completion_tokens": 159608,
+      "reasoning_tokens": 0,
+      "total_tokens": 256648,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra",
+        "Inceptron"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5-mini",
+      "date_tested": "2026-07-10",
+      "overall_score": 86.82,
+      "benchmark_cost_usd": 0.3836105,
+      "requests": 591,
+      "prompt_tokens": 166274,
+      "completion_tokens": 171021,
+      "reasoning_tokens": 0,
+      "total_tokens": 337295,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "anthropic/claude-sonnet-4",
+      "date_tested": "2026-07-09",
+      "overall_score": 86.35,
+      "benchmark_cost_usd": 0.620784,
+      "requests": 576,
+      "prompt_tokens": 190118,
+      "completion_tokens": 3362,
+      "reasoning_tokens": 0,
+      "total_tokens": 193480,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Amazon Bedrock",
+        "Google"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-5.4",
+      "date_tested": "2026-07-09",
+      "overall_score": 85.65,
+      "benchmark_cost_usd": 0.43805,
+      "requests": 575,
+      "prompt_tokens": 157970,
+      "completion_tokens": 2875,
+      "reasoning_tokens": 0,
+      "total_tokens": 160845,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "tencent/hy3",
+      "date_tested": "2026-07-10",
+      "overall_score": 85.41,
+      "benchmark_cost_usd": 0.01311554,
+      "requests": 428,
+      "prompt_tokens": 90161,
+      "completion_tokens": 850,
+      "reasoning_tokens": 0,
+      "total_tokens": 91011,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "GMICloud"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3-max-thinking",
+      "date_tested": "2026-07-09",
+      "overall_score": 84.94,
+      "benchmark_cost_usd": 0.07311798,
+      "requests": 425,
+      "prompt_tokens": 91616,
+      "completion_tokens": 425,
+      "reasoning_tokens": 0,
+      "total_tokens": 92041,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Alibaba"
+      ]
+    },
+    {
+      "model_name": "bytedance-seed/seed-1.6",
+      "date_tested": "2026-07-09",
+      "overall_score": 83.76,
+      "benchmark_cost_usd": 0.24934725,
+      "requests": 581,
+      "prompt_tokens": 182573,
+      "completion_tokens": 101852,
+      "reasoning_tokens": 0,
+      "total_tokens": 284425,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Seed"
+      ]
+    },
+    {
+      "model_name": "bytedance-seed/seed-2.0-lite",
+      "date_tested": "2026-07-09",
+      "overall_score": 83.76,
+      "benchmark_cost_usd": 0.18160925,
+      "requests": 575,
+      "prompt_tokens": 330685,
+      "completion_tokens": 49469,
+      "reasoning_tokens": 0,
+      "total_tokens": 380154,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Seed"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-4o",
+      "date_tested": "2026-07-09",
+      "overall_score": 82.59,
+      "benchmark_cost_usd": 0.4541875,
+      "requests": 575,
+      "prompt_tokens": 177811,
+      "completion_tokens": 966,
+      "reasoning_tokens": 0,
+      "total_tokens": 178777,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "meta-llama/llama-4-maverick",
+      "date_tested": "2026-07-09",
+      "overall_score": 82.12,
+      "benchmark_cost_usd": 0.06238335,
+      "requests": 575,
+      "prompt_tokens": 212461,
+      "completion_tokens": 1489,
+      "reasoning_tokens": 0,
+      "total_tokens": 213950,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra",
+        "Parasail"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-oss-120b",
+      "date_tested": "2026-07-09",
+      "overall_score": 82.12,
+      "benchmark_cost_usd": 0.05940345,
+      "requests": 425,
+      "prompt_tokens": 111707,
+      "completion_tokens": 71079,
+      "reasoning_tokens": 0,
+      "total_tokens": 182786,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra"
+      ]
+    },
+    {
+      "model_name": "z-ai/glm-4.7-flash",
+      "date_tested": "2026-07-10",
+      "overall_score": 82.12,
+      "benchmark_cost_usd": 0.13068025,
+      "requests": 500,
+      "prompt_tokens": 100380,
+      "completion_tokens": 317889,
+      "reasoning_tokens": 0,
+      "total_tokens": 418269,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra",
+        "Novita"
+      ]
+    },
+    {
+      "model_name": "deepseek/deepseek-chat",
+      "date_tested": "2026-07-09",
+      "overall_score": 81.18,
+      "benchmark_cost_usd": 0.035495,
+      "requests": 425,
+      "prompt_tokens": 85975,
+      "completion_tokens": 850,
+      "reasoning_tokens": 0,
+      "total_tokens": 86825,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Novita"
+      ]
+    },
+    {
+      "model_name": "nvidia/nemotron-3-nano-30b-a3b",
+      "date_tested": "2026-07-09",
+      "overall_score": 80.94,
+      "benchmark_cost_usd": 0.03533862,
+      "requests": 440,
+      "prompt_tokens": 99421,
+      "completion_tokens": 122389,
+      "reasoning_tokens": 0,
+      "total_tokens": 221810,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Nebius"
+      ]
+    },
+    {
+      "model_name": "inception/mercury-2",
+      "date_tested": "2026-07-09",
+      "overall_score": 80.71,
+      "benchmark_cost_usd": 0.07668045,
+      "requests": 427,
+      "prompt_tokens": 154602,
+      "completion_tokens": 80496,
+      "reasoning_tokens": 0,
+      "total_tokens": 235098,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Inception"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3-235b-a22b",
+      "date_tested": "2026-07-09",
+      "overall_score": 80.47,
+      "benchmark_cost_usd": 0.044593185,
+      "requests": 425,
+      "prompt_tokens": 89491,
+      "completion_tokens": 2129,
+      "reasoning_tokens": 0,
+      "total_tokens": 91620,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Alibaba"
+      ]
+    },
+    {
+      "model_name": "bytedance-seed/seed-2.0-mini",
+      "date_tested": "2026-07-09",
+      "overall_score": 78.82,
+      "benchmark_cost_usd": 0.1069209,
+      "requests": 575,
+      "prompt_tokens": 330685,
+      "completion_tokens": 184631,
+      "reasoning_tokens": 0,
+      "total_tokens": 515316,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Seed"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3-coder-next",
+      "date_tested": "2026-07-09",
+      "overall_score": 78.59,
+      "benchmark_cost_usd": 0.01167392,
+      "requests": 425,
+      "prompt_tokens": 91616,
+      "completion_tokens": 850,
+      "reasoning_tokens": 0,
+      "total_tokens": 92466,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Parasail"
+      ]
+    },
+    {
+      "model_name": "meta-llama/llama-3.1-70b-instruct",
+      "date_tested": "2026-07-09",
+      "overall_score": 77.65,
+      "benchmark_cost_usd": 0.0729664,
+      "requests": 425,
+      "prompt_tokens": 90276,
+      "completion_tokens": 932,
+      "reasoning_tokens": 0,
+      "total_tokens": 91208,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "WandB"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-oss-20b",
+      "date_tested": "2026-07-09",
+      "overall_score": 76.47,
+      "benchmark_cost_usd": 0.01732329,
+      "requests": 437,
+      "prompt_tokens": 114813,
+      "completion_tokens": 99135,
+      "reasoning_tokens": 0,
+      "total_tokens": 213948,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3-8b",
+      "date_tested": "2026-07-10",
+      "overall_score": 75.29,
+      "benchmark_cost_usd": 0.143952887,
+      "requests": 425,
+      "prompt_tokens": 89491,
+      "completion_tokens": 293368,
+      "reasoning_tokens": 0,
+      "total_tokens": 382859,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Alibaba"
+      ]
+    },
+    {
+      "model_name": "meta-llama/llama-4-scout",
+      "date_tested": "2026-07-09",
+      "overall_score": 74.35,
+      "benchmark_cost_usd": 0.0389439,
+      "requests": 575,
+      "prompt_tokens": 212461,
+      "completion_tokens": 1188,
+      "reasoning_tokens": 0,
+      "total_tokens": 213649,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Novita"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-4o-mini",
+      "date_tested": "2026-07-09",
+      "overall_score": 74.12,
+      "benchmark_cost_usd": 0.29993145,
+      "requests": 575,
+      "prompt_tokens": 1997243,
+      "completion_tokens": 575,
+      "reasoning_tokens": 0,
+      "total_tokens": 1997818,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "bytedance-seed/seed-1.6-flash",
+      "date_tested": "2026-07-09",
+      "overall_score": 73.88,
+      "benchmark_cost_usd": 0.065815275,
+      "requests": 575,
+      "prompt_tokens": 181681,
+      "completion_tokens": 173964,
+      "reasoning_tokens": 0,
+      "total_tokens": 355645,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Seed"
+      ]
+    },
+    {
+      "model_name": "google/gemma-3-27b-it",
+      "date_tested": "2026-07-09",
+      "overall_score": 73.65,
+      "benchmark_cost_usd": 0.019558192,
+      "requests": 575,
+      "prompt_tokens": 162168,
+      "completion_tokens": 1301,
+      "reasoning_tokens": 0,
+      "total_tokens": 163469,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Novita"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3-32b",
+      "date_tested": "2026-07-09",
+      "overall_score": 69.65,
+      "benchmark_cost_usd": 0.024089,
+      "requests": 475,
+      "prompt_tokens": 100559,
+      "completion_tokens": 46777,
+      "reasoning_tokens": 0,
+      "total_tokens": 147336,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Nebius"
+      ]
+    },
+    {
+      "model_name": "upstage/solar-pro-3",
+      "date_tested": "2026-07-09",
+      "overall_score": 66.12,
+      "benchmark_cost_usd": 0.00947568,
+      "requests": 427,
+      "prompt_tokens": 116520,
+      "completion_tokens": 2366,
+      "reasoning_tokens": 0,
+      "total_tokens": 118886,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Upstage"
+      ]
+    },
+    {
+      "model_name": "anthropic/claude-fable-5",
+      "date_tested": "2026-07-09",
+      "overall_score": 63.06,
+      "benchmark_cost_usd": 1.2196,
+      "requests": 425,
+      "prompt_tokens": 127800,
+      "completion_tokens": 7073,
+      "reasoning_tokens": 0,
+      "total_tokens": 134873,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Anthropic"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-3.5-turbo",
+      "date_tested": "2026-07-09",
+      "overall_score": 62.59,
+      "benchmark_cost_usd": 0.0455765,
+      "requests": 425,
+      "prompt_tokens": 89878,
+      "completion_tokens": 425,
+      "reasoning_tokens": 0,
+      "total_tokens": 90303,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "meta-llama/llama-3.1-8b-instruct",
+      "date_tested": "2026-07-09",
+      "overall_score": 56.24,
+      "benchmark_cost_usd": 0.00183952,
+      "requests": 425,
+      "prompt_tokens": 89851,
+      "completion_tokens": 850,
+      "reasoning_tokens": 0,
+      "total_tokens": 90701,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra"
+      ]
+    },
+    {
+      "model_name": "dhenu2-in-8b-preview",
+      "date_tested": "2026-07-09",
+      "overall_score": 54.82,
+      "benchmark_cost_usd": 0.0,
+      "requests": 426,
+      "prompt_tokens": 115179,
+      "completion_tokens": 852,
+      "reasoning_tokens": 0,
+      "total_tokens": 116031,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": []
+    },
+    {
+      "model_name": "google/gemma-3-4b-it",
+      "date_tested": "2026-07-09",
+      "overall_score": 50.59,
+      "benchmark_cost_usd": 0.0082492,
+      "requests": 576,
+      "prompt_tokens": 162268,
+      "completion_tokens": 1358,
+      "reasoning_tokens": 0,
+      "total_tokens": 163626,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra"
+      ]
+    },
+    {
+      "model_name": "google/gemini-3-flash-preview",
+      "date_tested": "2026-07-09",
+      "overall_score": 49.41,
+      "benchmark_cost_usd": 0.1479115,
+      "requests": 779,
+      "prompt_tokens": 319842,
+      "completion_tokens": 3073,
+      "reasoning_tokens": 0,
+      "total_tokens": 322915,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google",
+        "Google AI Studio"
+      ]
+    },
+    {
+      "model_name": "minimax/minimax-m2-her",
+      "date_tested": "2026-07-09",
+      "overall_score": 20.24,
+      "benchmark_cost_usd": 0.5223594,
+      "requests": 712,
+      "prompt_tokens": 264482,
+      "completion_tokens": 369179,
+      "reasoning_tokens": 0,
+      "total_tokens": 633661,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Minimax"
+      ]
+    }
+  ]
+}

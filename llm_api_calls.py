@@ -64,6 +64,18 @@ def _param(model_config, key, default):
     return model_config.get(key, default)
 
 
+def _structured_openrouter_response(response, content):
+    """Wraps answer content with exact usage/cost metadata from OpenRouter."""
+    usage = response.usage.model_dump() if response.usage else {}
+    model_extra = response.model_extra or {}
+    return {
+        "content": content,
+        "generation_id": response.id,
+        "provider": model_extra.get("provider"),
+        "usage": usage,
+    }
+
+
 def _get_request_semaphore(model_config):
     """Returns a shared semaphore for the model's upstream provider."""
     provider = model_config.get("provider")
@@ -160,16 +172,18 @@ async def _call_openai_sdk(client: AsyncOpenAI,
             and response.choices[0].message
             and response.choices[0].message.content
         ):
-            return response.choices[0].message.content.strip()
+            return _structured_openrouter_response(
+                response, response.choices[0].message.content.strip()
+            )
         # Empty content with a content-filter finish reason is a deterministic
         # refusal, not a transient error: treat it as terminal so it is scored
         # as wrong instead of being retried into a circuit-breaker abort.
         finish_reason = response.choices[0].finish_reason if response.choices else None
         if finish_reason == "content_filter":
             sync_tqdm.write(f"\nNotice ({model_id}): Model refused (content_filter).")
-            return REFUSAL_SENTINEL
+            return _structured_openrouter_response(response, REFUSAL_SENTINEL)
         sync_tqdm.write(f"\nWarning ({model_id}): No response content received.")
-        return API_ERROR_SENTINEL
+        return _structured_openrouter_response(response, API_ERROR_SENTINEL)
 
     except openai.APIConnectionError as e:
         sync_tqdm.write(f"\nError ({model_id}): Connection Error - {e}")
