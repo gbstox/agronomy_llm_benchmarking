@@ -46,7 +46,12 @@ def parse_model_response(raw_response):
     """Cleans raw model output to extract a single-letter answer (a-z)."""
     if not raw_response or not isinstance(raw_response, str): return "fail"
     cleaned = raw_response.strip(' "\'*`\t\n')
-    cleaned = re.sub(r"^(the correct answer is|answer is|correct answer:|answer:|key:)\s*", "", cleaned, flags=re.IGNORECASE).strip()
+    cleaned = re.sub(
+        r"^(the correct answer is|answer is|correct answer(?:_options)?(?: key)?:|answer:|key:)\s*",
+        "",
+        cleaned,
+        flags=re.IGNORECASE,
+    ).strip()
     match = re.match(r"^\s*([a-zA-Z])(?:[.)\s]|\b|$)", cleaned)
     if match: return match.group(1).lower()
     if len(cleaned) == 1 and cleaned.isalpha(): return cleaned.lower()

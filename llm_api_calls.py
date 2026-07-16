@@ -208,9 +208,41 @@ async def _call_openai_sdk(client: AsyncOpenAI,
         if e.status_code == 429:
             sync_tqdm.write(f"\nError ({model_id}): Rate Limit Exceeded - Status 429.")
             return RATE_LIMIT_SENTINEL
+        error_text = ""
+        try:
+            error_text = (e.response.text if e.response is not None else "") or str(e)
+        except Exception:
+            error_text = str(e)
+        error_text_l = error_text.lower()
+        # Billing / quota exhaustion is fatal for the whole model run. Treating
+        # 402 as a transient API error causes infinite requeue loops.
+        if e.status_code == 402 or "payment required" in error_text_l:
+            sync_tqdm.write(
+                f"\nError ({model_id}): Payment Required (HTTP 402). "
+                f"Top up OpenRouter credits before resuming. Detail: {error_text[:300]}"
+            )
+            return FATAL_API_ERROR_SENTINEL
+        # Per-prompt moderation/content-policy 400s (e.g. Meta Muse) are terminal
+        # for that question only — not a reason to abort the whole model run.
+        if e.status_code == 400 and any(
+            marker in error_text_l
+            for marker in (
+                "content_policy",
+                "content management policy",
+                "content_filter",
+                "moderation",
+                "safety",
+            )
+        ):
+            sync_tqdm.write(
+                f"\nNotice ({model_id}): Provider content policy blocked prompt "
+                f"(HTTP 400). Scoring as refusal."
+            )
+            return REFUSAL_SENTINEL
         if e.status_code in {400, 401, 403, 404}:
             sync_tqdm.write(
-                f"\nError ({model_id}): Non-retryable API Error - Status {e.status_code}."
+                f"\nError ({model_id}): Non-retryable API Error - Status {e.status_code}. "
+                f"Detail: {error_text[:300]}"
             )
             return FATAL_API_ERROR_SENTINEL
         sync_tqdm.write(

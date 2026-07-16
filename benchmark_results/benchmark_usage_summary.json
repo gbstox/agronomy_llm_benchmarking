@@ -54,6 +54,23 @@
       ]
     },
     {
+      "model_name": "moonshotai/kimi-k3",
+      "date_tested": "2026-07-16",
+      "overall_score": 92.0,
+      "benchmark_cost_usd": 5.3259837,
+      "requests": 592,
+      "prompt_tokens": 409895,
+      "completion_tokens": 276312,
+      "reasoning_tokens": 0,
+      "total_tokens": 686207,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Moonshot AI"
+      ]
+    },
+    {
       "model_name": "openai/gpt-5.5",
       "date_tested": "2026-07-09",
       "overall_score": 91.76,
@@ -992,6 +1009,23 @@
       "image_tokens": 0,
       "providers": [
         "DeepInfra"
+      ]
+    },
+    {
+      "model_name": "meta/muse-spark-1.1",
+      "date_tested": "2026-07-16",
+      "overall_score": 76.24,
+      "benchmark_cost_usd": 1.48963835,
+      "requests": 598,
+      "prompt_tokens": 306602,
+      "completion_tokens": 339069,
+      "reasoning_tokens": 0,
+      "total_tokens": 645671,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Meta"
       ]
     },
     {

@@ -121,6 +121,28 @@ MODELS_TO_RUN = [
     # ========== LATEST SOTA (July 2026) ==========
 
     {
+        "id": "moonshotai/kimi-k3",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "moonshotai/kimi-k3",
+        # Open-weight multimodal reasoning model (OpenRouter currently only exposes INT4).
+        "access": "open source",
+        "max_tokens": 4000,
+    },
+    {
+        "id": "meta/muse-spark-1.1",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "meta/muse-spark-1.1",
+        "access": "proprietary",
+        "max_tokens": 4000,
+        # Prefill causes the model to echo "Correct answer_options key: X"
+        # instead of a bare letter; disable for cleaner single-letter answers.
+        "assistant_prompt": None,
+    },
+    {
         "id": "openai/gpt-5.6-luna-pro",
         "provider": "openai_compatible",
         "api_key_env": "OPENROUTER_API_KEY",

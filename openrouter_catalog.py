@@ -153,6 +153,7 @@ def _infer_access_type(model_data: dict) -> str:
     model_id = model_data.get("id", "")
     raw_hugging_face_id = model_data.get("hugging_face_id")
     hugging_face_id = raw_hugging_face_id.strip() if isinstance(raw_hugging_face_id, str) else ""
+    description = str(model_data.get("description", "")).lower()
 
     if any(model_id.startswith(prefix) for prefix in _OPEN_SOURCE_PREFIXES):
         return "open source"
@@ -160,7 +161,15 @@ def _infer_access_type(model_data: dict) -> str:
     if hugging_face_id:
         return "open source"
 
+    # Some open-weight releases (e.g. moonshotai/kimi-k3) land before a HF id is listed.
+    if "open-weight" in description or "open weight" in description:
+        return "open source"
+
     if any(model_id.startswith(prefix) for prefix in _PROPRIETARY_PREFIXES):
+        return "proprietary"
+
+    # meta/* API-only models without HF ids are treated as proprietary.
+    if model_id.startswith("meta/"):
         return "proprietary"
 
     return "unknown"
