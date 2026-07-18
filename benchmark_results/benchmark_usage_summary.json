@@ -545,6 +545,23 @@
       ]
     },
     {
+      "model_name": "thinkingmachines/inkling",
+      "date_tested": "2026-07-17",
+      "overall_score": 88.47,
+      "benchmark_cost_usd": 0.74175147,
+      "requests": 576,
+      "prompt_tokens": 282700,
+      "completion_tokens": 117071,
+      "reasoning_tokens": 0,
+      "total_tokens": 399771,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Together"
+      ]
+    },
+    {
       "model_name": "openai/gpt-5.6-luna",
       "date_tested": "2026-07-09",
       "overall_score": 88.24,

@@ -23,6 +23,7 @@ _OPEN_SOURCE_PREFIXES = {
     "nvidia/",
     "openai/gpt-oss",
     "qwen/",
+    "thinkingmachines/",
     "xiaomi/",
 }
 
