@@ -121,6 +121,16 @@ MODELS_TO_RUN = [
     # ========== LATEST SOTA (July 2026) ==========
 
     {
+        "id": "thinkingmachines/inkling-small",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "thinkingmachines/inkling-small",
+        # Open-weight multimodal MoE (276B total / 12B active).
+        "access": "open source",
+        "max_tokens": 4000,
+    },
+    {
         "id": "thinkingmachines/inkling",
         "provider": "openai_compatible",
         "api_key_env": "OPENROUTER_API_KEY",

@@ -788,6 +788,23 @@
       ]
     },
     {
+      "model_name": "thinkingmachines/inkling-small",
+      "date_tested": "2026-07-31",
+      "overall_score": 84.0,
+      "benchmark_cost_usd": 0.285389284,
+      "requests": 576,
+      "prompt_tokens": 270321,
+      "completion_tokens": 102939,
+      "reasoning_tokens": 0,
+      "total_tokens": 373260,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra"
+      ]
+    },
+    {
       "model_name": "bytedance-seed/seed-1.6",
       "date_tested": "2026-07-09",
       "overall_score": 83.76,
