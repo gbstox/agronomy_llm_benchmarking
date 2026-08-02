@@ -514,10 +514,17 @@ async def generate_reports(results_dir, graphs_base_dir):
         except Exception as e:
             print(f"Error re-reading {filepath.name} for scoring: {e}"); continue
 
+        # Prefer unique model_id for leaderboard display so variants that share an
+        # OpenRouter API slug (e.g. reasoning-effort forks) do not collapse.
         model_name_api = data.get("model_name")
-        model_name_reporting = model_name_api or data.get("model_id", filepath.stem) # Fallback ID
+        model_id = data.get("model_id") or filepath.stem
+        model_name_reporting = model_id or model_name_api or filepath.stem
         date_tested = data.get("date", "Unknown").split('T')[0]
-        live_metadata = openrouter_metadata.get(model_name_api, {}) if model_name_api else {}
+        live_metadata = {}
+        for lookup_key in (model_name_api, model_id):
+            if lookup_key and lookup_key in openrouter_metadata:
+                live_metadata = openrouter_metadata[lookup_key]
+                break
         access_type = live_metadata.get("access") or data.get("access", "unknown")
         model_price = live_metadata.get("price_usd_per_mtok")
 

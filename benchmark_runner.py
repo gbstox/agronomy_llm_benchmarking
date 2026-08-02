@@ -495,6 +495,7 @@ async def run_single_model_benchmark(model_config, benchmark_questions, base_pro
         "openrouter_provider_routing": model_config.get(
             "openrouter_provider_routing"
         ),
+        "openrouter_reasoning": model_config.get("openrouter_reasoning"),
         "multiple_choice": {},
         "resumed_from_checkpoint": False,
     }

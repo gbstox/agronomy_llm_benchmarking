@@ -124,6 +124,24 @@
       ]
     },
     {
+      "model_name": "deepseek/deepseek-v4-flash-0731",
+      "date_tested": "2026-08-01",
+      "overall_score": 91.06,
+      "benchmark_cost_usd": 0.050222368,
+      "requests": 427,
+      "prompt_tokens": 120976,
+      "completion_tokens": 118980,
+      "reasoning_tokens": 0,
+      "total_tokens": 239956,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Novita",
+        "SiliconFlow"
+      ]
+    },
+    {
       "model_name": "google/gemini-3.1-flash-image-preview",
       "date_tested": "2026-07-09",
       "overall_score": 90.82,
@@ -330,6 +348,24 @@
       "image_tokens": 0,
       "providers": [
         "Anthropic"
+      ]
+    },
+    {
+      "model_name": "deepseek/deepseek-v4-flash-0731-max",
+      "date_tested": "2026-08-01",
+      "overall_score": 89.65,
+      "benchmark_cost_usd": 0.058485532,
+      "requests": 426,
+      "prompt_tokens": 124091,
+      "completion_tokens": 152361,
+      "reasoning_tokens": 0,
+      "total_tokens": 276452,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Novita",
+        "SiliconFlow"
       ]
     },
     {
@@ -1233,7 +1269,7 @@
       ]
     },
     {
-      "model_name": "dhenu2-in-8b-preview",
+      "model_name": "pratik/llama3-8b-dhenu-0.1",
       "date_tested": "2026-07-09",
       "overall_score": 54.82,
       "benchmark_cost_usd": 0.0,

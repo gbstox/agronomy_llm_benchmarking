@@ -121,6 +121,30 @@ MODELS_TO_RUN = [
     # ========== LATEST SOTA (July 2026) ==========
 
     {
+        "id": "deepseek/deepseek-v4-flash-0731",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "deepseek/deepseek-v4-flash-0731",
+        # Open-weight MoE (284B total / 13B active). Text-only.
+        # Routed to highest available precision (FP8; FP4 endpoints excluded).
+        # "Normal" = OpenRouter default reasoning (enabled, effort=high).
+        "access": "open source",
+        "max_tokens": 8000,
+        "openrouter_reasoning": {"effort": "high"},
+    },
+    {
+        "id": "deepseek/deepseek-v4-flash-0731-max",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "deepseek/deepseek-v4-flash-0731",
+        # Same weights/endpoints as above, but forced to max reasoning effort.
+        "access": "open source",
+        "max_tokens": 16000,
+        "openrouter_reasoning": {"effort": "max"},
+    },
+    {
         "id": "thinkingmachines/inkling-small",
         "provider": "openai_compatible",
         "api_key_env": "OPENROUTER_API_KEY",

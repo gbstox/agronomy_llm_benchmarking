@@ -158,13 +158,20 @@ async def _call_openai_sdk(client: AsyncOpenAI,
                 model_config, "temperature", config.DETERMINISTIC_TEMP
             ),
         }
-        # OpenRouter-specific provider routing is passed through the SDK via
-        # extra_body. Quantization is resolved before the run and filtered to one
+        # OpenRouter-specific options are passed through the SDK via extra_body.
+        # Quantization is resolved before the run and filtered to one
         # highest-precision tier, so fallback providers cannot silently downgrade
-        # a model to FP4/INT4.
+        # a model to FP4/INT4. Optional per-model reasoning controls (effort /
+        # enabled) are merged the same way.
+        extra_body = {}
         provider_routing = model_config.get("openrouter_provider_routing")
         if provider_routing:
-            request_kwargs["extra_body"] = {"provider": provider_routing}
+            extra_body["provider"] = provider_routing
+        openrouter_reasoning = model_config.get("openrouter_reasoning")
+        if openrouter_reasoning is not None:
+            extra_body["reasoning"] = openrouter_reasoning
+        if extra_body:
+            request_kwargs["extra_body"] = extra_body
 
         response = await client.chat.completions.create(**request_kwargs)
         if (
