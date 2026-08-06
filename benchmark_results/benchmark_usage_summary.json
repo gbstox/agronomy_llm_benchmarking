@@ -196,6 +196,23 @@
       ]
     },
     {
+      "model_name": "meta/muse-spark-1.2",
+      "date_tested": "2026-08-06",
+      "overall_score": 90.59,
+      "benchmark_cost_usd": 1.46920135,
+      "requests": 572,
+      "prompt_tokens": 217989,
+      "completion_tokens": 298204,
+      "reasoning_tokens": 0,
+      "total_tokens": 516193,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Meta"
+      ]
+    },
+    {
       "model_name": "openai/gpt-5.3-chat",
       "date_tested": "2026-07-09",
       "overall_score": 90.59,
@@ -872,6 +889,23 @@
       "image_tokens": 0,
       "providers": [
         "Seed"
+      ]
+    },
+    {
+      "model_name": "inclusionai/ling-3.0-flash",
+      "date_tested": "2026-08-06",
+      "overall_score": 83.76,
+      "benchmark_cost_usd": 0.03108166,
+      "requests": 430,
+      "prompt_tokens": 97408,
+      "completion_tokens": 108073,
+      "reasoning_tokens": 0,
+      "total_tokens": 205481,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra"
       ]
     },
     {

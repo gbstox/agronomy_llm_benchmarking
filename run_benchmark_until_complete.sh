@@ -122,7 +122,8 @@ while [[ "$remaining_before" =~ ^[0-9]+$ ]] && (( remaining_before > 0 )); do
 
         now_epoch="$(date +%s)"
         if [[ -f "$HEARTBEAT_FILE" ]]; then
-            heartbeat_epoch="$(stat -c %Y "$HEARTBEAT_FILE" 2>/dev/null || echo 0)"
+            # GNU stat uses -c %Y; BSD/macOS stat uses -f %m.
+            heartbeat_epoch="$(stat -c %Y "$HEARTBEAT_FILE" 2>/dev/null || stat -f %m "$HEARTBEAT_FILE" 2>/dev/null || echo 0)"
             heartbeat_age="$(( now_epoch - heartbeat_epoch ))"
             if (( heartbeat_age > STALL_TIMEOUT_SECONDS )); then
                 log_runner "Heartbeat stale for ${heartbeat_age}s; restarting worker pid $child_pid."

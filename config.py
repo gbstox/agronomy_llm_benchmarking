@@ -118,8 +118,32 @@ ASSISTANT_PROMPT = "Correct answer_options key:" # For models supporting assista
 
 MODELS_TO_RUN = [
 
-    # ========== LATEST SOTA (July 2026) ==========
+    # ========== LATEST SOTA (August 2026) ==========
 
+    {
+        "id": "meta/muse-spark-1.2",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "meta/muse-spark-1.2",
+        # Proprietary multimodal reasoning model (Meta first-party; quant=unknown).
+        "access": "proprietary",
+        "max_tokens": 4000,
+        # Prefill causes the model to echo "Correct answer_options key: X"
+        # instead of a bare letter; disable for cleaner single-letter answers.
+        "assistant_prompt": None,
+    },
+    {
+        "id": "inclusionai/ling-3.0-flash",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "inclusionai/ling-3.0-flash",
+        # Open-weight hybrid-linear MoE (124B total / 5.1B active). Text-only.
+        # OpenRouter currently exposes BF16 via DeepInfra (quality-first pick).
+        "access": "open source",
+        "max_tokens": 4000,
+    },
     {
         "id": "deepseek/deepseek-v4-flash-0731",
         "provider": "openai_compatible",
