@@ -121,6 +121,28 @@ MODELS_TO_RUN = [
     # ========== LATEST SOTA (August 2026) ==========
 
     {
+        "id": "stepfun/step-3.7-flash",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "stepfun/step-3.7-flash",
+        # Open-weight multimodal MoE (198B total / ~11B active). Vision.
+        # OpenRouter known quants are FP8 (StepFun/Novita); DeepInfra reports unknown.
+        "access": "open source",
+        "max_tokens": 4000,
+    },
+    {
+        "id": "qwen/qwen3.8-27b",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "qwen/qwen3.8-27b",
+        # Open-weight dense multimodal (~27.8B). Vision.
+        # Routed to highest available precision (BF16 via AkashML).
+        "access": "open source",
+        "max_tokens": 4000,
+    },
+    {
         "id": "meta/muse-spark-1.2",
         "provider": "openai_compatible",
         "api_key_env": "OPENROUTER_API_KEY",

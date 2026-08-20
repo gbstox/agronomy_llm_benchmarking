@@ -666,6 +666,24 @@
       ]
     },
     {
+      "model_name": "stepfun/step-3.7-flash",
+      "date_tested": "2026-08-20",
+      "overall_score": 87.76,
+      "benchmark_cost_usd": 0.90100974,
+      "requests": 611,
+      "prompt_tokens": 219143,
+      "completion_tokens": 746390,
+      "reasoning_tokens": 0,
+      "total_tokens": 965533,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Novita",
+        "StepFun"
+      ]
+    },
+    {
       "model_name": "anthropic/claude-sonnet-5",
       "date_tested": "2026-07-09",
       "overall_score": 87.53,
@@ -786,6 +804,23 @@
       "providers": [
         "Amazon Bedrock",
         "Google"
+      ]
+    },
+    {
+      "model_name": "qwen/qwen3.8-27b",
+      "date_tested": "2026-08-20",
+      "overall_score": 86.35,
+      "benchmark_cost_usd": 1.0829216,
+      "requests": 587,
+      "prompt_tokens": 341888,
+      "completion_tokens": 290335,
+      "reasoning_tokens": 0,
+      "total_tokens": 632223,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "AkashML"
       ]
     },
     {
