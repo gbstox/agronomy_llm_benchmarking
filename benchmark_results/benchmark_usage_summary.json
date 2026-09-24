@@ -37,6 +37,60 @@
       ]
     },
     {
+      "model_name": "google/gemini-3.8-flash",
+      "date_tested": "2026-09-23",
+      "overall_score": 92.71,
+      "benchmark_cost_usd": 0.744234,
+      "requests": 575,
+      "prompt_tokens": 277022,
+      "completion_tokens": 143058,
+      "reasoning_tokens": 0,
+      "total_tokens": 420080,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Google",
+        "Google AI Studio"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-6-astra",
+      "date_tested": "2026-09-23",
+      "overall_score": 92.24,
+      "benchmark_cost_usd": 5.1742175,
+      "requests": 575,
+      "prompt_tokens": 354014,
+      "completion_tokens": 21483,
+      "reasoning_tokens": 0,
+      "total_tokens": 375497,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
+      "model_name": "openai/gpt-6-sol",
+      "date_tested": "2026-09-23",
+      "overall_score": 92.24,
+      "benchmark_cost_usd": 1.2841035,
+      "requests": 575,
+      "prompt_tokens": 354014,
+      "completion_tokens": 46409,
+      "reasoning_tokens": 0,
+      "total_tokens": 400423,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Azure",
+        "OpenAI"
+      ]
+    },
+    {
       "model_name": "x-ai/grok-4.5",
       "date_tested": "2026-07-09",
       "overall_score": 92.24,
@@ -86,6 +140,41 @@
       "providers": [
         "Azure",
         "OpenAI"
+      ]
+    },
+    {
+      "model_name": "anthropic/claude-opus-5.5",
+      "date_tested": "2026-09-23",
+      "overall_score": 91.53,
+      "benchmark_cost_usd": 1.855392,
+      "requests": 576,
+      "prompt_tokens": 292028,
+      "completion_tokens": 34364,
+      "reasoning_tokens": 0,
+      "total_tokens": 326392,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Anthropic",
+        "Google"
+      ]
+    },
+    {
+      "model_name": "x-ai/grok-4.7",
+      "date_tested": "2026-09-23",
+      "overall_score": 91.53,
+      "benchmark_cost_usd": 3.8307072,
+      "requests": 579,
+      "prompt_tokens": 909210,
+      "completion_tokens": 670898,
+      "reasoning_tokens": 0,
+      "total_tokens": 1580108,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "xAI"
       ]
     },
     {
@@ -247,6 +336,23 @@
       ]
     },
     {
+      "model_name": "tencent/hy4-preview",
+      "date_tested": "2026-09-23",
+      "overall_score": 90.59,
+      "benchmark_cost_usd": 1.716703529,
+      "requests": 425,
+      "prompt_tokens": 90214,
+      "completion_tokens": 664633,
+      "reasoning_tokens": 0,
+      "total_tokens": 754847,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "SiliconFlow"
+      ]
+    },
+    {
       "model_name": "nvidia/nemotron-3-ultra-550b-a55b",
       "date_tested": "2026-07-09",
       "overall_score": 90.35,
@@ -299,6 +405,25 @@
       ]
     },
     {
+      "model_name": "z-ai/glm-5.3",
+      "date_tested": "2026-09-23",
+      "overall_score": 90.35,
+      "benchmark_cost_usd": 0.3284412,
+      "requests": 426,
+      "prompt_tokens": 90545,
+      "completion_tokens": 38971,
+      "reasoning_tokens": 0,
+      "total_tokens": 129516,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "AkashML",
+        "BaseTen",
+        "Parasail"
+      ]
+    },
+    {
       "model_name": "openai/gpt-5.2-codex",
       "date_tested": "2026-07-09",
       "overall_score": 90.12,
@@ -334,6 +459,23 @@
       ]
     },
     {
+      "model_name": "openai/gpt-6-luna",
+      "date_tested": "2026-09-23",
+      "overall_score": 90.12,
+      "benchmark_cost_usd": 0.071631675,
+      "requests": 575,
+      "prompt_tokens": 354014,
+      "completion_tokens": 61262,
+      "reasoning_tokens": 0,
+      "total_tokens": 415276,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "OpenAI"
+      ]
+    },
+    {
       "model_name": "openai/o3",
       "date_tested": "2026-07-09",
       "overall_score": 90.12,
@@ -348,6 +490,25 @@
       "image_tokens": 0,
       "providers": [
         "OpenAI"
+      ]
+    },
+    {
+      "model_name": "z-ai/glm-5.3-flash",
+      "date_tested": "2026-09-23",
+      "overall_score": 90.12,
+      "benchmark_cost_usd": 0.13302998,
+      "requests": 581,
+      "prompt_tokens": 288426,
+      "completion_tokens": 114252,
+      "reasoning_tokens": 0,
+      "total_tokens": 402678,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "BaseTen",
+        "Modal",
+        "Parasail"
       ]
     },
     {
@@ -478,6 +639,23 @@
       ]
     },
     {
+      "model_name": "z-ai/glm-5.3-flashx",
+      "date_tested": "2026-09-23",
+      "overall_score": 89.41,
+      "benchmark_cost_usd": 0.21572016,
+      "requests": 575,
+      "prompt_tokens": 285124,
+      "completion_tokens": 98444,
+      "reasoning_tokens": 0,
+      "total_tokens": 383568,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Z.AI"
+      ]
+    },
+    {
       "model_name": "anthropic/claude-opus-4.1",
       "date_tested": "2026-07-09",
       "overall_score": 89.18,
@@ -493,6 +671,24 @@
       "providers": [
         "Amazon Bedrock",
         "Anthropic"
+      ]
+    },
+    {
+      "model_name": "deepseek/deepseek-v4.1-flash",
+      "date_tested": "2026-09-23",
+      "overall_score": 89.18,
+      "benchmark_cost_usd": 0.332666324,
+      "requests": 580,
+      "prompt_tokens": 178822,
+      "completion_tokens": 306871,
+      "reasoning_tokens": 0,
+      "total_tokens": 485693,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "CoreWeave",
+        "Makora"
       ]
     },
     {
@@ -513,6 +709,23 @@
       ]
     },
     {
+      "model_name": "qwen/qwen3.8-flash",
+      "date_tested": "2026-09-23",
+      "overall_score": 89.18,
+      "benchmark_cost_usd": 0.148490664,
+      "requests": 591,
+      "prompt_tokens": 222709,
+      "completion_tokens": 246247,
+      "reasoning_tokens": 0,
+      "total_tokens": 468956,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Alibaba"
+      ]
+    },
+    {
       "model_name": "qwen/qwen3.5-27b",
       "date_tested": "2026-07-10",
       "overall_score": 88.94,
@@ -527,6 +740,24 @@
       "image_tokens": 0,
       "providers": [
         "Novita"
+      ]
+    },
+    {
+      "model_name": "xiaomi/mimo-v2.6-pro",
+      "date_tested": "2026-09-23",
+      "overall_score": 88.94,
+      "benchmark_cost_usd": 0.262486608,
+      "requests": 611,
+      "prompt_tokens": 226372,
+      "completion_tokens": 198678,
+      "reasoning_tokens": 0,
+      "total_tokens": 425050,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra",
+        "Xiaomi"
       ]
     },
     {
@@ -702,6 +933,57 @@
       ]
     },
     {
+      "model_name": "sakana/fugu-max",
+      "date_tested": "2026-09-23",
+      "overall_score": 87.53,
+      "benchmark_cost_usd": 1.68641725,
+      "requests": 575,
+      "prompt_tokens": 602474,
+      "completion_tokens": 105591,
+      "reasoning_tokens": 0,
+      "total_tokens": 708065,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Sakana AI"
+      ]
+    },
+    {
+      "model_name": "inception/mercury-2.5",
+      "date_tested": "2026-09-23",
+      "overall_score": 87.06,
+      "benchmark_cost_usd": 0.04973008,
+      "requests": 425,
+      "prompt_tokens": 96517,
+      "completion_tokens": 305796,
+      "reasoning_tokens": 0,
+      "total_tokens": 402313,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Inception"
+      ]
+    },
+    {
+      "model_name": "nex-agi/nex-n2.5-pro",
+      "date_tested": "2026-09-23",
+      "overall_score": 87.06,
+      "benchmark_cost_usd": 0.04562937,
+      "requests": 583,
+      "prompt_tokens": 249301,
+      "completion_tokens": 113252,
+      "reasoning_tokens": 0,
+      "total_tokens": 362553,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Nex AGI"
+      ]
+    },
+    {
       "model_name": "qwen/qwen3.5-122b-a10b",
       "date_tested": "2026-07-09",
       "overall_score": 87.06,
@@ -733,6 +1015,24 @@
       "image_tokens": 0,
       "providers": [
         "Alibaba"
+      ]
+    },
+    {
+      "model_name": "xiaomi/mimo-v2.6-flash",
+      "date_tested": "2026-09-23",
+      "overall_score": 87.06,
+      "benchmark_cost_usd": 0.072272564,
+      "requests": 622,
+      "prompt_tokens": 222459,
+      "completion_tokens": 168290,
+      "reasoning_tokens": 0,
+      "total_tokens": 390749,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "DeepInfra",
+        "Xiaomi"
       ]
     },
     {
@@ -1267,6 +1567,23 @@
       "image_tokens": 0,
       "providers": [
         "Nebius"
+      ]
+    },
+    {
+      "model_name": "upstage/solar-mini4",
+      "date_tested": "2026-09-23",
+      "overall_score": 69.41,
+      "benchmark_cost_usd": 0.00577425,
+      "requests": 425,
+      "prompt_tokens": 112085,
+      "completion_tokens": 850,
+      "reasoning_tokens": 0,
+      "total_tokens": 112935,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "image_tokens": 0,
+      "providers": [
+        "Upstage"
       ]
     },
     {
