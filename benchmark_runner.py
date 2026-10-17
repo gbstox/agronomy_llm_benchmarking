@@ -80,6 +80,19 @@ def _encode_image_data_url(image_rel_path, base_dir):
     mime_type, _ = mimetypes.guess_type(str(image_path))
     if not mime_type or not mime_type.startswith("image/"):
         mime_type = "image/jpeg"
+    try:
+        from PIL import Image
+        import io
+        with Image.open(io.BytesIO(raw)) as im:
+            if max(im.size) > 4096:
+                im = im.convert("RGB")
+                im.thumbnail((4096, 4096), Image.Resampling.LANCZOS)
+                buf = io.BytesIO()
+                im.save(buf, format="JPEG", quality=92)
+                raw = buf.getvalue()
+                mime_type = "image/jpeg"
+    except Exception:
+        pass
     encoded = base64.b64encode(raw).decode("ascii")
     return f"data:{mime_type};base64,{encoded}"
 

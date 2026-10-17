@@ -118,6 +118,107 @@ ASSISTANT_PROMPT = "Correct answer_options key:" # For models supporting assista
 
 MODELS_TO_RUN = [
 
+    # ========== LATEST SOTA (October 2026) ==========
+
+    {
+        "id": "google/gemini-4-argon",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "google/gemini-4-argon",
+        "access": "proprietary",
+        "max_tokens": 4000,
+        # Rejects requests ending with a model turn (400)
+        "assistant_prompt": None,
+    },
+    {
+        "id": "openai/gpt-6.1-sol",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "openai/gpt-6.1-sol",
+        "access": "proprietary",
+        "max_tokens": 4000,
+    },
+    {
+        "id": "anthropic/claude-sonnet-5.5",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "anthropic/claude-sonnet-5.5",
+        "access": "proprietary",
+        "max_tokens": 4000,
+        # Rejects assistant message prefill (400)
+        "assistant_prompt": None,
+    },
+    {
+        "id": "meta/muse-wonder",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "meta/muse-wonder",
+        "access": "proprietary",
+        "max_tokens": 4000,
+    },
+    {
+        "id": "fireworks/ember-1",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "fireworks/ember-1",
+        "access": "proprietary",
+        "max_tokens": 4000,
+    },
+    {
+        "id": "mistralai/mistral-large-4-0",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "mistralai/mistral-large-4-0",
+        "access": "proprietary",
+        "max_tokens": 12000,
+        # Prefill causes model to echo "Correct answer_options key: X\n\nX"
+        "assistant_prompt": None,
+    },
+    {
+        "id": "meta/muse-spark-open",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "meta/muse-spark-open",
+        "access": "open source",
+        "max_tokens": 4000,
+    },
+    {
+        "id": "reflection/beam-1.0-501b-a23b",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "reflection/beam-1.0-501b-a23b",
+        "access": "open source",
+        "max_tokens": 4000,
+    },
+    {
+        "id": "nvidia/nemotron-3.5-super-vl",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "nvidia/nemotron-3.5-super-vl",
+        "access": "open source",
+        "max_tokens": 12000,
+    },
+    {
+        "id": "anthropic/claude-haiku-5.5",
+        "provider": "openai_compatible",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url": "https://openrouter.ai/api/v1",
+        "model_name_api": "anthropic/claude-haiku-5.5",
+        "access": "proprietary",
+        "max_tokens": 4000,
+        # Rejects assistant message prefill (400)
+        "assistant_prompt": None,
+    },
+
     # ========== LATEST SOTA (September 2026) ==========
 
     {
